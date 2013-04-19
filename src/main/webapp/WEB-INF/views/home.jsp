@@ -3,7 +3,7 @@
 <html>
 <head>
 <link rel="icon" type="image/png" href='<c:url value="/resources/img/logo.png"/>'>
-	<title>Apalabrados PIUEx</title>
+<title>Apalabrados PIUEx</title>
 </head>
 <body style="text-align: center">
 <div style="position: fixed; top: 10%; width: 100%">
@@ -18,7 +18,7 @@ Carlos Rufo Jiménez</p>
 <p style="float: right;">Escuela Politécnica,<br>
 Universidad de Extremadura</p>
 <P>${serverTime}</P>
-<p>Versión: 1.2</p>
+<p>Versión: 1.1</p>
 </div>
 </body>
 </html>
