@@ -16,6 +16,10 @@
 	color: #D8000C;
 	background-color: #FFBABA;
 }
+.avatarList {
+	height: 45px;
+	width: auto;
+}
 </style>
 <title>Lista de usuarios</title>
 </head>
@@ -39,7 +43,7 @@
 				<td><a href="<c:url value="/user/profile?username=${user.username}"/>">${user.username}</a></td>
 				<td>${user.email}</td>
 				<td>${user.level}</td>
-				<td>${user.avatarFileName}</td>
+				<td><img src="<c:url value="/resources/avatars/${user.avatarFileName}"/>" alt="avatar" class="avatarList"/></td>
 				<td><a href="<c:url value="/game/list?id=${user.id}"/>"> Partidas de ${user.username}</a></td>
 			</tr>
 	   </c:forEach>

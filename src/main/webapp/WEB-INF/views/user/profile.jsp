@@ -19,7 +19,7 @@
 		<a href="<c:url value="/user/list"/>" style="font-style: oblique">Ir a la lista de usuarios</a>
 		<br>
 		<br>
-		<fieldset class="row4">		
+		<fieldset class="row4">
 		
 		<img src="<c:url value="/resources/avatars/${userBean.avatarFileName}"/>" alt="avatar" />
 		
