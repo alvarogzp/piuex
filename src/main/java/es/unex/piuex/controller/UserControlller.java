@@ -89,7 +89,7 @@ public class UserControlller {
 		}
 		userDAO.add(userBean);
 		System.out.println("Creado usuario '" + userBean.getUsername() + "' por '" + sr.getRemoteAddr() + ":" + sr.getRemotePort() + "' at '" + new Date().toString() + "'");
-		session.setAttribute("loggedUser", userBean);
+		session.setAttribute("loggedUser", userDAO.get(userBean.getUsername()));
 		// Añadir un atributo flash para asociar el siguiente GET al usuario que hizo el POST
 		attrs.addFlashAttribute("userBean", userBean);
 		return "redirect:/user/profile";
