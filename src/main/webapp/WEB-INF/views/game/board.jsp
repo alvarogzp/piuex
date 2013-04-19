@@ -110,7 +110,7 @@
 	  <input type="submit" value="Play" class="button"/>	  
 	  </fieldset>
 	  
-	  <a href="#" onclick="history.back(1)">Regresar a la lista usuarios</a>
+	  <a href="<c:url value="/game/list?id=${loggedUser.id}"/>">Regresar a la lista usuarios</a>
 	  	
 	</form>
 	</body>

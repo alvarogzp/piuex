@@ -18,6 +18,7 @@ Carlos Rufo Jiménez</p>
 <p style="float: right;">Escuela Politécnica,<br>
 Universidad de Extremadura</p>
 <P>${serverTime}</P>
+<p>Versión: 1.2</p>
 </div>
 </body>
 </html>
