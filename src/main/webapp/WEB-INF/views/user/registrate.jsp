@@ -10,10 +10,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet"  type="text/css" />
 
-<title>Registration Page</title>
+<title>Registro</title>
 </head>
 <body>
-
+<h1 style="text-align:center"> Formulario de registro</h1>
 <form:form method="post" modelAttribute="userBean" class="register">
 	<table>
 		<tr>

@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet"  type="text/css" />
 
-<title>Tablero de juego</title>
+<title>Partida: ${game.p1.username} VS ${game.p2.username}</title>
 </head>
 <body>
 	

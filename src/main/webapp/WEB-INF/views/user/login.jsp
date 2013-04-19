@@ -10,9 +10,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet"  type="text/css" />
 
-<title>Login Page</title>
+<title>Login</title>
 </head>
 <body>
+<h1 style="text-align:center"> Formulario de login</h1>
 
 <form:form method="post" modelAttribute="userBean" class="register">
 	<table>
@@ -32,6 +33,7 @@
 			<td> <c:if test="${errormessage!=null}"> <span class="error"> ${errormessage} </span> </c:if> </td>
 		</tr>
 	</table>
+		<br>
 		<p style="font-size: 10pt">Si no tienes usuario, <a href="<c:url value="/user/registrate"/>"> ¡registrate aquí! </a> </p>
 </form:form>
 </body>

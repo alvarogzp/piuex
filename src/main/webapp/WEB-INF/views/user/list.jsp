@@ -17,7 +17,7 @@
 	background-color: #FFBABA;
 }
 </style>
-<title>User List Page</title>
+<title>Lista de usuarios</title>
 </head>
 <body>
 

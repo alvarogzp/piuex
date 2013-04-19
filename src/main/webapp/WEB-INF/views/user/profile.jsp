@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet" type="text/css" />
 	
-<title>Perfil</title>
+<title>Perfil de ${userBean.username}</title>
 </head>
 <body style="text-align:center">
 <form:form method="post" modelAttribute="userBean" enctype="multipart/form-data">
