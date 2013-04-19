@@ -1,0 +1,11 @@
+Convertir level y opponents a enumeracion, igual con status de partidas
+implementar oppponents ¿como una lista?
+
+mostrar fotos en lista de usuarios
+en el tablero volver a la lista de partidas del usuario que inició sesión
+al redirigir a login porque no se está registrado que salga el error en la pantalla de login
+
+poner en list con que usuario estas logueado (y posiblemente en el resto de páginas)
+poner titles de las páginas en español
+excepciones & errores
+cambiar system.out por logger
