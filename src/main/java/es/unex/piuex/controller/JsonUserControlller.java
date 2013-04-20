@@ -49,7 +49,7 @@ public class JsonUserControlller {
 	public @ResponseBody User getUserParam(@PathVariable int id) {
 		User user = userDAO.get(id);
 		if (user == null) {
-			logger.error("Se ha lanzado la excepcion UnknownResourceException!");
+			logger.info("Se ha lanzado la excepcion UnknownResourceException!");
 			throw new UnknownResourceException("El usuario no existe!");
 		}
 		return user;

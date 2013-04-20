@@ -5,7 +5,12 @@ package es.unex.piuex.exceptions;
  */
 public class UnknownResourceException extends RuntimeException {
 
-    public UnknownResourceException(String msg) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5392167142454058587L;
+
+	public UnknownResourceException(String msg) {
         super(msg);
     }
 }

@@ -4,10 +4,13 @@ implementar oppponents ¿como una lista?
 al redirigir a login porque no se está registrado que salga el error en la pantalla de login
 
 poner en list con que usuario estas logueado (y posiblemente en el resto de páginas)
-poner titles de las páginas en español
 excepciones & errores
 cambiar system.out por logger
 
 cabecera en todos los ficheros .java
 cerrar sesión en todas las páginas
 arreglar codificación
+
+Sugerencias de rre:
+- Hoja de estilo uniforme en toda la aplicación
+- No mostrar enlaces que un usuario no puede seguir
