@@ -14,3 +14,5 @@ arreglar codificación
 Sugerencias de rre:
 - Hoja de estilo uniforme en toda la aplicación
 - No mostrar enlaces que un usuario no puede seguir
+
+Enlace en "version: x.x" en el home.jsp a otra pagina con las novedades de cada versión y una descripción de la aplicación
