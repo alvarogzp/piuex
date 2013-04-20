@@ -1,4 +1,11 @@
-
+/*
+ * Script para mover elementos en una pagina web.
+ * 
+ * Para usar este script carguelo AL FINAL del "body" de su pagina web,
+ * y asigne la clase "mover" a los elementos que desea que se puedan mover.
+ * 
+ * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
+ */
 
 var x = 0, y = 0, element = null;
 
