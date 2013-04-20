@@ -1,47 +1,50 @@
 
 
-var x = 0, y = 0;
-var moving = false;
+var x = 0, y = 0, element = null;
+
+
+function mover(elemento) {
+	elemento.onmousedown = iniciarmovimiento;
+	elemento.onmouseup = detenermovimiento;
+	console.log("Cargado movimiento para " + elemento.id);
+}
 
 
 function iniciarmovimiento(e) {
-	console.log("Moviendo elemento...");
+	console.log("Moviendo " + e.target.id);
 	x = e.pageX;
 	y = e.pageY;
-	moving = true;
+	element = e.target;
+	document.onmousemove = movimiento;
 }
 
 
-function mover(e) {
-	if (moving) {
-		// console.log("Moviendo...");
-		moversquare("left", e.pageX - x);
-		moversquare("top", e.pageY - y);
-		x = e.pageX;
-		y = e.pageY;
-	}
+function movimiento(e) {
+	// console.log("Moviendo...");
+	moverelemento(element, "left", e.pageX - x);
+	moverelemento(element, "top", e.pageY - y);
+	x = e.pageX;
+	y = e.pageY;
 }
 
 
-function moversquare(position, diff) {
-	square.style[position] = parseInt(square.style[position]) + diff;
+function moverelemento(element, position, diff) {
+	element.style[position] = parseInt(element.style[position] || element.getBoundingClientRect()[position]) + diff;
 }
 
 
 function detenermovimiento(e) {
-	moving = false;
-	console.log("Fin del movimiento!");
-	x = e.pageX;
-	x = e.pageY;
+	document.onmousemove = null;
+	element = null;
+	console.log("Fin del movimiento de " + e.target.id);
 }
 
 
 
-square.style.left = 0;
-square.style.top = 0;
+var elements = document.getElementsByClassName("mover");
+for (var i = 0; i < elements.length; i++) {
+	mover(elements[i]);
+}
 
-square.onmousedown = iniciarmovimiento;
-square.onmouseup = detenermovimiento;
-document.onmousemove = mover;
 
 console.log("Script cargado!");

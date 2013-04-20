@@ -2,8 +2,8 @@
 	background: #999;
 	width: 50px;
 	height: 50px;
-	left: 0;
-	top: 0;
+	left: auto;
+	top: auto;
 	position: absolute;
 	cursor: move;
 }
