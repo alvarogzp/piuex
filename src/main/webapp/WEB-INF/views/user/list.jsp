@@ -21,12 +21,13 @@
 	width: auto;
 }
 </style>
+<link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
 <title>Lista de usuarios</title>
 </head>
 <body>
 
 	<a style="float:right" href="<c:url value="/user/logout"/>"> Cerrar sesión </a>
-	<table cellpadding="5">
+	<table cellpadding="5" class="table table-hover table-striped table-condensed">
 		<tr class="even">
 			<th>Id</th>
 			<th>Name</th>
@@ -49,5 +50,7 @@
 	   </c:forEach>
 	</table>
 	 <c:if test="${errormessage!=null}"> <span class="error"> ${errormessage} </span> </c:if>
+	 <script src='<c:url value="/resources/jquery/1.6/jquery.js"/>'></script>
+	 <script src='<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>'></script>
 	</body>
 </html>

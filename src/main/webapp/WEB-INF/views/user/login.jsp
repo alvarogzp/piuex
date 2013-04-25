@@ -21,17 +21,17 @@
 		<tr>
 			<td>Usuario:</td>
 			<td><form:input path="username" placeholder="Usuario" style="text-align:center" /></td>
-			<td><form:errors path="username" cssClass="error" /></td>
+			<td><form:errors path="username" cssClass="label label-important" /></td>
 		</tr>
 		<tr>
 			<td>Contraseña:</td>
 			<td><form:password path="password" placeholder="Contraseña" style="text-align:center" /></td>
-			<td><form:errors path="password" cssClass="error" /></td>
+			<td><form:errors path="password" cssClass="label label-important" /></td>
 		</tr>
 		<tr>
 			<td></td>
 			<td><input type="submit" class="btn btn-success" value="Entrar"></td>
-			<td> <c:if test="${errormessage!=null}"> <span class="error">${errormessage}</span> </c:if> </td>
+			<td> <c:if test="${errormessage!=null}"> <span class="label label-important">${errormessage}</span> </c:if> </td>
 		</tr>
 	</table>
 		<br>
