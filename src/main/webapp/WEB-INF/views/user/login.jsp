@@ -9,6 +9,7 @@
 <link rel="icon" type="image/png" href='<c:url value="/resources/img/logo.png"/>'>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet"  type="text/css" />
+<link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
 
 <title>Login</title>
 </head>
@@ -29,12 +30,14 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="submit" value="Entrar"></td>
-			<td> <c:if test="${errormessage!=null}"> <span class="error"> ${errormessage} </span> </c:if> </td>
+			<td><input type="submit" class="btn btn-success" value="Entrar"></td>
+			<td> <c:if test="${errormessage!=null}"> <span class="error">${errormessage}</span> </c:if> </td>
 		</tr>
 	</table>
 		<br>
-		<p style="font-size: 10pt">Si no tienes usuario, <a href="<c:url value="/user/registrate"/>"> ¡registrate aquí! </a> </p>
+		<p style="font-size: 10pt">Si no tienes usuario, <a href="<c:url value="/user/registrate"/>">¡registrate aquí!</a> </p>
 </form:form>
+<script src='<c:url value="/resources/jquery/1.6/jquery.js"/>'></script>
+<script src='<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>'></script>
 </body>
 </html>
