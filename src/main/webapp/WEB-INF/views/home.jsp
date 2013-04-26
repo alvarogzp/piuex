@@ -18,7 +18,7 @@ Carlos Rufo Jiménez</p>
 <p style="float: right;">Escuela Politécnica,<br>
 Universidad de Extremadura</p>
 <P>${serverTime}</P>
-<p>Versión: 1.1</p>
+<p><a href='<c:url value="/version"/>' title="Ver cambios">Versión: 1.1</a></p>
 </div>
 </body>
 </html>
