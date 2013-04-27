@@ -39,4 +39,10 @@ public class HomeController {
 		return "home";
 	}
 	
+	
+	@RequestMapping(value="/version", method=RequestMethod.GET)
+	public String version() {
+		return "/version";
+	}
+	
 }
