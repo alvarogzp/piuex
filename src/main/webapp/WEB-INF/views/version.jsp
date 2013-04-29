@@ -6,16 +6,16 @@
 <title>Versiones</title>
 </head>
 <body>
-<h1 class="text-center"> Cambios de Apalabrados PIUEx </h1>
+<h1 class="text-center" style="text-shadow: 0 4px 0 #BBBBBB"> Cambios de Apalabrados PIUEx </h1>
 
-	<h2 style="text-shadow: 0 2px 0 #BBBBBB">Versión 1.1 (fecha 19-04-2013)</h2>
+	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 1.1 (fecha 19-04-2013)</h3>
 	<ul>
 		<li>Creado usuario "Administrador". Dispone de total acceso a la aplicación.</li>
 		<li>Añadidas las imágenes de los usuarios. En la lista de partidas se puede observar el avatar de cada usuario.</li>
 		<li>Arreglado enlace a la lista de partidas. Este enlace se encuentra en el tablero.</li>
 	</ul>
 	
-	<h2>Versión 1.0 (fecha 07-03-2013)</h2>
+	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 1.0 (fecha 07-03-2013)</h3>
 	<ul>
 		<li>Entrega parcial 1. Es la versión inicial de la aplicación.</li>
 	</ul>
