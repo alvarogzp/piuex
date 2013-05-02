@@ -1,11 +1,108 @@
 /*
- * Script para mover elementos en una pagina web.
- * 
- * Para usar este script carguelo AL FINAL del "body" de su pagina web,
- * y asigne la clase "mover" a los elementos que desea que se puedan mover.
+ * Corredor.
  * 
  * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
  */
+
+var x = 0;
+var y = 0;
+var v = 0;
+
+var f = function(e) {
+	v += 1;
+	if (e.keyCode == 39) {
+		// Mover derecha
+		if (x >= 500) {
+			square.style.background = "#0f0";
+		} else {
+			x += 10;
+			square.style.left = x;
+		}
+	}
+	if (e.keyCode == 37) {
+		// Mover izquierda
+		if (x <= 0) {
+			square.style.background = "#f00";
+		} else {
+			x -= 10;
+			square.style.left = x;
+		}
+	}
+	if (e.keyCode == 38) {
+		// Mover arriba
+		if (y <= 0) {
+			square.style.background = "#f00";
+		} else {
+			y -= 10;
+			square.style.top = y;
+		}
+	}
+	if (e.keyCode == 40) {
+		// Mover abajo
+		if (y >= 500) {
+			square.style.background = "#0f0";
+		} else {
+			y += 10;
+			square.style.top = y;
+		}
+	}
+	console.log(e);
+};
+
+
+var disminuirAceleracion = function() {
+	if (v > 0) {
+		v -= 1;
+	}
+};
+
+
+var pintar = function() {
+	x = x + v;
+	y = y + v;
+	square.style.left = x;
+	square.style.top = y;
+};
+
+
+setInterval(disminuirAceleracion, 1000);
+setInterval(pintar, 50);
+document.body.onkeydown = f;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var x = 0, y = 0, element = null;
 
