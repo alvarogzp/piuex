@@ -1,28 +1,70 @@
 /*
  * Corredor.
  * 
+ * Key codes:
+ * - 13: Intro
+ * - 37: Izquierda
+ * - 38: Arriba
+ * - 39: Derecha
+ * - 40: Abajo
+ * 
  * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
  */
 
 var x = 0;
 var y = 0;
-var v = 0;
+var vx = 0;
+var vy = 0;
+
 
 var acelerar = function(e) {
-	v += 1;
+	if (e.keyCode == 39) {
+		vx += 1.5;
+	} else if (e.keyCode == 37) {
+		vx -= 1.5;
+	} else if (e.keyCode == 40) {
+		vy += 1.5;
+	} else if (e.keyCode == 38) {
+		vy -= 1.5;
+	} else if (e.keyCode == 13) {
+		vx = 0;
+		xy = 0;
+		x = 0;
+		y = 0;
+	}
 };
 
 
 var disminuirAceleracion = function() {
-	if (v > 0) {
-		v -= 1;
+	if (vx > 0) {
+		vx -= 1;
+		if (vx < 0) {
+			vx = 0;
+		}
+	} else if (vx < 0) {
+		vx += 1;
+		if (vx > 0) {
+			vx = 0;
+		}
+	}
+	
+	if (vy > 0) {
+		vy -= 1;
+		if (vy < 0) {
+			vy = 0;
+		}
+	} else if (vy < 0) {
+		vy += 1;
+		if (vy > 0) {
+			vy = 0;
+		}
 	}
 };
 
 
 var pintar = function() {
-	x = x + v;
-	// y = y + v;
+	x = x + vx;
+	y = y + vy;
 	square.style.left = x;
 	square.style.top = y;
 };
