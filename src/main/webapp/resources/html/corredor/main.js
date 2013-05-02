@@ -8,45 +8,8 @@ var x = 0;
 var y = 0;
 var v = 0;
 
-var f = function(e) {
+var acelerar = function(e) {
 	v += 1;
-	if (e.keyCode == 39) {
-		// Mover derecha
-		if (x >= 500) {
-			square.style.background = "#0f0";
-		} else {
-			x += 10;
-			square.style.left = x;
-		}
-	}
-	if (e.keyCode == 37) {
-		// Mover izquierda
-		if (x <= 0) {
-			square.style.background = "#f00";
-		} else {
-			x -= 10;
-			square.style.left = x;
-		}
-	}
-	if (e.keyCode == 38) {
-		// Mover arriba
-		if (y <= 0) {
-			square.style.background = "#f00";
-		} else {
-			y -= 10;
-			square.style.top = y;
-		}
-	}
-	if (e.keyCode == 40) {
-		// Mover abajo
-		if (y >= 500) {
-			square.style.background = "#0f0";
-		} else {
-			y += 10;
-			square.style.top = y;
-		}
-	}
-	console.log(e);
 };
 
 
@@ -59,15 +22,15 @@ var disminuirAceleracion = function() {
 
 var pintar = function() {
 	x = x + v;
-	y = y + v;
+	// y = y + v;
 	square.style.left = x;
 	square.style.top = y;
 };
 
 
-setInterval(disminuirAceleracion, 1000);
+setInterval(disminuirAceleracion, 60);
 setInterval(pintar, 50);
-document.body.onkeydown = f;
+document.body.onkeydown = acelerar;
 
 
 
