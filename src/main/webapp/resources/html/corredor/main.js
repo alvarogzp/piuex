@@ -11,6 +11,10 @@
  *   tecla espacio.
  * - Pulsa la tecla intro para situar al corredor en el punto inicial (por si
  *   se te pierde por el ciberespacio).
+ * - El fondo del corredor sera de color verde si el corredor corre a una
+ *   velocidad razonable, y cambiara a rojo cuando el corredor vaya a una
+ *   velocidad excesiva. Es recomendable detener al corredor cuando se ponga
+ *   de color rojo, por su salud.
  * 
  * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
  */
@@ -26,10 +30,22 @@ var ACCELERATE_RATIO = 2.3;
 var DECELERATE_RATIO = 1.2;
 
 // Multiplicador del ratio de deceleracion al tener pulsada la tecla espacio
-var SPACE_MULTIPLIER = 2;
+var SPACE_MULTIPLIER = 2.5;
 
 // Intervalo de actualizacion de la posicion y velocidad en milisegundos
 var UPDATE_INTERVAL = 50;
+
+// Velocidad a partir de la cual se considera que el corredor va demasiado rapido
+var SPEED_HIGH = 50;
+
+// Color que mostrar cuando el corredor esta parado
+var COLOR_STOP = "#999";
+
+// Color que mostrar cuando el corredor se mueve a una velocidad razonable
+var COLOR_NORMAL = "#0f0";
+
+// Color que mostrar cuando el corredor va a una velocidad excesiva
+var COLOR_HIGH = "red";
 
 
 
@@ -58,6 +74,15 @@ var v = {
 // Teclas actualmente pulsadas, true si esta pulsada, false si no (se rellena segun se van pulsando)
 var keys = {};
 
+
+
+//Pone el corredor en la esquina superior izquierda eliminando su velocidad
+function reset() {
+	v.x = 0;
+	v.y = 0;
+	p.x = 0;
+	p.y = 0;
+}
 
 
 // Funcion llamada al producirse un evento de tecla, activa o desactiva la tecla correspondiente
@@ -93,11 +118,7 @@ function proccesskeys() {
 				break;
 				
 			case KEY_ENTER:
-				// Poner cuadrado en 0,0 eliminando su velocidad
-				v.x = 0;
-				v.y = 0;
-				p.x = 0;
-				p.y = 0;
+				reset();
 				break;
 			}
 		}
@@ -126,15 +147,33 @@ function decelerate() {
 }
 
 
-// Actualizar la velocidad y posicion del corredor
-function update() {
-	proccesskeys();
-	decelerate();
-	
+// Comprueba la velocidad del corredor y si va demasiado rapido lo pone rojo
+function checkspeed() {
+	if (v.x == 0 && v.y == 0) {
+		square.style.background = COLOR_STOP;
+	} else if (Math.abs(v.x) >= SPEED_HIGH || Math.abs(v.y) >= SPEED_HIGH) {
+		square.style.background = COLOR_HIGH;
+	} else {
+		square.style.background = COLOR_NORMAL;
+	}
+}
+
+
+// Actualiza la posicion del corredor
+function updateposition() {
 	p.x += v.x;
 	p.y += v.y;
 	square.style.left = p.x;
 	square.style.top = p.y;
+}
+
+
+// Actualizar la velocidad y posicion del corredor
+function update() {
+	proccesskeys();
+	decelerate();
+	checkspeed();
+	updateposition();
 }
 
 
