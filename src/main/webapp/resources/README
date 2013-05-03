@@ -1,0 +1,9 @@
+Contiene carpetas con los distintos recursos de la aplicación.
+
+Los frameworks minificados que se deben incluir en las páginas web se encuentran
+directamente en esta carpeta con el nombre del framework y la extensión dependiendo
+del tipo de archivo.
+
+Por ejemplo, bootstrap se encuentra en:
+- bootstrap.js
+- bootstrap.css
