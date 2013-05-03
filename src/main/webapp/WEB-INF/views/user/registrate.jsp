@@ -13,10 +13,11 @@
 
 <title>Registro</title>
 </head>
-<body>
-<h1> Formulario de registro</h1>
-<form:form class="form-horizontal" method="post" modelAttribute="userBean">
+<body >
 
+<h1 style="text-align: center"> Formulario de registro</h1>
+<div class="container" style="margin: 0 auto; width: 38%">
+<form:form class="form-horizontal" method="post" modelAttribute="userBean">
 		<div class="control-group">
 			<label class="control-label" for="name">Nombre completo:</label>
 			<div class="controls">
@@ -52,17 +53,13 @@
 			</div>	
 		</div>
 		
-		
 		<div class="control-group">
 			<div class="controls">
-		    	<label class="checkbox">
-        			<input type="checkbox"> Remember me
-     		 	</label>
 				<input type="submit" class="btn btn-success" value="Regístrate en PIUEx">
 				<c:if test="${errormessage!=null}"> <span class="label label-important"> ${errormessage} </span> </c:if>
 			</div>
-		</div>
-	
+	</div>
+	</div>
 </form:form>
 <script src='<c:url value="/resources/jquery/1.6/jquery.js"/>'></script>
 <script src='<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>'></script>
