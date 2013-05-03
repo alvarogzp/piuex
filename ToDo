@@ -1,3 +1,4 @@
+**Oscurecer elementos de la barra que no esten activos. Al terminar barra duplicar en todos los jsp.
 Convertir level y opponents a enumeracion, igual con status de partidas
 implementar oppponents ¿como una lista?
 

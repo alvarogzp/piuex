@@ -28,8 +28,8 @@
 		      	<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/game/list?id=${loggedUser.id}"/></c:if>'>Partidas</a></li>
 	      	</ul>
 	      	<ul class="nav pull-right">	
-	      		<li><a href="https://twitter.com/#piuex"><img class="barra-icon" src="<c:url value="/resources/img/twitter.png"/>"></a></li>
-	      		<li><a href=""><i class="icon-off"></i></a></li>
+	      		<li><a href="https://twitter.com/#piuex"><img src="<c:url value="/resources/img/twitter.png"/>" class="barra-icon"></a></li>
+	      		<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/user/logout"/></c:if>'><i class="icon-off"></i></a></li>
 	    	</ul>
 	  	</div>
 	</div>
