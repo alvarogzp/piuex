@@ -17,7 +17,7 @@
 <body>
 	<h1 style="text-align:center"> Formulario de login</h1>
 
-	<form:form method="post" modelAttribute="userBean" class="form-horizontal">
+	<form:form method="post" modelAttribute="userBean" class="form-horizontal" style="width: 100%">
 
 		<div class="control-group">
 			<label class="control-label" for="username">Usuario:</label>
