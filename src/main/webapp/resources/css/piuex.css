@@ -1,0 +1,6 @@
+@CHARSET "ISO-8859-1";
+
+.azul:focus{
+    background-color: #E5F5FF;
+    color: #000000;
+}
