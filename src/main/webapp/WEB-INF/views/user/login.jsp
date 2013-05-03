@@ -8,7 +8,6 @@
 <head>
 <link rel="icon" type="image/png" href='<c:url value="/resources/img/logo.png"/>'>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet"  type="text/css" />
 <link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
 
 <title>Login</title>
@@ -17,23 +16,24 @@
 <h1 style="text-align:center"> Formulario de login</h1>
 
 <form:form method="post" modelAttribute="userBean" class="register">
-	<table>
-		<tr>
-			<td>Usuario:</td>
-			<td><form:input path="username" placeholder="Usuario" style="text-align:center" /></td>
-			<td><form:errors path="username" cssClass="label label-important" /></td>
-		</tr>
-		<tr>
-			<td>Contraseña:</td>
-			<td><form:password path="password" placeholder="Contraseña" style="text-align:center" /></td>
-			<td><form:errors path="password" cssClass="label label-important" /></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit" class="btn btn-success" value="Entrar"></td>
-			<td> <c:if test="${errormessage!=null}"> <span class="label label-important">${errormessage}</span> </c:if> </td>
-		</tr>
-	</table>
+
+	<fieldset>
+		<label for="username">Usuario:</label>
+		<form:input path="username" placeholder="Usuario" style="text-align:center" />
+		<form:errors path="username" cssClass="label label-important" />
+	</fieldset>
+	
+	<fieldset>
+		<label for="password">Contraseña:</label>
+		<form:password path="password" placeholder="Contraseña" style="text-align:center" />
+		<form:errors path="password" cssClass="label label-important" />
+	</fieldset>
+	
+	<fieldset>
+		<input type="submit" class="btn btn-success" value="Entrar">
+		<c:if test="${errormessage!=null}"> <span class="label label-important">${errormessage}</span> </c:if>
+	</fieldset>
+		
 		<br>
 		<p style="font-size: 10pt">Si no tienes usuario, <a href="<c:url value="/user/registrate"/>">¡registrate aquí!</a> </p>
 </form:form>
