@@ -1,6 +1,40 @@
 @CHARSET "ISO-8859-1";
 
-.azul:focus{
-    background-color: #E5F5FF;
-    color: #000000;
+
+/*
+ * Usado en login y registrate para poner un fondo azul claro a los inputs
+ * al pulsar sobre ellos.
+ */
+.azul:focus {
+	background-color: #E5F5FF;
+	color: #000000;
+}
+
+
+/*
+ * Usado en list para mostrar los avatares de un tamaño determinado,
+ * en lugar de que se vea la imagen con su tamaño completo.
+ */
+.avatar-list {
+	height: 45px;
+	width: auto;
+}
+
+
+/*
+ * Clase para usar en los mensajes de error.
+ * Muestra un fondo rojo claro y una letra rojo oscuro.
+ */
+.error {
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+
+
+/*
+ * Usada en la barra para indicar el alto de los iconos.
+ */
+.barra-icon {
+	height: 15px;
+	width: auto;
 }
