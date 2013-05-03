@@ -17,6 +17,25 @@
 
 <body>
 
+
+
+	<div class="navbar">
+	  	<div class="navbar-inner">
+	    	<a href="<c:url value="/"/>" class="brand">Home</a>
+	    	<ul class="nav"> 	
+		      	<li><a href='<c:if test="${loggedUser==null}"><c:url value="/user/login"/></c:if>'>Login</a></li>
+		      	<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/user/list"/></c:if>'>Usuarios</a></li>
+		      	<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/game/list?id=${loggedUser.id}"/></c:if>'>Partidas</a></li>
+	      	</ul>
+	      	<ul class="nav pull-right">	
+	      		<li><a href="https://twitter.com/#piuex"><img class="barra-icon" src="<c:url value="/resources/img/twitter.png"/>"></a></li>
+	      		<li><a href=""><i class="icon-off"></i></a></li>
+	    	</ul>
+	  	</div>
+	</div>
+
+
+
 	<h1 style="text-align:center"> Formulario de login</h1>
 	<div class="container" style="margin: 0 auto; width: 38%">
 	
