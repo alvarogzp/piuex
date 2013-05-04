@@ -59,7 +59,7 @@
 				<label class="control-label" for="email">Correo electrónico:</label>
 				<div class="controls">
 					<div class="input-append">
-						<form:input class="azul" id="appendedInput" type="email" path="email" placeholder="Correo electrónico" style="text-align:center" />
+						<form:input class="azul" type="email" path="email" placeholder="Correo electrónico" style="text-align:center" />
 						<span class="add-on">@</span>
 					</div>
 					<form:errors path="email" cssClass="label label-important" />
