@@ -17,7 +17,7 @@
 
 <body>
 
-
+<!-- Barra de navegación -->
 
 	<div class="navbar">
 	  	<div class="navbar-inner">
@@ -33,8 +33,6 @@
 	    	</ul>
 	  	</div>
 	</div>
-
-
 
 	<h1 style="text-align:center"> Formulario de login</h1>
 	<div class="container" style="margin: 0 auto; width: 38%">
