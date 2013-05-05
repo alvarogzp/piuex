@@ -15,7 +15,7 @@
 </head>
 <body>
 
-	<!-- Barra de navegación -->
+<!-- Barra de navegación -->
 
 	<div class="navbar">
 	  	<div class="navbar-inner">
@@ -32,7 +32,7 @@
 	  	</div>
 	</div>
 
-	<h2> Partidas de ${username}</h2>
+	<h2 style="text-align:center"> Partidas de ${username}</h2>
 	
 	<table class="table table-hover table-striped table-condensed">
 		<tr class="even">
