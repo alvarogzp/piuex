@@ -65,17 +65,17 @@
 			
 				<label class="radio">
 				<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-					Novato
+					Newbie
 				</label>
 				
 				<label class="radio">
 				<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-					Avanzado
+					Advanced
 				</label>
 				
 				<label class="radio">
 				<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-					Maestro
+					Master
 				</label>
 				<br>
 				<input type="submit" value="Guardar" class="btn btn-success" style="padding: 5px 40px">
