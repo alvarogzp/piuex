@@ -4,16 +4,16 @@
     margin: 0;
     border: 0;
 }
-body, html {
-    color: #373C40;
-    font-family: Verdana,Arial, Helvetica, sans-serif;
-    height: 100%;
-    background-color: #f0f0f0;
-    margin:10px;
-}
-body {
-    font-size: 70%;
-}
+/* body, html { */
+/*     color: #373C40; */
+/*     font-family: Verdana,Arial, Helvetica, sans-serif; */
+/*     height: 100%; */
+/*     background-color: #f0f0f0; */
+/*     margin:10px; */
+/* } */
+/* body { */
+/*     font-size: 70%; */
+/* } */
 
 .error{
 	color: #D8000C;
