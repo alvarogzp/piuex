@@ -13,10 +13,10 @@ var filas = tablero_t.split("\n");
 
 _( filas ).each(function( tr, i ) {
 	
-	tabla.push ( "<tr border='1'>" );
+	tabla.push ( "<tr>" );
 	
 		_( tr.split("") ).each (function( td, j ) {
-			tabla.push(  "<td border='1'><span class='mover'>" );
+			tabla.push(  "<td>" );
 			tabla.push(    td   );
 			tabla.push( "</span></td>" );
 		});
