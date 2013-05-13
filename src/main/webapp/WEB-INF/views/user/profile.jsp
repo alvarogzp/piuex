@@ -58,29 +58,29 @@
 				</p>
 			</fieldset>
 			
-			
-			<div class="container" style="margin: 0 auto; width: 38%">
-			
-				<legend>Nivel: </legend>
-			
-				<label class="radio">
-				<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-					Newbie
-				</label>
 				
-				<label class="radio">
-				<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-					Advanced
-				</label>
-				
-				<label class="radio">
-				<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-					Master
-				</label>
+			<div class="container" style="margin: 0 auto; width: 38%">	
+				<fieldset style="text-align:center">
+					<legend>My Mastery Level: </legend>
+					<p class="agreement">
+						<form:radiobutton path="level" value="newbie"/>
+						<label>Newbie</label>
+					</p>
+					<p class="agreement">
+						<form:radiobutton path="level" value="advanced"/>
+						<label>Advanced</label>
+					</p>
+					<p class="agreement">
+						<form:radiobutton path="level" value="master"/>
+						<label>Master</label>
+					</p>
+				</fieldset>
 				<br>
 				<input type="submit" value="Guardar" class="btn btn-success" style="padding: 5px 40px">
-				
-			</div>	
+			</div>
+			
+			
+			
 			
 			<!--  
 			<fieldset class="row4">
