@@ -10,35 +10,37 @@
 var x = 0, y = 0, element = null, objeto = null;
 
 
-function mover(elemento) {
-	elemento.onmousedown = iniciarmovimiento;
-	console.log("Cargado movimiento para " + elemento.id);
-}
 
 function asignarCelda(e) {
 	var $td = $(this);
-	console.log(this,$td.data('x'),e);
-	$td.html(element);
+	$td.html(meterCelda(element));
+}
+
+
+function meterCelda(e) {
+	return $(e).html();
 }
 
 
 function iniciarmovimiento(e) {
-	console.log("Moviendo " + e.target.id);
-	x = e.pageX;
-	y = e.pageY;
-	element = e.target;
-	document.onmousemove = movimiento;
-	document.onmouseup = detenermovimiento;
-	document.onmouseout = detenermovimiento;
+	e.preventDefault();
+	var p = $(this).position();
+	x = p.left;
+	y = p.top;
+	element = this;
+	$("#contenedor").mousemove(movimiento);
+	$("#contenedor").mouseup(detenermovimiento);
+	$("#contenedor").mouseup(detenermovimiento);
 }
 
 
 function movimiento(e) {
-	// console.log("Moviendo...");
-	moverelemento(element, "left", e.pageX - x);
-	moverelemento(element, "top", e.pageY - y);
-	x = e.pageX;
-	y = e.pageY;
+	var p = $(this).position();
+	var $p = $(element).position();
+	$p.left += p.left - x;
+	$p.top += p.top - y;
+	x = p.left;
+	y = p.top;
 }
 
 
@@ -48,17 +50,13 @@ function moverelemento(element, position, diff) {
 
 
 function detenermovimiento(e) {
-	document.onmousemove = null;
+	$("#contenedor").mousemove(null);
 	element = null;
 	console.log("Fin del movimiento de " + e.target.id);
 }
 
 
-
-var elements = document.getElementsByClassName("mover");
-for (var i = 0; i < elements.length; i++) {
-	mover(elements[i]);
-}
+$(".mover").mousedown(iniciarmovimiento);
 
 $("#juego td").mouseup(asignarCelda);
 
