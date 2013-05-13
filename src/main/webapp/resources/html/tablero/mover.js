@@ -7,13 +7,18 @@
  * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
  */
 
-var x = 0, y = 0, element = null;
+var x = 0, y = 0, element = null, objeto = null;
 
 
 function mover(elemento) {
 	elemento.onmousedown = iniciarmovimiento;
-	elemento.onmouseup = detenermovimiento;
 	console.log("Cargado movimiento para " + elemento.id);
+}
+
+function asignarCelda(e) {
+	var $td = $(this);
+	console.log(this,$td.data('x'),e);
+	$td.html(element);
 }
 
 
@@ -23,6 +28,8 @@ function iniciarmovimiento(e) {
 	y = e.pageY;
 	element = e.target;
 	document.onmousemove = movimiento;
+	document.onmouseup = detenermovimiento;
+	document.onmouseout = detenermovimiento;
 }
 
 
@@ -53,5 +60,6 @@ for (var i = 0; i < elements.length; i++) {
 	mover(elements[i]);
 }
 
+$("#juego td").mouseup(asignarCelda);
 
 console.log("Script cargado!");
