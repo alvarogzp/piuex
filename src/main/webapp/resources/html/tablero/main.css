@@ -11,3 +11,12 @@ td {
 	font-align: center;
 	border: 1px solid gray;
 }
+
+#juego {
+	text-align: center;
+}
+
+.mover {
+	position: absolute;
+	cursor: move;
+}

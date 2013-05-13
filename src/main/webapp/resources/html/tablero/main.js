@@ -7,7 +7,7 @@
 
 var tablero_t = $("#tablero").text(),
 	juego_d = $("#juego"),
-	tabla = [ "<table>" ];
+	tabla = [ "<table border='1'>" ];
 
 var filas = tablero_t.split("\n");
 
@@ -18,7 +18,7 @@ _( filas ).each(function( tr, i ) {
 		_( tr.split("") ).each (function( td, j ) {
 			tabla.push(  "<td>" );
 			tabla.push(    td   );
-			tabla.push( "</td>" );
+			tabla.push( "</span></td>" );
 		});
 	
 	tabla.push ( "</tr>" );
