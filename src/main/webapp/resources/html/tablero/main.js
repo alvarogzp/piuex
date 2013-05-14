@@ -7,7 +7,7 @@
 
 var tablero_t = $("#tablero").text(),
 	juego_d = $("#juego"),
-	tabla = [ "<table border='1'>" ];
+	tabla = [ "<table border='1' height='850' width='850'>" ];
 
 var filas = tablero_t.split("\n");
 
