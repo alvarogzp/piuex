@@ -20,3 +20,140 @@ td {
 	position: absolute;
 	cursor: move;
 }
+
+/*
+ * Estilo para todas las letras.
+ */
+
+.letra {
+	background-image: url(../../img/letras.jpg);
+}
+
+/*
+ * Estilo de cada letra.
+ */
+
+.letra-A{
+	background-position-x: 265;
+	background-position-y: -15;
+}
+
+.letra-B{
+	background-position-x: 213;
+	background-position-y: -15;
+}
+
+.letra-C{
+	background-position-x: 162;
+	background-position-y: -15;
+}
+
+.letra-D{
+	background-position-x: 109;
+	background-position-y: -15;
+}
+
+.letra-E{
+	background-position-x: 57;
+	background-position-y: -15;
+}
+
+.letra-F{
+	background-position-x: 265;
+	background-position-y: -57;
+}
+
+.letra-G{
+	background-position-x: 213;
+	background-position-y: -57;
+}
+
+.letra-H{
+	background-position-x: 162;
+	background-position-y: -57;
+}
+
+.letra-I{
+	background-position-x: 109;
+	background-position-y: -57;
+}
+
+.letra-J{
+	background-position-x: 57;
+	background-position-y: -57;
+}
+
+.letra-L{
+	background-position-x: 265;
+	background-position-y: -109;
+}
+
+.letra-M{
+	background-position-x: 213;
+	background-position-y: -109;
+}
+
+.letra-N{
+	background-position-x: 162;
+	background-position-y: -109;
+}
+
+.letra-Ñ{
+	background-position-x: 109;
+	background-position-y: -109;
+}
+
+.letra-O{
+	background-position-x: 57;
+	background-position-y: -109;
+}
+
+.letra-P{
+	background-position-x: 265;
+	background-position-y: -161;
+}
+
+.letra-Q{
+	background-position-x: 213;
+	background-position-y: -161;
+}
+
+.letra-R{
+	background-position-x: 162;
+	background-position-y: -161;
+}
+
+.letra-S{
+	background-position-x: 109;
+	background-position-y: -161;
+}
+
+.letra-T{
+	background-position-x: 57;
+	background-position-y: -161;
+}
+
+.letra-U{
+	background-position-x: 265;
+	background-position-y: -213;
+}
+
+.letra-V{
+	background-position-x: 213;
+	background-position-y: -213;
+}
+
+.letra-X{
+	background-position-x: 162;
+	background-position-y: -213;
+}
+
+.letra-Y{
+	background-position-x: 109;
+	background-position-y: -213;
+}
+
+.letra-Z{
+	background-position-x: 57;
+	background-position-y: -213;
+}
