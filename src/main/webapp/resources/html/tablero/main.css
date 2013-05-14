@@ -21,12 +21,24 @@ td {
 	cursor: move;
 }
 
+.tabla{
+	border: 1;
+	height: 550;
+	width: 550;
+}
+
+.tabla-td{
+	height: 34;
+	width: 34;
+}
+
 /*
  * Estilo para todas las letras.
  */
 
 .letra {
 	background-image: url(../../img/letras.jpg);
+	background-size:300px 300px
 }
 
 /*
@@ -156,4 +168,33 @@ td {
 .letra-Z{
 	background-position-x: 57;
 	background-position-y: -213;
+}
+
+/*
+ * Estilo para todas las casillas.
+ */
+
+.casilla {
+	background-image: url(../../img/casillas.png);
+	background-size:300px 300px
+}
+
+.casilla-0{
+	background-position-x: 65;
+	background-position-y: -162;
+}
+
+.casilla-1{
+	background-position-x: 32;
+	background-position-y: -162;
+}
+
+.casilla-2{
+	background-position-x: 65;
+	background-position-y: -195;
+}
+
+.casilla-3{
+	background-position-x: 35;
+	background-position-y: -195;
 }
