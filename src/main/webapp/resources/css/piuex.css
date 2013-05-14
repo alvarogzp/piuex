@@ -40,9 +40,146 @@
 }
 
 /*
- * ¿?¿?¿?¿?¿?
+ * Estilo para el encabezado de las tablas.
  */
 
 .even {
-		background-color: silver;
-	}
+	background-color: silver;
+}
+	
+/*
+ * Estilo para todas las letras.
+ */
+
+.letra {
+	background-image: url(../img/letras.jpg);
+}
+
+/*
+ * Estilo de cada letra.
+ */
+
+.letra-A{
+	background-position-x: 256;
+	background-position-y: -17;
+}
+
+.letra-B{
+	background-position-x: 204;
+	background-position-y: -17;
+}
+
+.letra-C{
+	background-position-x: 153;
+	background-position-y: -17;
+}
+
+.letra-D{
+	background-position-x: 101;
+	background-position-y: -17;
+}
+
+.letra-E{
+	background-position-x: 48;
+	background-position-y: -17;
+}
+
+.letra-F{
+	background-position-x: 256;
+	background-position-y: -69;
+}
+
+.letra-G{
+	background-position-x: 204;
+	background-position-y: -69;
+}
+
+.letra-H{
+	background-position-x: 153;
+	background-position-y: -69;
+}
+
+.letra-I{
+	background-position-x: 101;
+	background-position-y: -69;
+}
+
+.letra-J{
+	background-position-x: 48;
+	background-position-y: -69;
+}
+
+.letra-L{
+	background-position-x: 256;
+	background-position-y: -121;
+}
+
+.letra-M{
+	background-position-x: 204;
+	background-position-y: -121;
+}
+
+.letra-N{
+	background-position-x: 153;
+	background-position-y: -121;
+}
+
+.letra-Ñ{
+	background-position-x: 101;
+	background-position-y: -121;
+}
+
+.letra-O{
+	background-position-x: 48;
+	background-position-y: -121;
+}
+
+.letra-P{
+	background-position-x: 256;
+	background-position-y: -173;
+}
+
+.letra-Q{
+	background-position-x: 204;
+	background-position-y: -173;
+}
+
+.letra-R{
+	background-position-x: 153;
+	background-position-y: -173;
+}
+
+.letra-S{
+	background-position-x: 101;
+	background-position-y: -173;
+}
+
+.letra-T{
+	background-position-x: 48;
+	background-position-y: -173;
+}
+
+.letra-U{
+	background-position-x: 256;
+	background-position-y: -225;
+}
+
+.letra-V{
+	background-position-x: 204;
+	background-position-y: -225;
+}
+
+.letra-X{
+	background-position-x: 153;
+	background-position-y: -225;
+}
+
+.letra-Y{
+	background-position-x: 101;
+	background-position-y: -225;
+}
+
+.letra-Z{
+	background-position-x: 48;
+	background-position-y: -225;
+}
