@@ -19,17 +19,19 @@ td {
 .mover {
 	position: absolute;
 	cursor: move;
+	width: 27;
+	height: 10;
 }
 
 .tabla{
 	border: 1;
-	height: 450;
-	width: 450;
+/* 	height: 450; */
+/* 	width: 450; */
 }
 
 .tabla-td{
-	height: 27;
-	width: 27;
+	height: 25;
+	width: 25;
 }
 
 /*
@@ -37,7 +39,7 @@ td {
  */
 
 .letra {
-	background-image: url(../../img/letras.jpg);
+	background-image: url(../img/letras.jpg);
 	background-size:140px 140px
 }
 
@@ -175,7 +177,7 @@ td {
  */
 
 .casilla {
-	background-image: url(../../img/casillas.png);
+	background-image: url(../img/casillas.png);
 	background-size: 50px 50px
 }
 

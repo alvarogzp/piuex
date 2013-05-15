@@ -3,7 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE html>
 <html>
 <head>
 	<link rel="icon" type="image/png" href='<c:url value="/resources/img/logo.png"/>'>
@@ -11,6 +10,7 @@
 	<link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet"  type="text/css" />
 	<link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
 	<link href="<c:url value="/resources/css/piuex.css"/>" rel="stylesheet">
+	<link href="<c:url value="/resources/tablero/main.css"/>" rel="stylesheet"/>
 	<title>Partida: ${game.p1.username} VS ${game.p2.username}</title>
 </head>
 <body>
@@ -32,113 +32,77 @@
 	  	</div>
 	</div>
 	
-	<div class="container" style="margin: 0 auto; width: 38%">
-		<form method="post">
+	<form method="post">
+		<div class="container" style="margin: 0 auto; width: 38%">
 			<input id="id" name="id" type="hidden" value="${game.id}"/>
 			
 			<span style="font-size: 25px; color: #000000"><b>Partida: </b></span>  <span style="font-size: 20px">${game.p1.username} VS ${game.p2.username} </span> 
 			<span style="font-size: 25px; color: #000000"><b>&nbsp;&nbsp;&nbsp;Puntuación:  </b></span><span style="font-size: 20px">${game.p1Score} - ${game.p2Score} </span>
 			<br>
-			<fieldset class="row2">
 			
-				<div class="container" style="margin: 0 auto; width: 38%">
-					<legend style="font-size: 20px; text-decoration: underline;"><b >Estado del tablero</b></legend>
-				</div>
+			<div class="container" style="margin: 0 auto; width: 38%">
+				<legend style="font-size: 20px; text-decoration: underline;"><b >Estado del tablero</b></legend>
+			</div>
+		</div>
 				
-				<table class="board">
+		<div id="contenedor" class="container" style="margin: 0 auto; width: 35%">
+			<textarea id="tablero">
+3  2   3   2  3
+ 2   1   1   2 
+  2   0 0   2  
+0  2   0   2  0
+    2     2    
+ 1   1   1   1 
+  0   0 0   0  
+3  0 PIUEX 0  3
+  0   0 0   0  
+ 1   1   1   1 
+    2     2    
+0  2   0   2  0
+  2   0 0   2  
+ 2   1   1   2 
+3  2   3   2  3</textarea>
+		
+			<div id="juego">
+				&nbsp;
+			</div>
+		</div>
+		
+		<br>
+		
+		<div class="container" style="margin: 0 auto; width: 35%">
+			<div id="letras" >
+				<table>
 					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">M</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">U</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">N</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">D</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">H</td><td class="board">O</td><td class="board">L</td><td class="board">A</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
-					</tr>
-					<tr>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>
-					<td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td><td class="board">&nbsp;</td>		
+						<td class="letra letra-A tabla-td"><span class="mover">&nbsp;</span></td>
+						<td class="letra letra-B tabla-td"><span class="mover">&nbsp;</span></td>
+						<td class="letra letra-C tabla-td"><span class="mover">&nbsp;</span></td>
+						<td class="letra letra-D tabla-td"><span class="mover">&nbsp;</span></td>
+						<td class="letra letra-E tabla-td"><span class="mover">&nbsp;</span></td>
+						<td class="letra letra-F tabla-td"><span class="mover">&nbsp;</span></td>
+						<td class="letra letra-G tabla-td"><span class="mover">&nbsp;</span></td>
+						<td class="letra letra-H tabla-td"><span class="mover">&nbsp;</span></td>
+						
 					</tr>
 				</table>
-			</fieldset>
-			
-			<div class="container" style="margin: 0 auto; width: 38%">
-				<legend style="font-size: 20px"><b>Tus letras:</b></legend>
 			</div>
+		</div>
+		
+			<br>
+		<div class="container" style="margin: 0 auto; width: 15%">
+			<input type="submit" value="Jugar" class="btn btn-success" style="padding: 5px 40px"/>
+		</div>
+		
 			
-			<div class="container" style="margin: 0 auto; width: 38%">
-				<div class="letters" style="font-size: 16px">
-					<span> A B C D E F G H </span>
-					<br><br>
-					<input type="submit" value="Jugar" class="btn btn-success" style="padding: 5px 40px"/>
-				</div>	  
-			</div>	
+		
 		</form>
-	</div>
+
 	
 	<script src='<c:url value="/resources/js/jquery.js"/>'></script>
+	<script src='<c:url value="/resources/js/underscore.js"/>'></script>
 	<script src='<c:url value="/resources/bootstrap/js/bootstrap.js"/>'></script>
+	<script src='<c:url value="/resources/tablero/main.js"/>'></script>
+	<script src='<c:url value="/resources/tablero/mover.js"/>'></script>	
+	
 	</body>
 </html>

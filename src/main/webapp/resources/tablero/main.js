@@ -16,7 +16,7 @@ _( filas ).each(function( tr, i ) {
 	tabla.push ( "<tr>" );
 	
 		_( tr.split("") ).each (function( td, j ) {
-			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' class='" );
+			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' class='tabla-td " );
 			if (td == ' '){
 				
 			}

@@ -1,10 +1,14 @@
+Actividad 2
+
+1) Si mueves la casilla a la misma casilla que no se borre.
+2) Casillas fijas.
+
+
 **Oscurecer elementos de la barra que no esten activos. Al terminar barra duplicar en todos los jsp.
 
 **Cosas fáciles que hacer:
 ***Hacer el boton de nueva partida de tipo bootstrap (clase btn)
-***El enlace a twitter que se abra en una nueva pestaña (target="_blank")
 ***Falta barra en /
-***Arreglar level en perfil
 
 **¿Qué le pasa a la barra de board?
 
