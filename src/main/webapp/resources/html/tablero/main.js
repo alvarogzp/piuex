@@ -16,8 +16,22 @@ _( filas ).each(function( tr, i ) {
 	tabla.push ( "<tr>" );
 	
 		_( tr.split("") ).each (function( td, j ) {
-			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' style='text-align: center' class='letra letra-" + td +"'>" );
-			tabla.push(    td   );
+			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' class='" );
+			if (td == ' '){
+				
+			}
+			else{
+				if(td.match("[A-Z]")){
+					tabla.push("letra letra-" + td);
+				}
+				else{
+					tabla.push("casilla casilla-" + td);
+				}
+			}
+			
+			tabla.push("'>");
+			
+			tabla.push(    ' '   );
 			tabla.push( "</td>" );
 		});
 	

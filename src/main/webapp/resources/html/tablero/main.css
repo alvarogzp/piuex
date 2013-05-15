@@ -23,13 +23,13 @@ td {
 
 .tabla{
 	border: 1;
-	height: 550;
-	width: 550;
+	height: 450;
+	width: 450;
 }
 
 .tabla-td{
-	height: 34;
-	width: 34;
+	height: 27;
+	width: 27;
 }
 
 /*
@@ -38,7 +38,7 @@ td {
 
 .letra {
 	background-image: url(../../img/letras.jpg);
-	background-size:300px 300px
+	background-size:140px 140px
 }
 
 /*
@@ -46,128 +46,128 @@ td {
  */
 
 .letra-A{
-	background-position-x: 265;
-	background-position-y: -15;
+	background-position-x: 276;
+	background-position-y: -4;
 }
 
 .letra-B{
-	background-position-x: 213;
-	background-position-y: -15;
+	background-position-x: 249;
+	background-position-y: -4;
 }
 
 .letra-C{
-	background-position-x: 162;
-	background-position-y: -15;
+	background-position-x: 222;
+	background-position-y: -4;
 }
 
 .letra-D{
-	background-position-x: 109;
-	background-position-y: -15;
+	background-position-x: 195;
+	background-position-y: -4;
 }
 
 .letra-E{
-	background-position-x: 57;
-	background-position-y: -15;
+	background-position-x: 169;
+	background-position-y: -4;
 }
 
 .letra-F{
-	background-position-x: 265;
-	background-position-y: -57;
+	background-position-x: 276;
+	background-position-y: -31;
 }
 
 .letra-G{
-	background-position-x: 213;
-	background-position-y: -57;
+	background-position-x: 249;
+	background-position-y: -31;
 }
 
 .letra-H{
-	background-position-x: 162;
-	background-position-y: -57;
+	background-position-x: 222;
+	background-position-y: -31;
 }
 
 .letra-I{
-	background-position-x: 109;
-	background-position-y: -57;
+	background-position-x: 195;
+	background-position-y: -31;
 }
 
 .letra-J{
-	background-position-x: 57;
-	background-position-y: -57;
+	background-position-x: 169;
+	background-position-y: -31;
 }
 
 .letra-L{
-	background-position-x: 265;
-	background-position-y: -109;
+	background-position-x: 276;
+	background-position-y: -58;
 }
 
 .letra-M{
-	background-position-x: 213;
-	background-position-y: -109;
+	background-position-x: 249;
+	background-position-y: -58;
 }
 
 .letra-N{
-	background-position-x: 162;
-	background-position-y: -109;
+	background-position-x: 222;
+	background-position-y: -58;
 }
 
 .letra-Ñ{
-	background-position-x: 109;
-	background-position-y: -109;
+	background-position-x: 195;
+	background-position-y: -58;
 }
 
 .letra-O{
-	background-position-x: 57;
-	background-position-y: -109;
+	background-position-x: 169;
+	background-position-y: -58;
 }
 
 .letra-P{
-	background-position-x: 265;
-	background-position-y: -161;
+	background-position-x: 276;
+	background-position-y: -85;
 }
 
 .letra-Q{
-	background-position-x: 213;
-	background-position-y: -161;
+	background-position-x: 249;
+	background-position-y: -85;
 }
 
 .letra-R{
-	background-position-x: 162;
-	background-position-y: -161;
+	background-position-x: 222;
+	background-position-y: -85;
 }
 
 .letra-S{
-	background-position-x: 109;
-	background-position-y: -161;
+	background-position-x: 195;
+	background-position-y: -85;
 }
 
 .letra-T{
-	background-position-x: 57;
-	background-position-y: -161;
+	background-position-x: 169;
+	background-position-y: -85;
 }
 
 .letra-U{
-	background-position-x: 265;
-	background-position-y: -213;
+	background-position-x: 276;
+	background-position-y: -111;
 }
 
 .letra-V{
-	background-position-x: 213;
-	background-position-y: -213;
+	background-position-x: 249;
+	background-position-y: -111;
 }
 
 .letra-X{
-	background-position-x: 162;
-	background-position-y: -213;
+	background-position-x: 222;
+	background-position-y: -111;
 }
 
 .letra-Y{
-	background-position-x: 109;
-	background-position-y: -213;
+	background-position-x: 195;
+	background-position-y: -111;
 }
 
 .letra-Z{
-	background-position-x: 57;
-	background-position-y: -213;
+	background-position-x: 169;
+	background-position-y: -111;
 }
 
 /*
@@ -176,25 +176,25 @@ td {
 
 .casilla {
 	background-image: url(../../img/casillas.png);
-	background-size:300px 300px
+	background-size: 50px 50px
 }
 
 .casilla-0{
-	background-position-x: 65;
-	background-position-y: -162;
+	background-position-x: 150;
+	background-position-y: -100;
 }
 
 .casilla-1{
-	background-position-x: 32;
-	background-position-y: -162;
+	background-position-x: 125;
+	background-position-y: -100;
 }
 
 .casilla-2{
-	background-position-x: 65;
-	background-position-y: -195;
+	background-position-x: 150;
+	background-position-y: -125;
 }
 
 .casilla-3{
-	background-position-x: 35;
-	background-position-y: -195;
+	background-position-x: 125;
+	background-position-y: -125;
 }

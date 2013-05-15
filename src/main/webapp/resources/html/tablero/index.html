@@ -1,53 +1,59 @@
 <html>
 	<head>
-		<title>Scrabble</title>
+		<title>Tablero</title>
 		<link href="./main.css" rel="stylesheet"/>
 	</head>
 	
 	<body>
 	
-	<div id="contenedor" class="container">
-		<textarea id="tablero">    QWERPU S F 
- SD ASDF WE W Q
-B AQ ERD O A SD
-SDF LASD NO  OA
-ASDF OA NO O K 
-ASD  O NO NO NO
- NO IO OI  KLNK
- NOI   O A D LN
-IAOS NO NIO INO
- NIO NIO NK N K
-  LO O  O   I I
- O  O    IS  KI
-  O   A K NL K 
-   J  L K N J J
-  D  L   K   J </textarea>
+	<div id="contenedor" class="container" style="margin: 0 auto; width: 38%">
+		<textarea id="tablero">
+3  2   3   2  3
+ 2   1   1   2 
+  2   0 0   2  
+0  2   0   2  0
+    2     2    
+ 1   1   1   1 
+  0   0 0   0  
+3  0 PIUEX 0  3
+  0   0 0   0  
+ 1   1   1   1 
+    2     2    
+0  2   0   2  0
+  2   0 0   2  
+ 2   1   1   2 
+3  2   3   2  3</textarea>
 		
-		<div id="juego">
-			&nbsp;
+			<div id="juego">
+				&nbsp;
+			</div>
 		</div>
+		
 		<br>
-		<div id="letras">
-			<table>
-				<tr>
-					<td class="tabla-td"><span class="mover">A</span></td>
-					<td class="tabla-td"><span class="mover">B</span></td>
-					<td class="tabla-td"><span class="mover">C</span></td>
-					<td class="tabla-td"><span class="mover">D</span></td>
-					<td class="tabla-td"><span class="mover">E</span></td>
-					<td class="tabla-td"><span class="mover">F</span></td>
-					<td class="tabla-td"><span class="mover">G</span></td>
-					<td class="tabla-td"><span class="mover">H</span></td>
-					
-				</tr>
-			</table>
+		
+		<div class="container" style="margin: 0 auto; width: 38%">
+			<div id="letras" >
+				<table>
+					<tr>
+						<td class="letra letra-A tabla-td"><span class="mover"> </span></td>
+						<td class="letra letra-B tabla-td"><span class="mover"> </span></td>
+						<td class="letra letra-C tabla-td"><span class="mover"> </span></td>
+						<td class="letra letra-D tabla-td"><span class="mover"> </span></td>
+						<td class="letra letra-E tabla-td"><span class="mover"> </span></td>
+						<td class="letra letra-F tabla-td"><span class="mover"> </span></td>
+						<td class="letra letra-G tabla-td"><span class="mover"> </span></td>
+						<td class="letra letra-H tabla-td"><span class="mover"> </span></td>
+						
+					</tr>
+				</table>
+			</div>
 		</div>
 		
 		<script src="../../js/jquery.js"></script>
 		<script src="../../js/underscore.js"></script>
 		<script src="./main.js"></script>
 		<script src="./mover.js"></script>
-	</div>
+	
 	</body>
 
 </html>
