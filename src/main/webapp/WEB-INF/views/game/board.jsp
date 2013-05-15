@@ -81,8 +81,7 @@
 						<td class="letra letra-E tabla-td"><span class="mover">&nbsp;</span></td>
 						<td class="letra letra-F tabla-td"><span class="mover">&nbsp;</span></td>
 						<td class="letra letra-G tabla-td"><span class="mover">&nbsp;</span></td>
-						<td class="letra letra-H tabla-td"><span class="mover">&nbsp;</span></td>
-						
+						<td class="comodin tabla-td"><span class="mover">&nbsp;</span></td>						
 					</tr>
 				</table>
 			</div>

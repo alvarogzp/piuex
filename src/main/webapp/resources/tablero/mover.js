@@ -10,9 +10,8 @@
 var x = 0, y = 0, element = null, objeto = null, clases = "";
 
 
-
 function asignarCelda(e) {
-	if (!clases || $(this).hasClass("letra")) {
+	if (!clases || $(this).hasClass("letra") || $(this).hasClass("comodin")) {
 		return;
 	}
 	$(this).attr("class", clases);

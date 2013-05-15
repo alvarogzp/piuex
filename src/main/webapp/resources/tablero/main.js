@@ -17,15 +17,28 @@ _( filas ).each(function( tr, i ) {
 	
 		_( tr.split("") ).each (function( td, j ) {
 			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' class='tabla-td " );
-			if (td == ' '){
-				
+			
+			if(td.match("[A-Z]")){
+				tabla.push("letra letra-" + td);
 			}
 			else{
-				if(td.match("[A-Z]")){
-					tabla.push("letra letra-" + td);
-				}
-				else{
-					tabla.push("casilla casilla-" + td);
+			
+				switch(td){
+					case(' '):{
+						break;
+					}
+	//				case(td.match("[A-Z]")):{
+	//					tabla.push("letra letra-" + td);
+	//					break;
+	//				}
+					case('*'):{
+						tabla.push("comodin" + td);
+						break;
+					}
+					default:{
+						tabla.push("casilla casilla-" + td);
+						break;
+					}
 				}
 			}
 			

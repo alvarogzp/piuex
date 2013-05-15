@@ -35,13 +35,25 @@ td {
 }
 
 /*
+ * Estilo para todas el comodin.
+ */
+
+.comodin {
+	background-image: url(../img/tablero/comodin.png);
+	background-size:26px 26px;
+	background-position-x: 286;
+	background-position-y: -1;
+}
+
+/*
  * Estilo para todas las letras.
  */
 
 .letra {
-	background-image: url(../img/letras.jpg);
+	background-image: url(../img/tablero/letras.jpg);
 	background-size:140px 140px
 }
+
 
 /*
  * Estilo de cada letra.
@@ -177,7 +189,7 @@ td {
  */
 
 .casilla {
-	background-image: url(../img/casillas.png);
+	background-image: url(../img/tablero/casillas.png);
 	background-size: 50px 50px
 }
 
