@@ -14,9 +14,16 @@ function asignarCelda(e) {
 	// this es el td de destino
 	// element es el span que se está moviendo
 	// el padre de element es el td de origen
-	if (element == null || $(this).hasClass("letra") || $(this).hasClass("comodin")) {
+	if (element == null) {
+		detenermovimiento(e);
+		return;
+	} else if (element.parent()[0] == $(this)[0]) {
+		return;
+	} else if ($(this).hasClass("letra") || $(this).hasClass("comodin")) {
+		detenermovimiento(e);
 		return;
 	}
+	
 	var $ep = element.parent();
 	_($ep.attr("class").split(" ")).each(
 		function(d, i){
@@ -41,6 +48,9 @@ function asignarCelda(e) {
 
 
 function iniciarmovimiento(e) {
+	if (element != null) {
+		return;
+	}
 	e.preventDefault();
 	element = $(this).children("span");
 	var p = element.position();
