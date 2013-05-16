@@ -54,11 +54,27 @@
 			<tr>
 				<td>${user.id}</td>
 				<td>${user.name}</td>
-				<td><a href="<c:url value="/user/profile?username=${user.username}"/>">${user.username}</a></td>
+				<td>
+					<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
+						<a href="<c:url value="/user/profile?username=${user.username}"/>">
+					</c:if>
+					${user.username}
+					<c:if test="${loggedUser.username} == ${user.username}">
+						</a>
+					</c:if>	
+				</td>
 				<td>${user.email}</td>
 				<td>${user.level}</td>
 				<td><img src="<c:url value="/resources/avatars/${user.avatarFileName}"/>" alt="${user.avatarFileName}" class="avatar-list"/></td>
-				<td><a href="<c:url value="/game/list?id=${user.id}"/>"> Partidas de ${user.username}</a></td>
+				<td>
+				<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
+					<a href="<c:url value="/game/list?id=${user.id}"/>">
+				</c:if>
+				Partidas de ${user.username}
+				<c:if test="${loggedUser.username} == ${user.username}">
+					</a>
+				</c:if>	
+				</td>
 			</tr>
 	   </c:forEach>
 	   
