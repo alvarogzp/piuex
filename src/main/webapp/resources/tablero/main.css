@@ -41,8 +41,16 @@ td {
 .comodin {
 	background-image: url(../img/tablero/comodin.png);
 	background-size:26px 26px;
-	background-position-x: 286;
-	background-position-y: -1;
+	background-position: 286px -1px;
+}
+
+/*
+ * Estilo para la casilla inicial.
+ */
+.inicial {
+	background-image: url(../img/tablero/casillaInicial.png);
+	background-size:26px 26px;
+	background-position: 286px -2px;
 }
 
 /*
@@ -60,128 +68,103 @@ td {
  */
 
 .letra-A{
-	background-position-x: 276;
-	background-position-y: -4;
+	background-position: 276px -4px;
 }
 
 .letra-B{
-	background-position-x: 249;
-	background-position-y: -4;
+	background-position: 249px -4px;
 }
 
 .letra-C{
-	background-position-x: 222;
-	background-position-y: -4;
+	background-position: 222px -4px;
 }
 
 .letra-D{
-	background-position-x: 195;
-	background-position-y: -4;
+	background-position: 195px -4px;
 }
 
 .letra-E{
-	background-position-x: 169;
-	background-position-y: -4;
+	background-position: 169px -4px;
 }
 
 .letra-F{
-	background-position-x: 276;
-	background-position-y: -31;
+	background-position: 276px -31px;
 }
 
 .letra-G{
-	background-position-x: 249;
-	background-position-y: -31;
+	background-position: 249px -31px;
 }
 
 .letra-H{
-	background-position-x: 222;
-	background-position-y: -31;
+	background-position: 222px -31px;
 }
 
 .letra-I{
-	background-position-x: 195;
-	background-position-y: -31;
+	background-position: 195px -31px;
 }
 
 .letra-J{
-	background-position-x: 169;
-	background-position-y: -31;
+	background-position: 169px -31px;
 }
 
 .letra-L{
-	background-position-x: 276;
-	background-position-y: -58;
+	background-position: 276px -58px;
 }
 
 .letra-M{
-	background-position-x: 249;
-	background-position-y: -58;
+	background-position: 249px -58px;
 }
 
 .letra-N{
-	background-position-x: 222;
-	background-position-y: -58;
+	background-position: 222px -58px;
 }
 
 .letra-Ñ{
-	background-position-x: 195;
-	background-position-y: -58;
+	background-position: 195px -58px;
 }
 
 .letra-O{
-	background-position-x: 169;
-	background-position-y: -58;
+	background-position: 169px -58px;
 }
 
 .letra-P{
-	background-position-x: 276;
-	background-position-y: -85;
+	background-position: 276px -85px;
 }
 
 .letra-Q{
-	background-position-x: 249;
-	background-position-y: -85;
+	background-position: 249px -85px;
 }
 
 .letra-R{
-	background-position-x: 222;
-	background-position-y: -85;
+	background-position: 222px -85px;
 }
 
 .letra-S{
-	background-position-x: 195;
-	background-position-y: -85;
+	background-position: 195px -85px;
 }
 
 .letra-T{
-	background-position-x: 169;
-	background-position-y: -85;
+	background-position: 169px -85px;
 }
 
 .letra-U{
-	background-position-x: 276;
-	background-position-y: -111;
+	background-position: 276px -111px;
 }
 
 .letra-V{
-	background-position-x: 249;
-	background-position-y: -111;
+	background-position: 249px -111px;
 }
 
 .letra-X{
-	background-position-x: 222;
-	background-position-y: -111;
+	background-position: 222px -111px;
 }
 
 .letra-Y{
-	background-position-x: 195;
-	background-position-y: -111;
+	background-position: 195px -111px;
 }
 
 .letra-Z{
-	background-position-x: 169;
-	background-position-y: -111;
+	background-position: 169px -111px;
 }
 
 /*
@@ -194,21 +177,17 @@ td {
 }
 
 .casilla-0{
-	background-position-x: 150;
-	background-position-y: -100;
+	background-position: 150px -100px;
 }
 
 .casilla-1{
-	background-position-x: 125;
-	background-position-y: -100;
+	background-position: 125px -100px;
 }
 
 .casilla-2{
-	background-position-x: 150;
-	background-position-y: -125;
+	background-position: 150px -125px;
 }
 
 .casilla-3{
-	background-position-x: 125;
-	background-position-y: -125;
+	background-position: 125px -125px;
 }

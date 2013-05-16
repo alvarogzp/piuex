@@ -27,12 +27,12 @@ _( filas ).each(function( tr, i ) {
 					case(' '):{
 						break;
 					}
-	//				case(td.match("[A-Z]")):{
-	//					tabla.push("letra letra-" + td);
-	//					break;
-	//				}
 					case('*'):{
-						tabla.push("comodin" + td);
+						tabla.push("comodin");
+						break;
+					}
+					case ('#'):{
+						tabla.push("inicial");
 						break;
 					}
 					default:{
