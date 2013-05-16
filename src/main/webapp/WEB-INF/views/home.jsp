@@ -10,34 +10,10 @@
 	
 	
 	<style type="text/css" media="screen">
-      body {
-        margin: 0;
-      }
-      body,
-      input,
-      button {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      }		
-
-      h1 { letter-spacing: -1px; line-height: 60px; font-size: 60px; font-weight: 100; margin: 0px; text-shadow: 0 1px 0 #fff; }
-
-      .logo { display: inline-block; margin-top: 35px; }
-      .logo-img-2x { display: none; }
-      @media
-      only screen and (-webkit-min-device-pixel-ratio: 2),
-      only screen and (   min--moz-device-pixel-ratio: 2),
-      only screen and (     -o-min-device-pixel-ratio: 2/1),
-      only screen and (        min-device-pixel-ratio: 2),
-      only screen and (                min-resolution: 192dpi),
-      only screen and (                min-resolution: 2dppx) {
-        .logo-img-1x { display: none; }
-        .logo-img-2x { display: inline-block; }
-      }
-
 
       #parallax_wrapper {
         position: absolute;
-        left: 25%;
+        left: 20%;
         top: 15%;
         z-index: 0;
       }
@@ -58,42 +34,19 @@
         position: relative;
         overflow: hidden;
       }
-      #parallax_illustration #parallax_sign {
-        position: absolute;
-        top: 25px;
-        left: 582px;
-        z-index: 10;
-      }
+     
       #parallax_illustration #letra1 {
         position: absolute;
-        top: 50%;
-        left: 15%;
+        top: 47%;
+        left: 17%;
         z-index: 8;
       }
       
       #parallax_illustration #letra2 {
         position: absolute;
-        top: 6%;
-        left: 50%;
+        top: 5%;
+        left: 48%;
         z-index: 8;
-      }
-      #parallax_illustration #parallax_error_text {
-        display: block;
-        width: 400px;
-        height: 144px;
-        position: absolute;
-        top: 165px;
-        left: 152px;
-        font-family:Arial, Helvetica, sans-serif;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 18px;
-/*         background-image: //oooopsss.jpg. */
-        background-repeat: no-repeat;
-        padding: 64px 0 0 106px;
-        color: #183913;
-        text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.30);
-        z-index: 5;
       }
       #parallax_field #parallax_bg {
         overflow: hidden;
@@ -104,12 +57,7 @@
         left: 0px;
         z-index: 0;
       }
-      #parallax_illustration #parallax_error_text span {
-        display: block;
-        margin-left: 12px;
-      }
     </style>
-	
 	
 </head>
 <body style="text-align: center">
@@ -131,16 +79,7 @@
 	    	</ul>
 	  	</div>
 	</div>
-
-<!-- 	<div style="position: fixed; top: 10%; width: 100%"> -->
-<%-- 		<a href='<c:url value="/user"/>'><img src='<c:url value="/resources/img/PIUEx_logo.jpg"/>' title="　 Entrar !!" width="600px" height="250px"></a> --%>
-<!-- 		<br> -->
-<!-- 		　 Pulsa en la imagen para entrar !! -->
-<!-- 	</div> -->
 	
-	
-	
-<!-- **************************************************************** -->
 	
 	<div class="container" style="margin: 0 auto; width: 120%">
 		<div id="parallax_wrapper">
@@ -149,14 +88,12 @@
 	      </div>
 	
 	      <div id="parallax_illustration">
-	        <img alt="Falling Octocat, oh noes!" class="js-plaxify" data-xrange="100" data-yrange="100"
+	        <img alt="letra1" class="js-plaxify" data-xrange="100" data-yrange="100"
 	        height="120" id="letra1" width="120" src='<c:url value="/resources/img/logo.png"/>'>
 	        
-	        <img alt="Falling Octocat, oh noes!" class="js-plaxify" data-xrange="100" data-yrange="100"
+	        <img alt="letra2" class="js-plaxify" data-xrange="100" data-yrange="100"
 	        width="70" height="70" id="letra2" src='<c:url value="/resources/img/logo.png"/>'>
 	
-	        <p id="parallax_error_text" class="js-plaxify" data-xrange="25" data-yrange="25">
-	        </p>
 	      </div>
 		 </div>
 	 </div>
@@ -187,16 +124,9 @@
 
     </script>
 	
-	
-	
-	
-	
-	
-	
-<!-- **************************************************************** -->
-	
-	<a style=" font-size:20; position: fixed; float:center; bottom: 30%" href='<c:url value="/user"/>'>　 Pulse para entrar !!</a>
-	
+
+	<a style="font-size:20; position: fixed; left:41%; bottom: 25%" href='<c:url value="/user"/>'>　 Pulse para entrar !!</a>
+
 	
 	<div style="position: fixed; bottom: 0; width: 98%">		
 	
