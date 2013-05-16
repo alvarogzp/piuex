@@ -29,5 +29,15 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/errors/error404</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/errors/error500</location>
+	</error-page>
 
 </web-app>
