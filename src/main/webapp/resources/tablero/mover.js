@@ -29,6 +29,9 @@ function asignarCelda(e) {
 		function(d, i){
 			if (d == "mover" || d == "letra" || d == "comodin" || d.match("letra-[A-Z]")) {
 				$(this).addClass(d);
+				if (d.match("letra-[A-Z]")) {
+					actualizartextarea($ep, $(this), d.charAt(6));
+				}
 			}
 		}, this
 	);
@@ -43,6 +46,31 @@ function asignarCelda(e) {
 	$(this).html("<span>&nbsp;</span>");
 	$(this).mousedown(iniciarmovimiento);
 	detenermovimiento(e);
+}
+
+
+function actualizartextarea(tdant, td, letra) {
+	var x = td.data("x");
+	var y = td.data("y");
+	if (x != undefined) {
+		actualizar(x, y, letra);
+	}
+	var xant = tdant.data("x");
+	var yant = tdant.data("y");
+	if (xant != undefined) {
+		actualizar(xant, yant, " ");
+	}
+}
+
+function actualizar(x, y, e) {
+	var tablero_t = $("#tablero").text();
+	var filas = tablero_t.split("\n");
+	var columnas = filas[y].split("");
+	columnas[x] = e;
+	var c = columnas.join("");
+	filas[y] = c;
+	var t = filas.join("\n");
+	$("#tablero").text(t);
 }
 
 
