@@ -32,7 +32,7 @@
 	  	</div>
 	</div>
 
-	<h2 style="text-align:center">Partidas de <a href="<c:url value="/user/profile?username=${loggedUser.username}"/>">${loggedUser.username}</a></h2><br>
+	<h2 style="text-align:center">Partidas de <a href="<c:url value="/user/profile?username=${username}"/>">${username}</a></h2><br>
 	
 	<table class="table table-hover table-striped table-condensed">
 		<tr class="even">
