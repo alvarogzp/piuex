@@ -31,15 +31,6 @@ td {
 	width: 25;
 }
 
-/*
- * Estilo para todas el comodin.
- */
-
-.comodin {
-	background-image: url(../img/tablero/comodin.png);
-	background-size:26px 26px;
-	background-position: 286px -1px;
-}
 
 /*
  * Estilo para la casilla inicial.
@@ -48,6 +39,41 @@ td {
 	background-image: url(../img/tablero/casillaInicial.png);
 	background-size:26px 26px;
 	background-position: 286px -2px;
+}
+
+/*
+ * Estilo para todas las casillas.
+ */
+
+.casilla {
+	background-image: url(../img/tablero/casillas.png);
+	background-size: 50px 50px
+}
+
+.casilla-0{
+	background-position: 150px -100px;
+}
+
+.casilla-1{
+	background-position: 125px -100px;
+}
+
+.casilla-2{
+	background-position: 150px -125px;
+}
+
+.casilla-3{
+	background-position: 125px -125px;
+}
+
+/*
+ * Estilo para todas el comodin.
+ */
+
+.comodin {
+	background-image: url(../img/tablero/comodin.png);
+	background-size:26px 26px;
+	background-position: 286px -1px;
 }
 
 /*
@@ -162,29 +188,4 @@ td {
 
 .letra-Z{
 	background-position: 169px -111px;
-}
-
-/*
- * Estilo para todas las casillas.
- */
-
-.casilla {
-	background-image: url(../img/tablero/casillas.png);
-	background-size: 50px 50px
-}
-
-.casilla-0{
-	background-position: 150px -100px;
-}
-
-.casilla-1{
-	background-position: 125px -100px;
-}
-
-.casilla-2{
-	background-position: 150px -125px;
-}
-
-.casilla-3{
-	background-position: 125px -125px;
 }
