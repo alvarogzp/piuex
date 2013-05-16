@@ -11,6 +11,9 @@ var x = 0, y = 0, element = null, objeto = null, clases = "";
 
 
 function asignarCelda(e) {
+	// this es el td de destino
+	// element es el span que se está moviendo
+	// el padre de element es el td de origen
 	if (!clases || $(this).hasClass("letra") || $(this).hasClass("comodin")) {
 		return;
 	}
@@ -18,8 +21,8 @@ function asignarCelda(e) {
 	clases = "";
 	$(element).parent().attr("class", "tabla-td");
 	$(element).remove();
-	$(this).html("<span class='mover'>&nbsp;</span>");
-	$(this).children(".mover").mousedown(iniciarmovimiento);
+	$(this).html("<span>&nbsp;</span>");
+	$(this).mousedown(iniciarmovimiento);
 	detenermovimiento(e);
 }
 
@@ -27,11 +30,11 @@ function asignarCelda(e) {
 
 function iniciarmovimiento(e) {
 	e.preventDefault();
-	var p = $(this).position();
+	element = $(this).children("span");
+	var p = element.position();
 	x = p.left;
 	y = p.top;
-	element = this;
-	clases = $(this).parent().attr("class");
+	clases = $(this).attr("class");
 	$("#contenedor").mousemove(movimiento);
 //	$("#contenedor").mouseup(detenermovimiento);
 //	$("#contenedor").mouseout(detenermovimiento);

@@ -74,14 +74,14 @@
 			<div id="letras" >
 				<table>
 					<tr>
-						<td class="letra letra-A tabla-td"><span class="mover">&nbsp;</span></td>
-						<td class="letra letra-B tabla-td"><span class="mover">&nbsp;</span></td>
-						<td class="letra letra-C tabla-td"><span class="mover">&nbsp;</span></td>
-						<td class="letra letra-D tabla-td"><span class="mover">&nbsp;</span></td>
-						<td class="letra letra-E tabla-td"><span class="mover">&nbsp;</span></td>
-						<td class="letra letra-F tabla-td"><span class="mover">&nbsp;</span></td>
-						<td class="letra letra-G tabla-td"><span class="mover">&nbsp;</span></td>
-						<td class="comodin tabla-td"><span class="mover">&nbsp;</span></td>						
+						<td class="letra letra-A tabla-td mover"><span>&nbsp;</span></td>
+						<td class="letra letra-B tabla-td mover"><span>&nbsp;</span></td>
+						<td class="letra letra-C tabla-td mover"><span>&nbsp;</span></td>
+						<td class="letra letra-D tabla-td mover"><span>&nbsp;</span></td>
+						<td class="letra letra-E tabla-td mover"><span>&nbsp;</span></td>
+						<td class="letra letra-F tabla-td mover"><span>&nbsp;</span></td>
+						<td class="letra letra-G tabla-td mover"><span>&nbsp;</span></td>
+						<td class="comodin tabla-td mover"><span>&nbsp;</span></td>						
 					</tr>
 				</table>
 			</div>

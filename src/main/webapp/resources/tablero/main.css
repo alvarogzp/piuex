@@ -17,10 +17,7 @@ td {
 }
 
 .mover {
-	position: absolute;
 	cursor: move;
-	width: 27;
-	height: 10;
 }
 
 .tabla{
@@ -119,7 +116,7 @@ td {
 	background-position: 222px -58px;
 }
 
-.letra-Ñ{
+.letra-ï¿½{
 	background-position: 195px -58px;
 }
 
