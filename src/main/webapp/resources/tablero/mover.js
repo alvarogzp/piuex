@@ -7,24 +7,32 @@
  * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
  */
 
-var x = 0, y = 0, element = null, objeto = null, clases = "";
+var x = 0, y = 0, element = null;
 
 
 function asignarCelda(e) {
 	// this es el td de destino
 	// element es el span que se está moviendo
 	// el padre de element es el td de origen
-	if (!clases || $(this).hasClass("letra") || $(this).hasClass("comodin")) {
+	if (element == null || $(this).hasClass("letra") || $(this).hasClass("comodin")) {
 		return;
 	}
-	_(clases.split(" ")).each(
+	var $ep = element.parent();
+	_($ep.attr("class").split(" ")).each(
 		function(d, i){
-			$(this).addClass(d);
+			if (d == "mover" || d == "letra" || d == "comodin" || d.match("letra-[A-Z]")) {
+				$(this).addClass(d);
+			}
 		}, this
 	);
-	clases = "";
-	$(element).parent().removeClass("letra");
-	$(element).remove();
+	$ep.removeClass("letra");
+	for (var i = 65; i <= 90; i++) {
+		$ep.removeClass("letra-" + String.fromCharCode(i));
+	}
+	$ep.removeClass("comodin");
+	$ep.removeClass("mover");
+	$ep.mousedown(null);
+	element.remove();
 	$(this).html("<span>&nbsp;</span>");
 	$(this).mousedown(iniciarmovimiento);
 	detenermovimiento(e);
@@ -38,10 +46,7 @@ function iniciarmovimiento(e) {
 	var p = element.position();
 	x = p.left;
 	y = p.top;
-	clases = $(this).attr("class");
 	$("#contenedor").mousemove(movimiento);
-//	$("#contenedor").mouseup(detenermovimiento);
-//	$("#contenedor").mouseout(detenermovimiento);
 }
 
 
@@ -67,7 +72,6 @@ function detenermovimiento(e) {
 	$("#contenedor").mousemove(null);
 	element = null;
 }
-
 
 $(".mover").mousedown(iniciarmovimiento);
 

@@ -45,24 +45,24 @@ td {
  * Estilo para todas las casillas.
  */
 
-.casilla {
+.modificador {
 	background-image: url(../img/tablero/casillas.png);
 	background-size: 50px 50px
 }
 
-.casilla-0{
+.modificador-dl {
 	background-position: 150px -100px;
 }
 
-.casilla-1{
+.modificador-tl {
 	background-position: 125px -100px;
 }
 
-.casilla-2{
+.modificador-dp {
 	background-position: 150px -125px;
 }
 
-.casilla-3{
+.modificador-tp {
 	background-position: 125px -125px;
 }
 
