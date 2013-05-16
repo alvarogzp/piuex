@@ -17,9 +17,13 @@ function asignarCelda(e) {
 	if (!clases || $(this).hasClass("letra") || $(this).hasClass("comodin")) {
 		return;
 	}
-	$(this).attr("class", clases);
+	_(clases.split(" ")).each(
+		function(d, i){
+			$(this).addClass(d);
+		}, this
+	);
 	clases = "";
-	$(element).parent().attr("class", "tabla-td");
+	$(element).parent().removeClass("letra");
 	$(element).remove();
 	$(this).html("<span>&nbsp;</span>");
 	$(this).mousedown(iniciarmovimiento);
