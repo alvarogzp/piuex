@@ -111,8 +111,8 @@ function iniciarmovimiento(e) {
 
 function movimiento(e) {
 	// this es el contenedor
-	$(".fantasma").css("left",e.pageX+10);
-	$(".fantasma").css("top",e.pageY+10);
+	$(".fantasma").css("left",e.pageX+1);
+	$(".fantasma").css("top",e.pageY+1);
 //	var p = $(this).position();
 //	var l = $(".fantasma").css("left");
 //	var t = $(".fantasma").css("top");
