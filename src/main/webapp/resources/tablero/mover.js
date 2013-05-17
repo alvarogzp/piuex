@@ -113,13 +113,6 @@ function movimiento(e) {
 	// this es el contenedor
 	$(".fantasma").css("left",e.pageX+1);
 	$(".fantasma").css("top",e.pageY+1);
-//	var p = $(this).position();
-//	var l = $(".fantasma").css("left");
-//	var t = $(".fantasma").css("top");
-//	$(".fantasma").css("left", (parseInt(l) || 0) + (p.left || 0) - x);
-//	$(".fantasma").css("top", (parseInt(t) || 0) + (p.top || 0) - y);
-//	x = p.left;
-//	y = p.top;
 }
 
 
