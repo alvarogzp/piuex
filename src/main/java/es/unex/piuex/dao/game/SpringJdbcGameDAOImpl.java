@@ -95,7 +95,7 @@ public class SpringJdbcGameDAOImpl implements GameDAO {
 
 	@Override
 	public void update(Game game) {
-		jdbcTemplate.update(GAME_UPDATE_SQL, new Object[] {game.getStatus(), game.getP1Turn(), game.getP1Score(), game.getP2Score(), game.getBoard()});
+		jdbcTemplate.update(GAME_UPDATE_SQL, new Object[] {game.getStatus(), game.getP1Turn(), game.getP1Score(), game.getP2Score(), game.getBoard(), game.getId()});
 	}
 
 	@Override

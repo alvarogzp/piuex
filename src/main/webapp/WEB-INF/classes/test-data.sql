@@ -52,29 +52,32 @@ INSERT INTO APALABRADOS.USER (NAME, USERNAME,AVATAR,EMAIL,PASSWORD,LEVEL, RANK) 
 
 
 
-INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE) VALUES (
+INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
 	'playing',
 	1,
 	1,
 	2,
 	13,
-	5
+	5,
+	'               .               .               .               .               .               .               .               .               .               .               .               .               .               .               '
 );
 
-INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE) VALUES (
+INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
 	'initializing',
 	1,
 	2,
 	3,
 	0,
-	0
+	0,
+	'               .               .               .               .               .               .               .               .               .               .               .               .               .               .               '
 );
 
-INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE) VALUES (
+INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
 	'finish',
 	0,
 	3,
 	4,
 	100,
-	94
+	94,
+	'               .               .               .               .               .               .               .               .               .               .               .               .               .               .               '
 );
