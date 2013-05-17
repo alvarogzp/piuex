@@ -31,6 +31,8 @@ function asignarCelda(e) {
 				$(this).addClass(d);
 				if (d.match("letra-[A-Z]")) {
 					actualizartextarea($ep, $(this), d.charAt(6));
+				} else if (d == "comodin") {
+					actualizartextarea($ep, $(this), "*");
 				}
 			}
 		}, this

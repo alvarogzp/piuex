@@ -98,11 +98,13 @@ public class GameControlller {
 	
 	
 	@RequestMapping(value="/detail", method=RequestMethod.POST)
-	public String postBoard(int id, Model model, HttpSession session) {
+	public String postBoard(int id, Model model, HttpSession session, String tablero) {
 		// Comprobar que el usuario esté logueado
 		if (session.getAttribute("loggedUser") == null)
 			return "redirect:/user/login";
-		return "redirect:/game/detail?id=" + id;
+		model.addAttribute("tableronuevo", tablero);
+		model.addAttribute("game", gameDAO.get(id));
+		return "/game/board";
 	}
 
 }
