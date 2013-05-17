@@ -80,6 +80,16 @@ public class GameControlller {
 		game.setP1(userDAO.get(p1));
 		game.setP2(userDAO.get(p2));
 		game.setStatus("starting");
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 15; j++) {
+				sb.append(' ');
+			}
+			if (i < 14) {
+				sb.append('.');
+			}
+		}
+		game.setBoard(sb.toString());
 		gameDAO.add(game);
 		System.out.println("Nueva partida por '" + userDAO.get(p1).getUsername() + "' desde '" + sr.getRemoteAddr() + ":" + sr.getRemotePort() + "' at '" + new Date().toString() + "'");
 		
@@ -102,8 +112,10 @@ public class GameControlller {
 		// Comprobar que el usuario esté logueado
 		if (session.getAttribute("loggedUser") == null)
 			return "redirect:/user/login";
-		model.addAttribute("tableronuevo", tablero);
-		model.addAttribute("game", gameDAO.get(id));
+		Game game = gameDAO.get(id);
+		game.setBoard(tablero);
+		gameDAO.update(game);
+		model.addAttribute("game", game);
 		return "/game/board";
 	}
 

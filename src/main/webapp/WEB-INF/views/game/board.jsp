@@ -33,6 +33,9 @@
 	  	</div>
 	</div>
 	
+	
+	<span class="fantasma"></span>
+	
 	<form method="post">
 		<div class="container" style="margin: 0 auto; width: 38%">
 			<input id="id" name="id" type="hidden" value="${game.id}"/>
@@ -47,22 +50,7 @@
 		</div>
 				
 		<div id="contenedor" class="container" style="margin: 0 auto; width: 35%">
-			<textarea id="tablero" name="tablero"><c:if test="${tableronuevo != null}">${tableronuevo}</c:if><c:if test="${tableronuevo == null}">
-               
-               
-               
-               
-               
-               
-               
-     PI UEX    
-               
-               
-               
-               
-               
-               
-               </c:if></textarea>
+			<textarea id="tablero" name="tablero">${game.board}</textarea>
 		
 			<div id="juego">
 				&nbsp;

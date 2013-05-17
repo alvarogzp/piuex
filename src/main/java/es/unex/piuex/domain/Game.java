@@ -16,6 +16,8 @@ public class Game {
 	
 	private int p2Score;
 	
+	private String board;
+	
 
 	public Game() {
 		this.status = "initializing";
@@ -87,6 +89,14 @@ public class Game {
 
 	public void setP2Score(int p2Score) {
 		this.p2Score = p2Score;
+	}
+
+	public String getBoard() {
+		return board;
+	}
+
+	public void setBoard(String board) {
+		this.board = board;
 	}
 	
 }

@@ -27,9 +27,9 @@ public class SpringJdbcGameDAOImpl implements GameDAO {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	private final String GAME_INSERT_SQL = "INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2) VALUES (?, ?, ?, ?)";
-	private final String GAME_SELECT_SQL = "SELECT ID, STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE FROM APALABRADOS.GAME";
-	private final String GAME_UPDATE_SQL = "UPDATE APALABRADOS.GAME SET (STATUS, P1TURN, P1SCORE, P2SCORE) = (?, ?, ?, ?) WHERE ID = ?";
+	private final String GAME_INSERT_SQL = "INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, BOARD) VALUES (?, ?, ?, ?, ?)";
+	private final String GAME_SELECT_SQL = "SELECT ID, STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD FROM APALABRADOS.GAME";
+	private final String GAME_UPDATE_SQL = "UPDATE APALABRADOS.GAME SET (STATUS, P1TURN, P1SCORE, P2SCORE, BOARD) = (?, ?, ?, ?, ?) WHERE ID = ?";
 	
 	private final String GAME_ORDER_SQL = " ORDER BY ID" ;
 	
@@ -58,6 +58,7 @@ public class SpringJdbcGameDAOImpl implements GameDAO {
 			game.setP2(getUser(rs.getInt("p2")));
 			game.setP1Score(rs.getInt("p1score"));
 			game.setP2Score(rs.getInt("p2score"));
+			game.setBoard(rs.getString("board"));
 			return game;
 		}
 		
@@ -89,12 +90,12 @@ public class SpringJdbcGameDAOImpl implements GameDAO {
 
 	@Override
 	public void add(Game game) {
-		jdbcTemplate.update(GAME_INSERT_SQL, new Object[] {game.getStatus(), game.getP1Turn(), game.getP1().getId(), game.getP2().getId()});
+		jdbcTemplate.update(GAME_INSERT_SQL, new Object[] {game.getStatus(), game.getP1Turn(), game.getP1().getId(), game.getP2().getId(), game.getBoard()});
 	}
 
 	@Override
 	public void update(Game game) {
-		jdbcTemplate.update(GAME_UPDATE_SQL, new Object[] {game.getStatus(), game.getP1Turn(), game.getP1Score(), game.getP2Score()});
+		jdbcTemplate.update(GAME_UPDATE_SQL, new Object[] {game.getStatus(), game.getP1Turn(), game.getP1Score(), game.getP2Score(), game.getBoard()});
 	}
 
 	@Override

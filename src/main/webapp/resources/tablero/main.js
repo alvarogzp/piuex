@@ -27,7 +27,7 @@ var tablero_t = $("#tablero").text(),
 	juego_d = $("#juego"),
 	tabla = [ "<table class='tabla'>" ];
 
-var filas = tablero_t.split("\n");
+var filas = tablero_t.split(".");
 
 _( filas ).each(function( tr, i ) {
 	
@@ -36,6 +36,7 @@ _( filas ).each(function( tr, i ) {
 		_( tr.split("") ).each (function( td, j ) {
 			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' class='tabla-td " );
 			
+			console.log(i + ", " + j);
 			if (modificadores[i][j] != " ") {
 				if (modificadores[i][j].match("[0-3]")) {
 					tabla.push("modificador ");

@@ -32,6 +32,17 @@ td {
 }
 
 
+.fantasma {
+	position: absolute;
+	display: none;
+	left: 0;
+	top: 0;
+	height: 25;
+	width: 25;
+	opacity: 0.5;
+}
+
+
 /*
  * Estilo para la casilla inicial.
  */
