@@ -22,8 +22,8 @@
         position: absolute;
         left: 0;
         top: 0;
-        height: 380px;
-        width: 100%;
+        height: 90%;
+        width: 95%;
       }
       #parallax_illustration {
         display: block;
@@ -35,17 +35,17 @@
         overflow: hidden;
       }
      
-      #parallax_illustration #letra1 {
+      #parallax_illustration #letra-A {
         position: absolute;
         top: 47%;
         left: 17%;
         z-index: 8;
       }
       
-      #parallax_illustration #letra2 {
+      #parallax_illustration #letra-I {
         position: absolute;
-        top: 5%;
-        left: 48%;
+        top: 10%;
+        left: 53%;
         z-index: 8;
       }
       #parallax_field #parallax_bg {
@@ -88,11 +88,11 @@
 	      </div>
 	
 	      <div id="parallax_illustration">
-	        <img alt="letra1" class="js-plaxify" data-xrange="100" data-yrange="100"
-	        height="120" id="letra1" width="120" src='<c:url value="/resources/img/logo.png"/>'>
+	        <img alt="letra-A" class="js-plaxify" data-xrange="50" data-yrange="50"
+	        height="120" id="letra-A" width="120" src='<c:url value="/resources/img/logo.png"/>'>
 	        
-	        <img alt="letra2" class="js-plaxify" data-xrange="100" data-yrange="100"
-	        width="70" height="70" id="letra2" src='<c:url value="/resources/img/logo.png"/>'>
+	        <img alt="letra-I" class="js-plaxify" data-xrange="80" data-yrange="80"
+	        width="60" height="60" id="letra-I" src='<c:url value="/resources/img/tablero/letra-I.png"/>'>
 	
 	      </div>
 		 </div>
