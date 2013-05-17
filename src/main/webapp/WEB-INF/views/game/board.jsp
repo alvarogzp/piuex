@@ -47,7 +47,7 @@
 		</div>
 				
 		<div id="contenedor" class="container" style="margin: 0 auto; width: 35%">
-			<textarea id="tablero">
+			<textarea id="tablero" name="tablero"><c:if test="${tableronuevo != null}">${tableronuevo}</c:if><c:if test="${tableronuevo == null}">
                
                
                
@@ -62,7 +62,7 @@
                
                
                
-               </textarea>
+               </c:if></textarea>
 		
 			<div id="juego">
 				&nbsp;
