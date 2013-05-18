@@ -1,5 +1,6 @@
 ** Cambiar "Usuario logueado" por "Has entrado como" o algo parecido.
 ** En lista de partidas cambiar el enlace a la partida en Id por un enlace al final de la fila (crear una nueva columna para ello), usando un botón de bootstrap bien gordo :D
+** Cambiar el botón de crear nueva partida por bootstrap
 
 
 Convertir level y opponents a enumeracion, igual con status de partidas
