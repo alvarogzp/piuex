@@ -67,6 +67,11 @@
 				<input type="submit" value="Nueva partida">
 		</form:form>
 	</div>
+	
+	<div class="container" style="margin: 0 auto; width: 38%">
+		<a class="twitter-timeline"  width="300" height="400" href="https://twitter.com/search?q=%23PIUEx" data-widget-id="335841821836066816">Tweets sobre "#PIUEx"</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>	
+	</div>
 		
 	<script src='<c:url value="/resources/js/jquery.js"/>'></script>
 	<script src='<c:url value="/resources/bootstrap/js/bootstrap.js"/>'></script>
