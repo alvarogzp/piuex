@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1">
     <link rel="icon" type="image/png" href='<c:url value="/resources/img/logo.png"/>'>
     <title>Página no encontrada &middot; PIUEx</title>
     <style type="text/css" media="screen">
