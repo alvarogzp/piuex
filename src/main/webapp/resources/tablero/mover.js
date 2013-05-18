@@ -1,13 +1,12 @@
 /*
- * Script para mover elementos en una pagina web.
- * 
- * Para usar este script carguelo AL FINAL del "body" de su pagina web,
- * y asigne la clase "mover" a los elementos que desea que se puedan mover.
+ * Script para mover las letras del tablero.
  * 
  * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
  */
 
-var x = 0, y = 0, element = null;
+
+// Elemento que está siendo movido (span vacío)
+var element = null;
 
 
 function asignarCelda(e) {
@@ -99,20 +98,22 @@ function iniciarmovimiento(e) {
 	}
 	e.preventDefault();
 	element = $(this).children("span");
-	var p = element.position();
-	x = p.left - e.pageX;
-	y = p.top  - e.pageY;
 	$("body").mousemove(movimiento);
 	addClasses($(this), $(".fantasma"));
 	$(".fantasma").removeClass("mover");
+	actualizarFantasma(e.pageX, e.pageY);
 	$(".fantasma").show();
 }
 
 
 function movimiento(e) {
-	// this es el contenedor
-	$(".fantasma").css("left",e.pageX+1);
-	$(".fantasma").css("top",e.pageY+1);
+	actualizarFantasma(e.pageX, e.pageY);
+}
+
+
+function actualizarFantasma(x, y) {
+	$(".fantasma").css("left", x + 1);
+	$(".fantasma").css("top", y + 1);
 }
 
 

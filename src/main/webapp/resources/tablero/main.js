@@ -36,7 +36,6 @@ _( filas ).each(function( tr, i ) {
 		_( tr.split("") ).each (function( td, j ) {
 			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' class='tabla-td " );
 			
-			console.log(i + ", " + j);
 			if (modificadores[i][j] != " ") {
 				if (modificadores[i][j].match("[0-3]")) {
 					tabla.push("modificador ");
