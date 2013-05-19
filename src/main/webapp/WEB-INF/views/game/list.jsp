@@ -35,27 +35,36 @@
 
 	<h2 style="text-align:center">Partidas de <a href="<c:url value="/user/profile?username=${username}"/>">${username}</a></h2><br>
 	
-	<table class="table table-hover table-striped table-condensed">
-		<tr class="even">
-			<th>Id</th>
-			<th>Estado</th>
-			<th>Turno</th>
-			<th>Jugador 1</th>
-			<th>Jugador 2</th>
-			<th>Puntuación</th>
-		</tr>
-		<c:forEach items="${games}" var="game">
-			<tr>
-			<td><a href="<c:url value="/game/detail?id=${game.id}"/>">${game.id}</a></td>
-			<td>${game.status}</td>
-			<td>Jugador <c:if test="${game.p1Turn==true}">1</c:if><c:if test="${game.p1Turn==false}">2</c:if></td>
-			<td>${game.p1.username}</td>
-			<td>${game.p2.username}</td>
-			<td>${game.p1Score} - ${game.p2Score}</td>
-			</tr>
-	   </c:forEach>
-	</table>
-	
+	<div style="display: inline-block; width: 100%;">
+		<div style="float: left; width: 75%;">
+			<table class="table table-hover table-striped table-condensed">
+				<tr class="even">
+					<th>Id</th>
+					<th>Estado</th>
+					<th>Turno</th>
+					<th>Jugador 1</th>
+					<th>Jugador 2</th>
+					<th>Puntuación</th>
+				</tr>
+				<c:forEach items="${games}" var="game">
+					<tr>
+					<td><a href="<c:url value="/game/detail?id=${game.id}"/>">${game.id}</a></td>
+					<td>${game.status}</td>
+					<td>Jugador <c:if test="${game.p1Turn==true}">1</c:if><c:if test="${game.p1Turn==false}">2</c:if></td>
+					<td>${game.p1.username}</td>
+					<td>${game.p2.username}</td>
+					<td>${game.p1Score} - ${game.p2Score}</td>
+					</tr>
+			   </c:forEach>
+			</table>
+		</div>
+		
+	<div class="container" style="width:20%; height:auto; float: right;">
+		<a class="twitter-timeline" width="300" height="400" href="https://twitter.com/search?q=%23PIUEx" data-widget-id="335841821836066816">Tweets sobre "#PIUEx"</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>	
+	</div>
+</div>
+			
 	<div class="container" style="margin: 0 auto; width: 38%">
 		<c:url var="gameNew" value="/game/new"/>
 		<form:form method="post" modelAttribute="newGame" action="${gameNew}">
@@ -67,11 +76,7 @@
 				<input type="submit" value="Nueva partida">
 		</form:form>
 	</div>
-	
-	<div class="container" style="margin: 0 auto; width: 38%">
-		<a class="twitter-timeline"  width="300" height="400" href="https://twitter.com/search?q=%23PIUEx" data-widget-id="335841821836066816">Tweets sobre "#PIUEx"</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>	
-	</div>
+		
 		
 	<script src='<c:url value="/resources/js/jquery.js"/>'></script>
 	<script src='<c:url value="/resources/bootstrap/js/bootstrap.js"/>'></script>
