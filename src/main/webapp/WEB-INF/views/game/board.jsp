@@ -35,6 +35,7 @@
 	
 	
 	<span class="fantasma"></span>
+	<span style="display:none;" id="diccionario"><c:url value="/resources/tablero/diccionarios/diccionario-enminusculas-sintildes.txt"/></span>
 	
 	<form method="post">
 		<div class="container" style="margin: 0 auto; width: 38%">

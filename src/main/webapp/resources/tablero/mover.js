@@ -23,8 +23,15 @@
 
 // Elemento que está siendo movido (span vacío), necesario para saber cuál es el origen del movimiento
 var element = null;
+
 // El span que sigue el movimiento del cursor
 var $fantasma = $(".fantasma");
+
+// Indica el estado de la confirmación de la jugada:
+// 0 es que todavía no se ha empezado a confirmar (o ha sido rechazada)
+// 1 es que se está confirmando
+// 2 es que ha sido confirmada
+var confirmandoJugada = 0;
 
 
 
@@ -180,6 +187,16 @@ function confirmarjugada(e) {
 	 * o en el centro del tablero en el caso inicial.
 	 * Devuelve false si no se debe realizar el submit, true si sí.
 	 */
+	if (confirmandoJugada == 2) {
+		// La jugada ya ha sido confirmada, enviar
+		return true;
+	} else if (confirmandoJugada == 1) {
+		// La jugada se está confirmando, no hacer nada
+		return false;
+	}
+	
+	confirmandoJugada = 1;
+	
 	// Comprobar que hayan desaparecido fichas del usuario
 	var movidas = false;
 	$("#letras td").each(function (i, d) {
@@ -190,6 +207,8 @@ function confirmarjugada(e) {
 		}
 	});
 	if (!movidas) {
+		// Detener confirmación
+		confirmandoJugada = 0;
 		return confirm("No has hecho cambios al tablero\n¿Estás seguro que quieres pasar el turno?");
 	}
 	
@@ -207,11 +226,78 @@ function confirmarjugada(e) {
 		}
 	});
 	if (!seguidas) {
-		alert("¡La jugada es incorrecta!\nTodas las palabras que pongas tienen que estar unidas a otras que ya estuvieran puestas");
+		// Detener confirmación
+		confirmandoJugada = 0;
+		alert("¡La jugada es incorrecta!\nTodas las palabras que pongas tienen que estar unidas a otras que ya estuvieran puestas.\nSi estás haciendo el primer movimiento, debes poner una palabra que pase por el centro.");
 		return false;
 	}
 	
-	return true;
+	/*
+	 * Comprobar palabras válidas.
+	 * Esto debe hacerse de forma asíncrona porque jquery llamará al callback de esa manera
+	 */
+	$.get($("#diccionario").text(), function(e) {
+		comprobarDiccionario(["HOLA"], e);
+	});
+	
+	// Devolver falso en espera de que se realize la comprobación del diccionario
+	return false;
+}
+
+
+function comprobarDiccionario(palabras, diccionario) {
+	palabras = tolowercase(palabras);
+	// No se usa _.each porque no se puede parar cuando ya no quieras seguir recorriendo el array
+	// Con every se devuelve false para detener el recorrido, y entonces el propio every devuelve false
+	diccionario.split(/\s/).every(function (palabra) {
+		if (!palabras.every(function (p) {
+			if (palabra == p) {
+				console.log("Eliminando: " + p + "\nLongitud: " + (palabras.length-1));
+				palabras = eliminarelemento(palabras, p);
+				if (palabras.length == 0) {
+					// Comprobación correcta!
+					confirmandoJugada = 2;
+//					$(".js-submit").click();
+					console.log("OK!");
+					// Detener el recorrido
+					return false;
+				}
+			}
+			// Seguir el recorrido
+			return true;
+		})) {
+			// El every interno nos informa que se ha vaciado el vector de palabras
+			// Detener recorrido
+			return false;
+		}
+		// Seguir recorrido
+		return true;
+	});
+	if (palabras.length > 0) {
+		// Hay palabras no reconocidas
+		confirmandoJugada = 0;
+		alert("Las siguientes palabras no son válidas:\n" + palabras.join("\n"));
+	}
+}
+
+
+function tolowercase(vector) {
+	var nuevo = [];
+	_(vector).each(function (e, i) {
+		nuevo.push(e.toLowerCase());
+	});
+	return nuevo;
+}
+
+
+function eliminarelemento(vector, elemento) {
+	var nuevo = [];
+	_(vector).each(function (e, i) {
+		if (e != elemento) {
+			nuevo.push(e);
+		}
+	});
+	return nuevo;
 }
 
 
