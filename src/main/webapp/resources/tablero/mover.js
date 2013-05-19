@@ -1,6 +1,21 @@
 /*
  * Script para mover las letras del tablero.
  * 
+ * Permite mover las letras que tienen la clase "mover", pudiendo soltarlas
+ * en cualquier casilla libre del tablero o de las fichas del jugador.
+ * 
+ * El movimiento se puede hacer quedando presionado el ratón y arrastrando
+ * hasta soltarlo en la casilla de destino; o pulsando y soltando el ratón
+ * en la casilla origen, desplazar hasta la casilla destino y allí pulsar
+ * y soltar el ratón nuevamente.
+ * 
+ * Cuando se está arrastrando una ficha (ya sea con el ratón pulsado o no)
+ * se muestra la sombra de la ficha que está siendo arrastrada de forma
+ * semi-transparente bajo el cursor.
+ * Si se desea cancelar el movimiento de una ficha, se debe pulsar de nuevo
+ * sobre la celda de origen en la que se encuentra la ficha que se está
+ * moviendo.
+ * 
  * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
  */
 
@@ -161,7 +176,8 @@ function confirmarjugada(e) {
 	/*
 	 * Ejecutado al enviar la jugada.
 	 * Comprueba si no se han cambiado fichas del tablero y muestra una advertencia en ese caso.
-	 * Comprueba que las fichas puestas estén seguidas.
+	 * Comprueba que las fichas puestas estén unidas a otras puestas previamente,
+	 * o en el centro del tablero en el caso inicial.
 	 * Devuelve false si no se debe realizar el submit, true si sí.
 	 */
 	// Comprobar que hayan desaparecido fichas del usuario
@@ -213,8 +229,6 @@ function comprobarseguidas(td, juegotd) {
 		var dx = d[i].dx;
 		var dy = d[i].dy;
 		while (true) {
-			x += dx;
-			y += dy;
 			if (!(x < 15 && x >= 0 && y < 15 && y >= 0)) {
 				// Celda fuera de los límites
 				break;
@@ -228,6 +242,8 @@ function comprobarseguidas(td, juegotd) {
 					return true;
 				}
 			}
+			x += dx;
+			y += dy;
 		}
 	}
 	// No ha habido éxito
