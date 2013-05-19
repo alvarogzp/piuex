@@ -21,6 +21,9 @@ CREATE SCHEMA APALABRADOS AUTHORIZATION DBA
 		P2 INTEGER REFERENCES USER(ID) NOT NULL,
 		P1SCORE INTEGER DEFAULT 0 NOT NULL,
 		P2SCORE INTEGER DEFAULT 0 NOT NULL,
-		BOARD VARCHAR(255)
+		BOARD VARCHAR(255) DEFAULT '               .               .               .               .               .               .               .               .               .               .               .               .               .               .               ' NOT NULL,
+		LETTERS VARCHAR(96) DEFAULT 'EDENISNITRALPUEGAEAETEMDAADDVSÑUOFBRHUUONGITAXSALOOAQHOSNOBROTDEOSJCNAECCZEAEJSARIPCUIROEMILAYEL' NOT NULL,
+		P1LETTERS VARCHAR(8) DEFAULT '        ' NOT NULL,
+		P2LETTERS VARCHAR(8) DEFAULT '        ' NOT NULL
 	)
 ;

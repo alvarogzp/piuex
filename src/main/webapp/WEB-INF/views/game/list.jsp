@@ -49,8 +49,8 @@
 			<td><a href="<c:url value="/game/detail?id=${game.id}"/>">${game.id}</a></td>
 			<td>${game.status}</td>
 			<td>Jugador <c:if test="${game.p1Turn==true}">1</c:if><c:if test="${game.p1Turn==false}">2</c:if></td>
-			<td>${game.p1.username}</td>
-			<td>${game.p2.username}</td>
+			<td><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if></td>
+			<td><c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if></td>
 			<td>${game.p1Score} - ${game.p2Score}</td>
 			</tr>
 	   </c:forEach>

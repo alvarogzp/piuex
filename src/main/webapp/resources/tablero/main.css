@@ -1,3 +1,6 @@
+@CHARSET "ISO-8859-15";
+
+
 textarea {
 	display: none;
 }
@@ -153,7 +156,7 @@ td {
 	background-position: 222px -58px;
 }
 
-.letra-ï¿½{
+.letra-Ñ{
 	background-position: 195px -58px;
 }
 

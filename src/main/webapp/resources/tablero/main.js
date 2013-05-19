@@ -1,12 +1,12 @@
 /*
- * Tablero.
+ * Construye el tablero dinámicamente en la página web.
  * 
  * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
  */
 
 
 var modificadores = [
-"3  2   3   2  3",
+"3  0   3   0  3",
 " 2   1   1   2 ",
 "  2   0 0   2  ",
 "0  2   0   2  0",
@@ -20,7 +20,7 @@ var modificadores = [
 "0  2   0   2  0",
 "  2   0 0   2  ",
 " 2   1   1   2 ",
-"3  2   3   2  3" ];
+"3  0   3   0  3" ];
 
 
 var tablero_t = $("#tablero").text(),
@@ -58,7 +58,7 @@ _( filas ).each(function( tr, i ) {
 				}
 			}
 			
-			if(td.match("[A-Z]")) {
+			if(td.match("[A-Z]|Ñ")) {
 				tabla.push("letra letra-" + td);
 			} else if (td == "*") {
 				tabla.push("comodin");
@@ -76,6 +76,42 @@ _( filas ).each(function( tr, i ) {
 tabla.push( "</table>" );
 
 juego_d.html( tabla.join("") );
+
+
+
+
+// Fichas del jugador
+
+var fichas = $("#fichas");
+if (fichas.length) {
+	// En la partida juega el usuario
+	fichas = fichas.text();
+	// Es el turno del jugador?
+	var mover = $(".js-submit").length? "mover ": "";
+	var tabla = [ "<table class='tabla'><tr>" ];
+
+	_( fichas.split("") ).each(function( td, i ) {
+		tabla.push( "<td data-f='" + i + "' class='tabla-td " );
+		
+		if(td.match("[A-Z]|Ñ")) {
+			tabla.push(mover + "letra letra-" + td);
+		} else if (td == "*") {
+			tabla.push(mover + "comodin");
+		}
+		
+		tabla.push("'>");
+		
+		tabla.push( '<span>&nbsp;</span>' );
+		tabla.push( "</td>" );
+	});
+
+	tabla.push( "</tr></table>" );
+
+	$("#letras").html( tabla.join("") );
+} else {
+	// El usuario no juega
+	$("#letras").html('<span class="label label-important">¡No juegas en esta partida!</span>');
+}
 
 
 

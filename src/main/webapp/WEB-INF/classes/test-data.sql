@@ -59,7 +59,7 @@ INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) V
 	2,
 	13,
 	5,
-	'               .               .               .               .               .               .               .               .               .               .               .               .               .               .               '
+	'               .               .               .               .               .               .               .     PIUEX     .               .               .               .               .               .               .               '
 );
 
 INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
@@ -79,5 +79,5 @@ INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) V
 	4,
 	100,
 	94,
-	'               .               .               .               .               .               .               .               .               .               .               .               .               .               .               '
+	'               .               .               .               .               .               .               .  APALABRADOS  .               .               .               .               .               .               .               '
 );

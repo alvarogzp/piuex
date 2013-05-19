@@ -1,6 +1,7 @@
 package es.unex.piuex.controller;
 
 import java.util.Date;
+import java.util.Random;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpSession;
@@ -80,16 +81,12 @@ public class GameControlller {
 		game.setP1(userDAO.get(p1));
 		game.setP2(userDAO.get(p2));
 		game.setStatus("starting");
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 15; j++) {
-				sb.append(' ');
-			}
-			if (i < 14) {
-				sb.append('.');
-			}
-		}
-		game.setBoard(sb.toString());
+		/*
+		 * Aquí se deberían asignar las primeras 8 letras a los usuarios, pero la "bolsa" de letras
+		 * se asigna al guardar la partida en la base de datos, y una vez guardada no podemos recuperarla
+		 * ya que no sabemos qué id le va a asignar la base de datos, así que las letras de cada jugador
+		 * se asignan al mostrar el tablero.
+		 */
 		gameDAO.add(game);
 		System.out.println("Nueva partida por '" + userDAO.get(p1).getUsername() + "' desde '" + sr.getRemoteAddr() + ":" + sr.getRemotePort() + "' at '" + new Date().toString() + "'");
 		
@@ -102,21 +99,80 @@ public class GameControlller {
 		// Comprobar que el usuario esté logueado
 		if (session.getAttribute("loggedUser") == null)
 			return "redirect:/user/login";
-		model.addAttribute("game", gameDAO.get(id));
+		Game game = gameDAO.get(id);
+		int loggedUserId = ((User) session.getAttribute("loggedUser")).getId();
+		boolean p1 = loggedUserId == game.getP1().getId();
+		boolean p2 = loggedUserId == game.getP2().getId();
+		boolean turn = (game.isP1Turn() && p1) || (!game.isP1Turn() && p2);
+		if (p1 && p2) {
+			// El usuario está jugando consigo mismo
+			// Activar p1 o p2 dependiendo del turno actual
+			p1 = game.isP1Turn();
+			p2 = !game.isP1Turn();
+		}
+		// Comprobar si faltan letras y rellenar
+		boolean update = false;
+		if (p1 && game.getP1letters().contains(" ")) {
+			StringBuffer letters = new StringBuffer(game.getLetters());
+			StringBuffer pletters = new StringBuffer(game.getP1letters());
+			Random random = new Random();
+			int index = pletters.indexOf(" ");
+			while (index != -1) {
+				int rand = random.nextInt(letters.length());
+				pletters.deleteCharAt(index).insert(index, letters.charAt(rand));
+				letters.deleteCharAt(rand);
+				index = pletters.indexOf(" ");
+			}
+			game.setLetters(letters.toString());
+			game.setP1letters(pletters.toString());
+			update = true;
+		} else if (p2 && game.getP2letters().contains(" ")) {
+			StringBuffer letters = new StringBuffer(game.getLetters());
+			StringBuffer pletters = new StringBuffer(game.getP2letters());
+			Random random = new Random();
+			int index = pletters.indexOf(" ");
+			while (index != -1) {
+				int rand = random.nextInt(letters.length());
+				pletters.deleteCharAt(index).insert(index, letters.charAt(rand));
+				letters.deleteCharAt(rand);
+				index = pletters.indexOf(" ");
+			}
+			game.setLetters(letters.toString());
+			game.setP2letters(pletters.toString());
+			update = true;
+		}
+		if (update) {
+			gameDAO.update(game);
+			game = gameDAO.get(game.getId());
+		}
+		String letras = null;
+		if (p1) {
+			letras = game.getP1letters();
+		} else if (p2) {
+			letras = game.getP2letters();
+		}
+		model.addAttribute("game", game);
+		model.addAttribute("turn", turn);
+		model.addAttribute("letters", letras);
 		return "/game/board";
 	}
 	
 	
 	@RequestMapping(value="/detail", method=RequestMethod.POST)
-	public String postBoard(int id, Model model, HttpSession session, String tablero) {
+	public String postBoard(int id, Model model, HttpSession session, String tablero, String fichas) {
 		// Comprobar que el usuario esté logueado
 		if (session.getAttribute("loggedUser") == null)
 			return "redirect:/user/login";
 		Game game = gameDAO.get(id);
-		game.setBoard(tablero);
+		game.setBoard(tablero); // Actualizar tablero
+		if (game.getP1Turn()) {
+			game.setP1letters(fichas);
+		} else {
+			game.setP2letters(fichas);
+		}
+		game.setP1Turn(!game.getP1Turn()); // Cambiar turno
 		gameDAO.update(game);
-		model.addAttribute("game", game);
-		return "/game/board";
+		return "redirect:/game/detail?id=" + id;
 	}
 
 }

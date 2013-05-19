@@ -18,6 +18,12 @@ public class Game {
 	
 	private String board;
 	
+	private String letters;
+	
+	private String p1letters;
+	
+	private String p2letters;
+	
 
 	public Game() {
 		this.status = "initializing";
@@ -97,6 +103,30 @@ public class Game {
 
 	public void setBoard(String board) {
 		this.board = board;
+	}
+
+	public String getLetters() {
+		return letters;
+	}
+
+	public void setLetters(String letters) {
+		this.letters = letters;
+	}
+
+	public String getP1letters() {
+		return p1letters;
+	}
+
+	public void setP1letters(String p1letters) {
+		this.p1letters = p1letters;
+	}
+
+	public String getP2letters() {
+		return p2letters;
+	}
+
+	public void setP2letters(String p2letters) {
+		this.p2letters = p2letters;
 	}
 	
 }

@@ -40,17 +40,21 @@
 		<div class="container" style="margin: 0 auto; width: 38%">
 			<input id="id" name="id" type="hidden" value="${game.id}"/>
 			
-			<span style="font-size: 25px; color: #000000"><b>Partida: </b></span>  <span style="font-size: 20px">${game.p1.username} VS ${game.p2.username} </span> 
+			<span style="font-size: 25px; color: #000000"><b>Partida: </b></span>  <span style="font-size: 20px"><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if> VS <c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if> </span> 
 			<span style="font-size: 25px; color: #000000"><b>&nbsp;&nbsp;&nbsp;Puntuación:  </b></span><span style="font-size: 20px">${game.p1Score} - ${game.p2Score} </span>
 			<br>
 			
 			<div class="container" style="margin: 0 auto; width: 38%">
-				<legend style="font-size: 20px; text-decoration: underline;"><b >Estado del tablero</b></legend>
+				<span style="font-size: 20px; text-decoration: underline;"><b >Estado del tablero</b></span>
 			</div>
+			<br>
 		</div>
 				
 		<div id="contenedor" class="container" style="margin: 0 auto; width: 35%">
 			<textarea id="tablero" name="tablero">${game.board}</textarea>
+			<c:if test="${letters != null}">
+				<textarea id="fichas" name="fichas">${letters}</textarea>
+			</c:if>
 		
 			<div id="juego">
 				&nbsp;
@@ -59,38 +63,32 @@
 		
 		<br>
 		
+		
 		<div class="container" style="margin: 0 auto; width: 35%">
-			<div id="letras" >
-				<table>
-					<tr>
-						<td class="letra letra-A tabla-td mover"><span>&nbsp;</span></td>
-						<td class="letra letra-B tabla-td mover"><span>&nbsp;</span></td>
-						<td class="letra letra-C tabla-td mover"><span>&nbsp;</span></td>
-						<td class="letra letra-D tabla-td mover"><span>&nbsp;</span></td>
-						<td class="letra letra-E tabla-td mover"><span>&nbsp;</span></td>
-						<td class="letra letra-F tabla-td mover"><span>&nbsp;</span></td>
-						<td class="letra letra-G tabla-td mover"><span>&nbsp;</span></td>
-						<td class="comodin tabla-td mover"><span>&nbsp;</span></td>						
-					</tr>
-				</table>
+			<div id="letras">
+				&nbsp;
 			</div>
 		</div>
 		
-			<br>
+		<br>
+		
 		<div class="container" style="margin: 0 auto; width: 15%">
-			<input type="submit" value="Jugar" class="btn btn-success" style="padding: 5px 40px"/>
+			<c:if test='${turn}'>
+				<input type="submit" value="Jugar" class="btn btn-success btn-block js-submit" style="padding: 5px 40px"/>
+			</c:if>
+			<c:if test='${!turn}'>
+				<c:if test="${letters != null}"><span class="label label-inverse" style="margin: 0 auto">¡No es tu turno!</span></c:if><a href="" class="btn btn-primary btn-block">Recargar</a>
+			</c:if>
 		</div>
 		
-			
-		
-		</form>
+	</form>
 
 	
 	<script src='<c:url value="/resources/js/jquery.js"/>'></script>
 	<script src='<c:url value="/resources/js/underscore.js"/>'></script>
 	<script src='<c:url value="/resources/bootstrap/js/bootstrap.js"/>'></script>
-	<script src='<c:url value="/resources/tablero/main.js"/>'></script>
-	<script src='<c:url value="/resources/tablero/mover.js"/>'></script>	
+	<script charset="UTF-8" src='<c:url value="/resources/tablero/main.js"/>'></script>
+	<script charset="UTF-8" src='<c:url value="/resources/tablero/mover.js"/>'></script>	
 	
 	</body>
 </html>
