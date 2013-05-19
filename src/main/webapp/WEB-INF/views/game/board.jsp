@@ -75,6 +75,12 @@
 		
 		<div class="container" style="margin: 0 auto; width: 15%">
 			<c:if test='${turn}'>
+				<div class="js-confirm">
+					<span class="js-mensaje label label-success">&nbsp;</span>
+					<div class="progress">
+						<div class="bar bar-success" style="width: 0%;"></div>
+					</div>
+				</div>
 				<input type="submit" value="Jugar" class="btn btn-success btn-block js-submit" style="padding: 5px 40px"/>
 			</c:if>
 			<c:if test='${!turn}'>

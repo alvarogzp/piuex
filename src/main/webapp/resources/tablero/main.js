@@ -1,10 +1,11 @@
 /*
- * Construye el tablero dinámicamente en la página web.
+ * Construye el tablero y las fichas del usuario dinámicamente en la página web.
  * 
  * Autores: Alvaro Gutierrez Perez y Carlos Rufo Jimenez.
  */
 
 
+// Celdas especiales del tablero
 var modificadores = [
 "3  0   3   0  3",
 " 2   1   1   2 ",

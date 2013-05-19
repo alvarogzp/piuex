@@ -22,7 +22,7 @@ La partida guarda la jugada en la BBDD																	 7	 74	✔
 Se pregunta al usuario si confirma una jugada sin haber puesto fichas (pasar turno)						 4	 78	✔
 Se comprueba al confirmar que las fichas que ha puesto estén en fila									 6	 84	? (¿esto no está incluido en el punto siguiente?)
 Se comprueba al confirmar que las fichas que ha puesto estén en contacto con otras fichas existentes	 6	 90	✓ (falta comprobar si está en contacto con otra que tú hayas puesto en la misma jugada que sí esté en contacto con una que ya estaba puesta)
-Se comprueba al confirmar que las palabras nuevas están en una lista de palabras válidas				10	100	✘
+Se comprueba al confirmar que las palabras nuevas están en una lista de palabras válidas				10	100	✔
 
 Leyenda:
 ✔ - Requisito cumplido
