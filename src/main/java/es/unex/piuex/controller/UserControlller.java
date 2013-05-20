@@ -200,19 +200,27 @@ public class UserControlller {
 	
 	
 	private IpInfo getMap() {
-		// URI
-		String url = "http://freegeoip.net/json/158.49.113.104";
-		// Create a REST template
-		RestTemplate restTemplate = new RestTemplate();
-		// Create a list for the message converters
-		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-		// Add the Jackson Message converter
-		messageConverters.add(new MappingJacksonHttpMessageConverter());
-		// Add the message converters to the restTemplate
-		restTemplate.setMessageConverters(messageConverters);
-		// A simple GET request, the response will be maped to IpInfo.class
-		IpInfo result = restTemplate.getForObject(url, IpInfo.class);
-		return result;
+		try {
+			// URI
+			String url = "http://freegeoip.net/json/158.49.113.104";
+			// Create a REST template
+			RestTemplate restTemplate = new RestTemplate();
+			// Create a list for the message converters
+			List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+			// Add the Jackson Message converter
+			messageConverters.add(new MappingJacksonHttpMessageConverter());
+			// Add the message converters to the restTemplate
+			restTemplate.setMessageConverters(messageConverters);
+			// A simple GET request, the response will be maped to IpInfo.class
+			IpInfo result = restTemplate.getForObject(url, IpInfo.class);
+			return result;
+		} catch (Exception e) {
+			// Si hay algún error, devolver las coordenadas de Cáceres
+			IpInfo result = new IpInfo();
+			result.setLatitude(39.4819f);
+			result.setLongitude(-6.3732f);
+			return result;
+		}
 	}
 	
 }
