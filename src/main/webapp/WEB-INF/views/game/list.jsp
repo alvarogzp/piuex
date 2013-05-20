@@ -43,15 +43,17 @@
 			<th>Jugador 1</th>
 			<th>Jugador 2</th>
 			<th>Puntuación</th>
+			<th>Tablero</th>
 		</tr>
 		<c:forEach items="${games}" var="game">
 			<tr>
-			<td><a href="<c:url value="/game/detail?id=${game.id}"/>">${game.id}</a></td>
+			<td>${game.id}</td>
 			<td>${game.status}</td>
 			<td>Jugador <c:if test="${game.p1Turn==true}">1</c:if><c:if test="${game.p1Turn==false}">2</c:if></td>
 			<td><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if></td>
 			<td><c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if></td>
 			<td>${game.p1Score} - ${game.p2Score}</td>
+			<td><a class="btn btn-primary btn-block" href="<c:url value="/game/detail?id=${game.id}"/>">Acceder a la partida</a></td>
 			</tr>
 	   </c:forEach>
 	</table>
@@ -64,7 +66,7 @@
 				<form:select path="p2">
 					<c:forEach items="${users}" var="user"> <option value="${user.id}"> ${user.username} </option></c:forEach>
 				</form:select>
-				<input type="submit" value="Nueva partida">
+				<input class="btn btn-success" type="submit" value="Nueva partida">
 		</form:form>
 	</div>
 		
