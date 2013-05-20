@@ -8,6 +8,12 @@
 <body>
 <h1 class="text-center" style="text-shadow: 0 4px 0 #BBBBBB"> Cambios de Apalabrados PIUEx </h1>
 
+	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 2.0 (fecha 20-05-2013)</h3>
+	<ul>
+		<li>Implementado tablero y jugabilidad.</li>
+		<li>Aplicado estilo uniforme a toda la aplicación usando bootstrap.</li>
+	</ul>
+
 	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 1.1 (fecha 19-04-2013)</h3>
 	<ul>
 		<li>Creado usuario "Administrador". Dispone de total acceso a la aplicación.</li>

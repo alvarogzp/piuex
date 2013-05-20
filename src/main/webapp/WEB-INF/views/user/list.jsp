@@ -35,19 +35,19 @@
 	  	</div>
 	</div>
 	
-	<h2 style="text-align:center">Usuario logueado: <a href="<c:url value="/user/profile?username=${loggedUser.username}"/>">${loggedUser.username}</a></h2><br>
+	<h2 style="text-align:center">Has entrado como <a href="<c:url value="/user/profile?username=${loggedUser.username}"/>">${loggedUser.username}</a></h2><br>
 		
 	
 	<table class="table table-hover table-striped table-condensed">
 	
 		<tr>
 			<th>Id</th>
-			<th>Name</th>
-			<th>Username</th>
+			<th>Nombre</th>
+			<th>Usuario</th>
 			<th>E-mail</th>
 			<th>Level</th>
 			<th>Avatar</th>
-			<th>Games</th>
+			<th>Partidas</th>
 		</tr>
 		
 		<c:forEach items="${users}" var="user">
@@ -68,7 +68,7 @@
 				<td><img src="<c:url value="/resources/avatars/${user.avatarFileName}"/>" alt="${user.avatarFileName}" class="avatar-list"/></td>
 				<td>
 				<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
-					<a href="<c:url value="/game/list?id=${user.id}"/>">
+					<a class="btn btn-primary btn-block" href="<c:url value="/game/list?id=${user.id}"/>">
 				</c:if>
 				Partidas de ${user.username}
 				<c:if test="${loggedUser.username} == ${user.username}">

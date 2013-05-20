@@ -137,7 +137,7 @@
 		<p style="float: right;">Escuela Politécnica,<br>
 		Universidad de Extremadura</p>
 		<P>${serverTime}</P>
-		<p><a href='<c:url value="/version"/>' title="Ver cambios">Versión: 1.1</a></p>
+		<p><a href='<c:url value="/version"/>' title="Ver cambios">Versión: 2.0</a></p>
 	</div>
 	<script src='<c:url value="/resources/js/jquery.js"/>'></script>
 	<script src='<c:url value="/resources/bootstrap/js/bootstrap.js"/>'></script>
