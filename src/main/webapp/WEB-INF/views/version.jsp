@@ -1,11 +1,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <html>
 <head>
 <link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
+<link href="<c:url value="/resources/css/piuex.css"/>" rel="stylesheet">
 <title>Versiones</title>
 </head>
 <body>
+
+
+<!-- Barra de navegación -->
+
+	<div class="navbar">
+	  	<div class="navbar-inner">
+	    	<ul class="nav">
+	    		<li><a href="<c:url value="/"/>" class="brand">Home</a></li>
+	    	    <li class="divider-vertical"></li> 	 	
+		      	<li><a href='<c:if test="${loggedUser==null}"><c:url value="/user/login"/></c:if>'>Login</a></li>
+		      	<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/user/list"/></c:if>'>Usuarios</a></li>
+		      	<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/game/list?id=${loggedUser.id}"/></c:if>'>Partidas</a></li>
+	      	</ul>
+	      	<ul class="nav pull-right">	
+	      		<li><a target="_blank" href="https://twitter.com/#piuex"><img src="<c:url value="/resources/img/twitter.png"/>" class="barra-icon"></a></li>
+	      		<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/user/logout"/></c:if>'><i class="icon-off"></i></a></li>
+	    	</ul>
+	  	</div>
+	</div>
+
 <h1 class="text-center" style="text-shadow: 0 4px 0 #BBBBBB"> Cambios de Apalabrados PIUEx </h1>
 
 	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 2.0 (fecha 20-05-2013)</h3>
@@ -25,6 +45,7 @@
 	<ul>
 		<li>Entrega parcial 1. Es la versión inicial de la aplicación.</li>
 	</ul>
+	
 
 <script src='<c:url value="/resources/jquery/1.6/jquery.js"/>'></script>
 <script src='<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>'></script>
