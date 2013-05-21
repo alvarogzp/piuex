@@ -4,7 +4,7 @@ INSERT INTO APALABRADOS.USER (ID, NAME, USERNAME,AVATAR,EMAIL,PASSWORD,LEVEL, RA
 	'Administrador',
 	'admin',
 	'admin.png',
-	'admin@piuex.es',
+	'admin@unex.es',
 	'gprjPIUEX13',
 	'master',
 	0
@@ -50,6 +50,25 @@ INSERT INTO APALABRADOS.USER (NAME, USERNAME,AVATAR,EMAIL,PASSWORD,LEVEL, RANK) 
 	10
 );
 
+INSERT INTO APALABRADOS.USER (NAME, USERNAME,AVATAR,EMAIL,PASSWORD,LEVEL, RANK) VALUES (
+	'Koky',
+	'koky',
+	'koky.png',
+	'koky@unex.es',
+	'rjPIUEX13',
+	'master',
+	0
+);
+
+INSERT INTO APALABRADOS.USER (NAME, USERNAME,AVATAR,EMAIL,PASSWORD,LEVEL, RANK) VALUES (
+	'Alvaro',
+	'alvaro',
+	'alvaro.png',
+	'alvaro@unex.es',
+	'gpPIUEX13',
+	'master',
+	0
+);
 
 
 INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
