@@ -14,6 +14,11 @@
 
 ** Si puedes, mejora el estilo del span que hay abajo del tablero cuando no es tu turno :)
 
+** Hacer que compruebe de alguna forma cada cierto tiempo el tablero si ya es tu turno, y actualize la pantalla en ese caso
+
+** Que se muestre la fecha/hora de la última jugada, palabras puestas, y un historial de movimientos
+
+** Las letras puestas en la última jugada del otro jugador podían salir de alguna forma más destacada.
 
 * Puntuaciones
 
