@@ -20,6 +20,8 @@
 
 ** Las letras puestas en la última jugada del otro jugador podían salir de alguna forma más destacada.
 
+** Una ficha no se debería soltar a menos que se pulse en la misma ficha o, atención, fuera del tablero (en concreto ahora se suelta si pulsas sobre cualquier otra ficha).
+
 * Puntuaciones
 
 * Confirmar jugada
