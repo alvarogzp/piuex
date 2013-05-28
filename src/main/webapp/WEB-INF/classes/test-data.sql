@@ -21,6 +21,7 @@ INSERT INTO APALABRADOS.USER (NAME, USERNAME, AVATAR, EMAIL, PASSWORD, LEVEL) VA
 	'advanced'
 );
 
+
 INSERT INTO APALABRADOS.USER (NAME, USERNAME, AVATAR, EMAIL, PASSWORD, LEVEL) VALUES (
 	'Daniel Gonzalez',
 	'daniel',
@@ -29,6 +30,7 @@ INSERT INTO APALABRADOS.USER (NAME, USERNAME, AVATAR, EMAIL, PASSWORD, LEVEL) VA
 	'1234',
 	'newbie'
 );
+
 
 INSERT INTO APALABRADOS.USER (NAME, USERNAME, AVATAR, EMAIL, PASSWORD, LEVEL, RANK) VALUES (
 	'Koky',
@@ -52,6 +54,8 @@ INSERT INTO APALABRADOS.USER (NAME, USERNAME, AVATAR, EMAIL, PASSWORD, LEVEL, RA
 );
 
 
+
+
 INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
 	'Inicializando',
 	1,
@@ -73,6 +77,7 @@ INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) V
 	'               .               .               .               .               .               .               .               .               .               .               .               .               .               .               '
 );
 
+
 INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
 	'Inicializando',
 	1,
@@ -83,9 +88,10 @@ INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) V
 	'               .               .               .               .               .               .               .               .               .               .               .               .               .               .               '
 );
 
+
 INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
 	'Jugando',
-	1,
+	0,
 	3,
 	4,
 	10,
