@@ -11,7 +11,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
 	<link href="<c:url value="/resources/css/piuex.css"/>" rel="stylesheet">
-	<title>Lista de partidas de ${username}</title>
+	<title>Partidas de ${username}</title>
 </head>
 <body>
 

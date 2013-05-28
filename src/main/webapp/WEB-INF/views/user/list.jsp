@@ -35,52 +35,61 @@
 	  	</div>
 	</div>
 	
-	<h2 style="text-align:center">Has entrado como <a href="<c:url value="/user/profile?username=${loggedUser.username}"/>">${loggedUser.username}</a></h2><br>
+	<div>
+		<div style="width:75%;float:left;display: inline-block;">
+	
+			<h2 style="text-align:center">Has entrado como <a href="<c:url value="/user/profile?username=${loggedUser.username}"/>">${loggedUser.username}</a></h2><br>
+			
+			<table class="table table-hover table-striped table-condensed">
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Usuario</th>
+					<th>E-mail</th>
+					<th>Level</th>
+					<th>Avatar</th>
+					<th>Partidas</th>
+				</tr>
+				
+				<c:forEach items="${users}" var="user">
+					<tr>
+						<td>${user.id}</td>
+						<td>${user.name}</td>
+						<td>
+							<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
+								<a href="<c:url value="/user/profile?username=${user.username}"/>">
+							</c:if>
+							${user.username}
+							<c:if test="${loggedUser.username} == ${user.username}">
+								</a>
+							</c:if>	
+						</td>
+						<td>${user.email}</td>
+						<td>${user.level}</td>
+						<td><img src="<c:url value="/resources/avatars/${user.avatarFileName}"/>" alt="${user.avatarFileName}" class="avatar-list"/></td>
+						<td>
+						<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
+							<a class="btn btn-primary btn-block" href="<c:url value="/game/list?id=${user.id}"/>">
+						</c:if>
+						Partidas de ${user.username}
+						<c:if test="${loggedUser.username} == ${user.username}">
+							</a>
+						</c:if>	
+						</td>
+					</tr>
+			   </c:forEach>
+			</table>
+			<c:if test="${errormessage!=null}"> <span class="error"> ${errormessage} </span> </c:if>
+		</div>
 		
-	
-	<table class="table table-hover table-striped table-condensed">
-	
-		<tr>
-			<th>Id</th>
-			<th>Nombre</th>
-			<th>Usuario</th>
-			<th>E-mail</th>
-			<th>Level</th>
-			<th>Avatar</th>
-			<th>Partidas</th>
-		</tr>
+		<div class="ic_span-divider" style="min-height: 36px;"></div>
 		
-		<c:forEach items="${users}" var="user">
-			<tr>
-				<td>${user.id}</td>
-				<td>${user.name}</td>
-				<td>
-					<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
-						<a href="<c:url value="/user/profile?username=${user.username}"/>">
-					</c:if>
-					${user.username}
-					<c:if test="${loggedUser.username} == ${user.username}">
-						</a>
-					</c:if>	
-				</td>
-				<td>${user.email}</td>
-				<td>${user.level}</td>
-				<td><img src="<c:url value="/resources/avatars/${user.avatarFileName}"/>" alt="${user.avatarFileName}" class="avatar-list"/></td>
-				<td>
-				<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
-					<a class="btn btn-primary btn-block" href="<c:url value="/game/list?id=${user.id}"/>">
-				</c:if>
-				Partidas de ${user.username}
-				<c:if test="${loggedUser.username} == ${user.username}">
-					</a>
-				</c:if>	
-				</td>
-			</tr>
-	   </c:forEach>
-	   
-	</table>
-	
-	<c:if test="${errormessage!=null}"> <span class="error"> ${errormessage} </span> </c:if>
+		<div style="margin-left: 15%;">
+			<a class="twitter-timeline" width="300px" height="500px" href="https://twitter.com/search?q=%23PIUEx" data-widget-id="335841821836066816">Tweets sobre "#PIUEx"</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	    </div>
+	</div>
+		
 	
 	<script src='<c:url value="/resources/js/jquery.js"/>'></script>
 	<script src='<c:url value="/resources/bootstrap/js/bootstrap.js"/>'></script>

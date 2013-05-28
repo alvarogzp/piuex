@@ -1,13 +1,45 @@
-*** Perfil falla si no está conectado a internet
+Cosas importantes que hacer ordenadas por importancia según Rober (¡NO ESCRIBIR NADA POR ENCIMA DE ESTA LÍNEA!):
+1. Puntuaciones
+2. Comodín
+3. Estadísticas
+
+*** Registro interno y oculto de número de visitas a la web.
+
+*** Hacer timeline de twitter relativo a porcentaje (mirar toda la página en general).
+
 *** Intercambiar letra si sueltas el ratón en una letra que se pueda mover cuando estás moviendo una
 
+*** Si pones una sola letra en el centro del tablero en el turno inicial no comprueba nada al darle a jugar
 
-** Cambiar "Usuario logueado" por "Has entrado como" o algo parecido.
-** En lista de partidas cambiar el enlace a la partida en Id por un enlace al final de la fila (crear una nueva columna para ello), usando un botón de bootstrap bien gordo :D
-** Cambiar el botón de crear nueva partida por bootstrap
-** Enlace de ir a las partidas también estaría bien que fuera un botón
+** Hacer que la barra se mueva tras obtener satisfactoriamente el diccionario.
+
+** El diccionario podía cargarse al obtener la página, para no tener que esperar una vez le das a jugar, mucha gente se cansa de esperar.
+
 ** Si puedes, mejora el estilo del span que hay abajo del tablero cuando no es tu turno :)
 
+** Hacer que compruebe de alguna forma cada cierto tiempo el tablero si ya es tu turno, y actualize la pantalla en ese caso
+
+** Que se muestre la fecha/hora de la última jugada, palabras puestas, y un historial de movimientos
+
+** Las letras puestas en la última jugada del otro jugador podían salir de alguna forma más destacada.
+
+** Una ficha no se debería soltar a menos que se pulse en la misma ficha o, atención, fuera del tablero (en concreto ahora se suelta si pulsas sobre cualquier otra ficha).
+
+** Comprobar que las fichas nuevas estén alineadas
+
+** Poner asteriscos en el título de la página en el tablero alrededor del jugador que le toca
+
+** poner en la barra con qué usuario has entrado
+
+* ¿Comodines?
+
+* Puntuaciones
+
+* Confirmar jugada
+
+* Estadísticas
+
+al redirigir a login desde cualquier página porque no se está registrado que salga el error en la pantalla de login (por ejemplo "Debes iniciar sesión para ver esa página")
 
 Convertir level y opponents a enumeracion, igual con status de partidas
 implementar oppponents ¿como una lista?

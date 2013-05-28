@@ -80,7 +80,7 @@ public class GameControlller {
 		Game game = new Game();
 		game.setP1(userDAO.get(p1));
 		game.setP2(userDAO.get(p2));
-		game.setStatus("starting");
+		game.setStatus("Empezando");
 		/*
 		 * Aquí se deberían asignar las primeras 8 letras a los usuarios, pero la "bolsa" de letras
 		 * se asigna al guardar la partida en la base de datos, y una vez guardada no podemos recuperarla
