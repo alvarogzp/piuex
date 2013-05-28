@@ -1,3 +1,8 @@
+Cosas importantes que hacer ordenadas por importancia según Rober (¡NO ESCRIBIR NADA POR ENCIMA DE ESTA LÍNEA!):
+1. Puntuaciones
+2. Comodín
+3. Estadísticas
+
 *** Registro interno y oculto de número de visitas a la web.
 
 *** Fav icon en version.jsp
@@ -21,6 +26,12 @@
 ** Las letras puestas en la última jugada del otro jugador podían salir de alguna forma más destacada.
 
 ** Una ficha no se debería soltar a menos que se pulse en la misma ficha o, atención, fuera del tablero (en concreto ahora se suelta si pulsas sobre cualquier otra ficha).
+
+** Comprobar que las fichas nuevas estén alineadas
+
+** Poner asteriscos en el título de la página en el tablero alrededor del jugador que le toca
+
+* ¿Comodines?
 
 * Puntuaciones
 
