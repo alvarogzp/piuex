@@ -19,6 +19,7 @@ function mover(elemento) {
 
 function iniciarmovimiento(e) {
 	console.log("Moviendo " + e.target.id);
+	e.preventDefault();
 	x = e.pageX;
 	y = e.pageY;
 	element = e.target;
