@@ -64,32 +64,14 @@ function asignarCelda(e) {
 		// Se ha soltado el ratón en la misma celda en la que se presionó
 		// No hacer nada para poder arrastrar la celda teniendo el ratón sin pulsar
 		return;
-	} else if (($this.hasClass("letra") || $this.hasClass("comodin")) && !$this.hasClass("mover")) {
-		// Se ha soltado el ratón sobre una celda ya ocupada y que no se puede mover
+	} else if ($this.hasClass("letra") || $this.hasClass("comodin")) {
+		// Se ha soltado el ratón sobre una celda ya ocupada
 		// Detener sin hacer nada
 		detenermovimiento(e);
 		return;
 	}
 	
 	var $ep = element.parent();
-	
-	if ($this.hasClass("mover")) {
-		// Se van a intercambiar las fichas
-		var letrathis = addClasses($this, element);
-		removeClasses($this);
-		var letra = addClasses($ep, $this);
-		removeClasses($ep);
-		addClasses(element, $ep);
-		removeClasses(element);
-		intercambiartextarea($this, $ep);
-		$ep.off("mousedown");
-		element.remove();
-		
-		// Añadir span por si en el futuro se mueve esta celda poder guardarlo en element
-		$this.html("<span>&nbsp;</span>");
-		$this.mousedown(iniciarmovimiento);
-		detenermovimiento(e);
-	}
 	
 	var letra = addClasses($ep, $this);
 	actualizartextarea($ep, $this, letra);
