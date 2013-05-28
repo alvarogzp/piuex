@@ -313,9 +313,24 @@ function confirmarjugada(e) {
 			palabras = concatenarunicos(palabras, obtenerpalabras($d, $juegotd));
 		}
 	});
-	if (!seguidas) {
+	if (!seguidas || palabras.length == 0) {
 		detenerconfirmacion();
-		alert("¡La jugada es incorrecta!\nTodas las palabras que pongas tienen que estar unidas a otras que ya estuvieran puestas.\nSi estás haciendo el primer movimiento, debes poner una palabra que pase por el centro.");
+		// Decidir qué mensaje mostrar dependiendo de si es el primer movimiento o no
+		var primermovimiento = true;
+		$juegotd.each(function (i, d) {
+			var $d = $(d);
+			if (($d.hasClass("letra") || $d.hasClass("comodin")) && !$d.hasClass("mover")) {
+				primermovimiento = false;
+				return false;
+			}
+		});
+		var mensaje = "";
+		if (primermovimiento) {
+			mensaje = "Debes poner una palabra de al menos dos letras que pase por el centro.";
+		} else {
+			mensaje = "Todas las palabras que pongas tienen que estar unidas a otras que ya estuvieran puestas.";
+		}
+		alert("¡La jugada es incorrecta!\n" + mensaje);
 		return false;
 	}
 	
@@ -509,9 +524,6 @@ function comprobarDiccionario(palabras, diccionario) {
 			if (palabra == p) {
 				palabras = eliminarelemento(palabras, p);
 				if (palabras.length == 0) {
-					// Comprobación correcta!
-					completarconfirmacion();
-					$(".js-submit").click();
 					// Detener el recorrido
 					return false;
 				}
@@ -526,10 +538,16 @@ function comprobarDiccionario(palabras, diccionario) {
 		// Seguir recorrido
 		return true;
 	});
+	
 	if (palabras.length > 0) {
 		// Hay palabras no reconocidas
 		detenerconfirmacion();
-		alert("Las siguientes palabras no son válidas:\n" + palabras.join("\n"));
+		alert("Las siguientes palabras no son válidas:\n" + touppercase(palabras).join("\n"));
+	} else {
+		// Palabras vacías!
+		completarconfirmacion();
+		// Simular una pulsación del botón de jugar
+		$(".js-submit").click();
 	}
 }
 
@@ -542,6 +560,19 @@ function tolowercase(vector) {
 	var nuevo = [];
 	_(vector).each(function (e) {
 		nuevo.push(e.toLowerCase());
+	});
+	return nuevo;
+}
+
+
+
+/*
+ * Convierte a mayúsculas todas las palabras de un vector.
+ */
+function touppercase(vector) {
+	var nuevo = [];
+	_(vector).each(function (e) {
+		nuevo.push(e.toUpperCase());
 	});
 	return nuevo;
 }
