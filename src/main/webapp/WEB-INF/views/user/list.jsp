@@ -36,13 +36,11 @@
 	</div>
 	
 	<div>
-		<div style="width:75%;float:left;display:inline-block;">
+		<div style="width:75%;float:left;display: inline-block;">
 	
 			<h2 style="text-align:center">Has entrado como <a href="<c:url value="/user/profile?username=${loggedUser.username}"/>">${loggedUser.username}</a></h2><br>
 			
-		
 			<table class="table table-hover table-striped table-condensed">
-			
 				<tr>
 					<th>Id</th>
 					<th>Nombre</th>
@@ -80,16 +78,16 @@
 						</td>
 					</tr>
 			   </c:forEach>
-			   
 			</table>
-			
 			<c:if test="${errormessage!=null}"> <span class="error"> ${errormessage} </span> </c:if>
 		</div>
-		<div style="margin-left:20%;">
+		
+		<div class="ic_span-divider" style="min-height: 36px;"></div>
+		
+		<div style="margin-left: 15%;">
 			<a class="twitter-timeline" width="300px" height="500px" href="https://twitter.com/search?q=%23PIUEx" data-widget-id="335841821836066816">Tweets sobre "#PIUEx"</a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 	    </div>
-		
 	</div>
 		
 	
