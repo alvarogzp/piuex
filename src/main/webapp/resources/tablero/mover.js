@@ -74,32 +74,41 @@ function asignarCelda(e) {
 	var $ep = element.parent();
 	
 	if ($this.hasClass("mover")) {
-		// Se van a intercambiar las fichas
-		var letrathis = addClasses($this, element);
+		// Intercambiar una ficha con otra
+		// Crear un span vacío para insertar las clases ahí de forma temporal
+		var $tempspan = $(document.createElement("span"));
+		
+		// Añadir las clases de la celda de destino al span temporal, y borrar clases de la celda destino
+		var letrathis = addClasses($this, $tempspan);
 		removeClasses($this);
+		
+		// Añadir las clases de la celda de origen a la de destino, y borrar clases de la celda origen
 		var letra = addClasses($ep, $this);
 		removeClasses($ep);
-		addClasses(element, $ep);
-		removeClasses(element);
-		intercambiartextarea($this, $ep);
+		
+		// Añadir las clases del span temporal (tiene las de la celda destino) a la celda origen
+		addClasses($tempspan, $ep);
+		removeClasses($tempspan);
+		
+		// Intercambiar letras en el textarea que representa el tablero
+		ponertextarea($this, letra);
+		ponertextarea($ep, letrathis);
+		
+	} else {
+		// Mover una ficha de una celda a otra vacía
+		var letra = addClasses($ep, $this);
+		actualizartextarea($ep, $this, letra);
+		
+		// Limpiar celda origen
+		removeClasses($ep);
 		$ep.off("mousedown");
 		element.remove();
 		
 		// Añadir span por si en el futuro se mueve esta celda poder guardarlo en element
 		$this.html("<span>&nbsp;</span>");
 		$this.mousedown(iniciarmovimiento);
-		detenermovimiento(e);
 	}
 	
-	var letra = addClasses($ep, $this);
-	actualizartextarea($ep, $this, letra);
-	removeClasses($ep);
-	$ep.off("mousedown");
-	element.remove();
-	
-	// Añadir span por si en el futuro se mueve esta celda poder guardarlo en element
-	$this.html("<span>&nbsp;</span>");
-	$this.mousedown(iniciarmovimiento);
 	detenermovimiento(e);
 }
 
@@ -113,15 +122,15 @@ function addClasses(origen, destino) {
 	var letra = "";
 	_(origen.attr("class").split(" ")).each(
 		function(c, i) {
-			if (c == "mover" || c == "letra" || c == "comodin" || c.match("letra-([A-Z]|Ñ)")) {
-				this.addClass(c);
-				if (c.match("letra-([A-Z]|Ñ)")) {
+			if (c == "mover" || c == "letra" || c == "comodin" || c.match("letra-[A-ZÑ]")) {
+				destino.addClass(c);
+				if (c.match("letra-[A-ZÑ]")) {
 					letra = c.charAt(6);
 				} else if (c == "comodin") {
 					letra = "*";
 				}
 			}
-		}, destino
+		}
 	);
 	return letra;
 }
@@ -150,6 +159,18 @@ function removeClasses(elemento) {
  * de ellas.
  */
 function actualizartextarea(tdant, td, letra) {
+	ponertextarea(td, letra);
+	ponertextarea(tdant, " ");
+}
+
+
+
+/*
+ * Pone la letra en la posición indicada del textarea que representa el tablero.
+ * Actualiza el textarea de las fichas del jugador si el td corresponde a una de ellas, o el del
+ * tablero en caso contrario.
+ */
+function ponertextarea(td, letra) {
 	var x = td.data("x");
 	var y = td.data("y");
 	var f = td.data("f");
@@ -157,14 +178,6 @@ function actualizartextarea(tdant, td, letra) {
 		actualizartablero(x, y, letra);
 	} else if (f != undefined) {
 		actualizarfichas(f, letra);
-	}
-	var xant = tdant.data("x");
-	var yant = tdant.data("y");
-	var fant = tdant.data("f");
-	if (xant != undefined) {
-		actualizartablero(xant, yant, " ");
-	} else if (fant != undefined) {
-		actualizarfichas(fant, " ");
 	}
 }
 
@@ -223,13 +236,13 @@ function iniciarmovimiento(e) {
 	$fantasma.removeClass("mover"); // porque addClasses se la pone también
 	actualizarFantasma(e.pageX, e.pageY);
 	$fantasma.show();
-	$("body").mousemove(movimiento);
+	$(document).mousemove(movimiento);
 }
 
 
 
 /*
- * Llamado desde body cuando se mueve el ratón mientras se está desplazando una ficha.
+ * Llamado desde el document cuando se mueve el ratón mientras se está desplazando una ficha.
  */
 function movimiento(e) {
 	actualizarFantasma(e.pageX, e.pageY);
@@ -252,7 +265,7 @@ function actualizarFantasma(x, y) {
  * Es seguro llamar a esta función aunque el movimiento ya esté detenido.
  */
 function detenermovimiento(e) {
-	$("body").off("mousemove");
+	$(document).off("mousemove");
 	element = null;
 	$fantasma.hide();
 	removeClasses($fantasma);
