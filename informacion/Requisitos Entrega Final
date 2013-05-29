@@ -1,0 +1,63 @@
+Requisitos:
+
+
+Registro de usuario con validación																		 2	✔
+Perfil usuario con foto																					 3	✔
+Listado de usuarios																						 3	✔
+Dashboard de partidas																					 3	✔
+Detalle de partida																						 3	✓ (estamos en ello)
+Despliegue en cloudfoundry																				 2	✓ (re-desplegar en la entrega)
+Capa REST para la gestión de usuarios																	 3	✗ (esto hay que revisarlo en profundidad)
+Cliente REST para mapa en perfil u otra funcionalidad													 3	✔
+Login/logout																							 3	✔
+Gestión de excepciones																					 4	✘ (sólo controlamos páginas de error, que son lanzadas por excepciones)
+Páginas de error de contenedor servlet																	 3	✔
+Uso de logger																							 3	✓ (hay que cambiar todos los System.out.println por logger)
+Personalización CSS																						 4	✔
+Menú de navegación																						 3	✓ (esto es la barra?)
+Control de nombre de la imagen de avatar																 4	✓ (si es que nosotros decidimos con qué nombre se guarda el avatar, sí)
+El proyecto muestra un aspecto uniforme																	 4	✓ (esto es muy subjetivo)
+Podemos abrir una partida en la que estemos como jugador pero no una en la que no estemos				 2	✓ (excepto el administrador y si un usuario pone el link directamente, aunque sólo puede ver la partida)
+En la partida actual se ve el tablero																	 3	✔
+Se muestran las fichas disponibles del jugador															 2	✔
+El tablero tiene aspecto diferente para las celdas con significado especial								 2	✔
+Las fichas mostradas incluyen tanto la letra como el valor												 4	✓ (en las que han sido creadas a partir de un comodín debería aparecer un 0)
+Se puede arrastrar una ficha de la mano al tablero														 3	✔
+La ficha arrastrada se queda en la celda correspondiente												 3	✔
+Se controla no arrastrar fichas a celdas ocupadas														 4	✔
+Se controla no arrastrar fichas fuera del tablero														 4	✔
+Se puede devolver a la mano una ficha puesta durante este turno pero no una prefijada					 4	✔
+Haga lo que haga el usuario, puede seguir poniendo y quitando fichas indefinidamente					10	✔
+El tablero que se ve es el real																			 4	✔
+Las fichas disponibles son las guardadas en la BBDD														 5	✔
+Se controla no poder arrastrar fichas si no es el turno del jugador										 3	✔
+Se puede confirmar la jugada																			 2	✔
+La partida con la jugada confirmada cambia de turno														 3	✔
+La partida guarda la jugada en la BBDD																	 7	✔
+Se pregunta al usuario si confirma una jugada sin haber puesto fichas (pasar turno)						 4	✔ (aquí hay una extensión, se informa si se va a pasar turno o jugar antes de pulsar en el botón)
+Se comprueba al confirmar que las fichas que ha puesto estén en fila									 6	✔
+Se comprueba al confirmar que las fichas que ha puesto estén en contacto con otras fichas existentes	 6	✔
+Se comprueba al confirmar que las palabras nuevas están en una lista de palabras válidas				 8	✔
+El comodín se maneja en todos los casos bien															 8	✘
+Existe una página con estadísticas de partidas y jugadas récord											 8	✘
+Ausencia de registros por consola del navegador en la versión final										 5	✘ (borrarlos antes de entregar)
+
+Ausencia de errores graves																				 5	✓ (por ahora)
+Estilo de código adecuado y calidad general correcta													10	✓ (subjetivo)
+Conveniencia de las soluciones adoptadas																 5	✓ (supongo...)
+
+La documentación adjunta es relevante, concisa y útil													10	✘
+Descripción correcta de lo realizado, los errores y las limitaciones									10	✘
+
+Extensiones (puntos extra)																				40	✓ (tenemos muchas extensiones, podemos tener muchos puntos aquí, pero hay que documentarlas bien)
+
+
+Puntuación requisitos cumplidos:																	   107
+Puntuación posible:																					   155
+
+
+Leyenda:
+✔ - Requisito cumplido
+✓ - Requisito cumplido, con salvedades (no de forma óptima, parece que lo está pero realmente no, ...), revisar
+✗ - Requisito no cumplido totalmente
+✘ - Requisito no cumplido
