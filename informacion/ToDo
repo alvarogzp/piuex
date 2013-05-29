@@ -9,10 +9,6 @@ http://www.apalabrados.com/reglas
 
 *** Hacer timeline de twitter relativo a porcentaje (mirar toda la página en general).
 
-*** Intercambiar letra si sueltas el ratón en una letra que se pueda mover cuando estás moviendo una
-
-*** Si pones una sola letra en el centro del tablero en el turno inicial no comprueba nada al darle a jugar
-
 ** Hacer que la barra se mueva tras obtener satisfactoriamente el diccionario.
 
 ** El diccionario podía cargarse al obtener la página, para no tener que esperar una vez le das a jugar, mucha gente se cansa de esperar.
@@ -27,11 +23,11 @@ http://www.apalabrados.com/reglas
 
 ** Una ficha no se debería soltar a menos que se pulse en la misma ficha o, atención, fuera del tablero (en concreto ahora se suelta si pulsas sobre cualquier otra ficha).
 
-** Comprobar que las fichas nuevas estén alineadas
-
-** Poner asteriscos en el título de la página en el tablero alrededor del jugador que le toca
-
 ** poner en la barra con qué usuario has entrado
+
+** Con admin no se debe poder jugar
+
+** Mover ficha entera en lugar de sombra?
 
 * ¿Comodines?
 

@@ -11,7 +11,7 @@
 	<link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
 	<link href="<c:url value="/resources/css/piuex.css"/>" rel="stylesheet">
 	<link href="<c:url value="/resources/tablero/main.css"/>" rel="stylesheet"/>
-	<title>Partida: ${game.p1.username} VS ${game.p2.username}</title>
+	<title>Partida: <c:if test="${game.p1Turn}">*</c:if>${game.p1.username}<c:if test="${game.p1Turn}">*</c:if> VS <c:if test="${!game.p1Turn}">*</c:if>${game.p2.username}<c:if test="${!game.p1Turn}">*</c:if></title>
 </head>
 <body>
 
@@ -34,10 +34,10 @@
 	</div>
 	
 	
-	<span class="fantasma"></span>
+	<span class="fantasma" data-letra=" "></span>
 	<span style="display:none;" id="diccionario"><c:url value="/resources/tablero/diccionarios/diccionario-enminusculas-sintildes.txt"/></span>
 	
-	<form method="post">
+	<form method="post" autocomplete="off"> <!-- autocomplete="off" tells firefox to not remember the state of the controls, like the disabled state of the input button -->
 		<div class="container" style="margin: 0 auto; width: 38%">
 			<input id="id" name="id" type="hidden" value="${game.id}"/>
 			
@@ -81,7 +81,13 @@
 						<div class="bar bar-success" style="width: 0%;"></div>
 					</div>
 				</div>
-				<input type="submit" value="Jugar" class="btn btn-success btn-block js-submit" style="padding: 5px 40px"/>
+				<div class="js-input">
+					<span class="js-checklabel js-invalid js-invalid1 label label-important" style="display: none;">&nbsp;</span>
+					<span class="js-checklabel js-invalid js-invalid2 label label-important" style="display: none;">&nbsp;</span>
+					<span class="js-checklabel js-invalid js-invalid3 label label-important" style="display: none;">&nbsp;</span>
+					<span class="js-checklabel js-correct label label-success" style="display: none;">&nbsp;</span>
+					<input type="submit" value="Pasar turno" class="btn btn-info btn-block js-submit" style="padding: 5px"/>
+				</div>
 			</c:if>
 			<c:if test='${!turn}'>
 				<c:if test="${letters != null}"><span class="label label-inverse" style="margin: 0 auto">¡No es tu turno!</span></c:if><a href="" class="btn btn-primary btn-block">Recargar</a>

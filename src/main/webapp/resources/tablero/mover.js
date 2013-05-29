@@ -43,6 +43,49 @@ var $bar = $(".bar");
 // Span usado para mostrar mensajes mientras se confirma la jugada
 var $mensaje = $(".js-mensaje");
 
+// Estado de la parte inferior de la pantalla:
+//  0: Botón activado, texto "Pasar turno"
+//  1: Botón desactivado, error en la jugada
+//  2: Botón activado, texto "Jugar"
+var estadopantalla = 0;
+
+
+
+
+
+/// FUNCIONES COMUNES ///
+
+/*
+ * Devuelve true si el td indicado contiene a una ficha, ya sea letra o comodín.
+ * 
+ * Se debe llamar siempre pasando un objeto de jQuery.
+ */
+function esficha($td) {
+	return $td.hasClass("letra") || $td.hasClass("comodin");
+}
+
+
+
+/*
+ * Devuelve true si el td indicado contiene a una ficha que no se puede mover.
+ * 
+ * Se debe llamar siempre pasando un objeto de jQuery.
+ */
+function esfichafija($td) {
+	return esficha($td) && !$td.hasClass("mover");
+}
+
+
+
+/*
+ * Devuelve true si el td indicado contiene a una ficha que se puede mover.
+ * 
+ * Se debe llamar siempre pasando un objeto de jQuery.
+ */
+function esfichamovil($td) {
+	return esficha($td) && $td.hasClass("mover");
+}
+
 
 
 
@@ -64,7 +107,7 @@ function asignarCelda(e) {
 		// Se ha soltado el ratón en la misma celda en la que se presionó
 		// No hacer nada para poder arrastrar la celda teniendo el ratón sin pulsar
 		return;
-	} else if (($this.hasClass("letra") || $this.hasClass("comodin")) && !$this.hasClass("mover")) {
+	} else if (esfichafija($this)) {
 		// Se ha soltado el ratón sobre una celda ya ocupada y que no se puede mover
 		// Detener sin hacer nada
 		detenermovimiento(e);
@@ -79,28 +122,23 @@ function asignarCelda(e) {
 		var $tempspan = $(document.createElement("span"));
 		
 		// Añadir las clases de la celda de destino al span temporal, y borrar clases de la celda destino
-		var letrathis = addClasses($this, $tempspan);
+		addClasses($this, $tempspan);
 		removeClasses($this);
 		
 		// Añadir las clases de la celda de origen a la de destino, y borrar clases de la celda origen
-		var letra = addClasses($ep, $this);
+		addClasses($ep, $this);
 		removeClasses($ep);
 		
 		// Añadir las clases del span temporal (tiene las de la celda destino) a la celda origen
 		addClasses($tempspan, $ep);
 		removeClasses($tempspan);
 		
-		// Intercambiar letras en el textarea que representa el tablero
-		ponertextarea($this, letra);
-		ponertextarea($ep, letrathis);
-		
 	} else {
 		// Mover una ficha de una celda a otra vacía
-		var letra = addClasses($ep, $this);
-		actualizartextarea($ep, $this, letra);
+		addClasses($ep, $this);
+		removeClasses($ep);
 		
 		// Limpiar celda origen
-		removeClasses($ep);
 		$ep.off("mousedown");
 		element.remove();
 		
@@ -108,6 +146,13 @@ function asignarCelda(e) {
 		$this.html("<span>&nbsp;</span>");
 		$this.mousedown(iniciarmovimiento);
 	}
+	
+	// Actualizar las letras del textarea
+	ponertextarea($ep);
+	ponertextarea($this);
+	
+	// Actualizar los botones
+	actualizarestado();
 	
 	detenermovimiento(e);
 }
@@ -117,50 +162,31 @@ function asignarCelda(e) {
 /*
  * Añade las clases que tiene el elemento origen al elemento destino.
  * Las clases que se añaden son mover, letra, comodin y letra-[A-ZÑ].
+ * También añade el data de la letra.
  */
 function addClasses(origen, destino) {
-	var letra = "";
 	_(origen.attr("class").split(" ")).each(
 		function(c, i) {
 			if (c == "mover" || c == "letra" || c == "comodin" || c.match("letra-[A-ZÑ]")) {
 				destino.addClass(c);
-				if (c.match("letra-[A-ZÑ]")) {
-					letra = c.charAt(6);
-				} else if (c == "comodin") {
-					letra = "*";
-				}
 			}
 		}
 	);
-	return letra;
+	destino.data("letra", origen.data("letra"));
 }
 
 
 
 /*
  * Elimina las clases letra, letra-[A-ZÑ], comodin y mover del elemento.
+ * También establece el data de la letra a un espacio (vacía).
  */
 function removeClasses(elemento) {
 	elemento.removeClass("letra");
-	for (var i = 65; i <= 90; i++) {
-		elemento.removeClass("letra-" + String.fromCharCode(i));
-	}
-	elemento.removeClass("letra-Ñ");
+	elemento.removeClass("letra-" + elemento.data("letra"));
 	elemento.removeClass("comodin");
 	elemento.removeClass("mover");
-}
-
-
-
-/*
- * Actualiza el textarea que representa el tablero con la nueva posición de la letra,
- * borrando la posición anterior.
- * También actualiza el textarea de las fichas del jugador si el td corresponde a una
- * de ellas.
- */
-function actualizartextarea(tdant, td, letra) {
-	ponertextarea(td, letra);
-	ponertextarea(tdant, " ");
+	elemento.data("letra", " ");
 }
 
 
@@ -169,11 +195,13 @@ function actualizartextarea(tdant, td, letra) {
  * Pone la letra en la posición indicada del textarea que representa el tablero.
  * Actualiza el textarea de las fichas del jugador si el td corresponde a una de ellas, o el del
  * tablero en caso contrario.
+ * La letra la coje del data.
  */
-function ponertextarea(td, letra) {
+function ponertextarea(td) {
 	var x = td.data("x");
 	var y = td.data("y");
 	var f = td.data("f");
+	var letra = td.data("letra");
 	if (x != undefined) {
 		actualizartablero(x, y, letra);
 	} else if (f != undefined) {
@@ -254,8 +282,7 @@ function movimiento(e) {
  * Actualiza la posición x e y de una ficha transparente que sigue el ratón
  */
 function actualizarFantasma(x, y) {
-	$fantasma.css("left", x + 1);
-	$fantasma.css("top", y + 1);
+	$fantasma.css("left", x + 1).css("top", y + 1);
 }
 
 
@@ -276,6 +303,166 @@ function detenermovimiento(e) {
 
 
 /// COMPROBACIONES ANTES DE ENVIAR ///
+
+/*
+ * Comprueba si las fichas puestas por el jugador en el tablero están en linea,
+ * es decir en la misma fila o la misma columna y seguidas todas ellas o separadas por
+ * otras fichas no puestas en esta jugada.
+ * 
+ * Si se cumple la condición anterior, devuelve una lista con dos elementos: el primero es true,
+ * y el segundo es una lista de palabras insertadas o ampliadas con las letras puestas.
+ * 
+ * Si no se cumple la condición (hay algo mal puesto), devuelve una lista con 4 elementos:
+ * el primero es false, el segundo es una lista de letras incorrectas que el usuario debe quitar,
+ * el tercero es una lista de letras no alineadas con la fila o columna y que se ha usado para el alineamiento,
+ * y el cuarto es una lista que contiene listas de letras válidas y que están seguidas,
+ * pero con huecos con las otras listas de la lista y debe quedar sólo una de las listas
+ * para poder completar la jugada.
+ * 
+ * Si el usuario no ha introducido todavía palabras, se devuelve como primer valor true y como segundo
+ * una lista vacía.
+ */
+function puestasenlinea() {
+	var $juegotd = $("#juego td");
+	// Cambia a false si alguna condicion no se cumple
+	var enlinea = true;
+	// Contiene las palabras nuevas que se forman con las letras correctas puestas
+	var palabras = [];
+	// letras es una lista de listas de letras seguidas entre sí,
+	// pero con huecos entre las demás
+	// noalineadas es una lista de letras no alineadas con la coordenada usada para el alineamiento
+	// malas contiene letras malas con seguridad
+	var letras = [[]], noalineadas = [], malas = [];
+	// Estas banderas se activan si se encuentra un hueco en la fila o columna en la que se ha puesto
+	// una letra
+	var huecox = false, huecoy = false;
+	// Posiciones x e y de la primera casilla móvil vista
+	// fijax es true si la X debe estar fija, false si la Y, y null si todavía no se sabe
+	var x = null, y = null, fijax = null;
+	$("#juego td").each(function (i, d) {
+		var $d = $(d);
+		if (!esficha($d)) {
+			if (x != null) {
+				var dx = $d.data("x"), dy = $d.data("y");
+				if (x == dx) {
+					huecox = true;
+				}
+				if (y == dy) {
+					huecoy = true;
+				}
+			}
+		} else {
+			if ($d.hasClass("mover")) {
+				if (!comprobarseguidas($d, $juegotd)) {
+					// La ficha no está en línea con una ficha no fija y no es el centro del tablero
+					enlinea = false;
+					malas.push($d.data("letra"));
+					return;
+				}
+				var dx = $d.data("x"), dy = $d.data("y");
+				if (x == null) {
+					// Inicializar los valores de X e Y si estaban por definir
+					x = dx;
+					y = dy;
+				} else {
+					if (fijax == null) {
+						// Esta es la segunda casilla que se visita, se decide ahora qué coordenada estará fija:
+						// si no ha cambiado la Y, la X es fija, y si no, la Y es fija
+						fijax = y != dy;
+					}
+					if ((fijax && dx != x) || (!fijax && dy != y)) {
+						// Ha cambiado la coordenada fija, las fichas no están alineadas
+						enlinea = false;
+						noalineadas.push($d.data("letra"));
+						return;
+					} else if ((fijax && huecox) || (!fijax && huecoy)) {
+						// Ha habido un hueco entre las letras puestas
+						enlinea = false;
+						// Crear nueva lista para el hueco actual
+						letras.push([]);
+						letras[letras.length-1].push($d.data("letra"));
+						// Desactivar el hueco para detectar más huecos
+						huecox = false;
+						huecoy = false;
+						return;
+					}
+				}
+				// Si se ha llegado hasta aquí es que la letra es buena
+				letras[letras.length-1].push($d.data("letra"));
+				// Obtener palabras de las que forma parte esta casilla y unirlas eliminando duplicados
+				// a las palabras
+				palabras = concatenarunicos(palabras, obtenerpalabras($d, $juegotd));
+			}
+		}
+	});
+	// TODO QUITAR ESTO ANTES DE ENVIARLO PARA PRODUCCION ;)
+	// No es más que un checkeo que se debería cumplir siempre
+	if (enlinea && (malas.length > 0 || noalineadas.length > 0 || letras.length > 1)) {
+		alert("Hay algo mal en puestasenlinea, ¡avisa a Álvaro!");
+	}
+	return enlinea? [true, palabras]: [false, malas, noalineadas, letras];
+}
+
+
+
+/*
+ * Es llamado cada vez que se cambia una ficha de sitio, y se encarga de actualizar los elementos
+ * de la pantalla según el estado del tablero.
+ * Únicamente actualiza los mensajes de la parte inferior de la pantalla, el tablero ya debe haber sido
+ * actualizado antes de llamar a esta función.
+ */
+function actualizarestado() {
+	// Comprobar cómo está el tablero
+	var estado = puestasenlinea();
+	
+	if (estado[0] == false) {
+		// Jugada incorrecta
+		
+		if (estadopantalla != 1) {
+			// Desactivar envío
+			$(".js-submit").addClass("btn-danger").removeClass("btn-success").removeClass("btn-info")
+			.attr("value", "Jugada no válida");
+			$(".js-checklabel").hide();
+			estadopantalla = 1;
+		}
+		$(".js-invalid").hide();
+		if (estado[1].length > 0) {
+			$(".js-invalid1").show().text("Letras incorrectas: " + estado[1].join(", "));
+		}
+		if (estado[2].length > 0) {
+			$(".js-invalid2").show().text("Letras no alineadas: " + estado[2].join(", "));
+		}
+		if (estado[3].length > 1) {
+			$(".js-invalid3").show().text("Letras en grupos incompatibles: " + estado[3].join(" - "));
+		}
+		
+	} else if (estado[0] == true) {
+		// Jugada correcta
+		
+		if (estado[1].length == 0) {
+			// No se han movido fichas (pasar turno)
+			
+			if (estadopantalla != 0) {
+				$(".js-submit").addClass("btn-info").removeClass("btn-success").removeClass("btn-danger")
+				.attr("value", "Pasar turno");
+				$(".js-checklabel").hide();
+				estadopantalla = 0;
+			}
+		} else {
+			// Se han puesto fichas
+			
+			if (estadopantalla != 2) {
+				$(".js-submit").addClass("btn-success").removeClass("btn-info").removeClass("btn-danger")
+				.attr("value", "¡Jugar!");
+				$(".js-checklabel").hide();
+				estadopantalla = 2;
+			}
+			$(".js-correct").show().text("Palabras: " + estado[1].join(", "));
+		}
+	}
+}
+
+
 
 /*
  * Llamado al pulsar sobre el botón de Jugar, justo antes de enviar el formulario con el tablero
@@ -312,62 +499,44 @@ function confirmarjugada(e) {
 	
 	iniciarconfirmacion();
 	
-	// Comprobar que hayan desaparecido fichas del jugador
-	var movidas = false;
-	$("#letras td").each(function (i, d) {
-		if (!$(d).hasClass("mover")) {
-			movidas = true;
-			// Dejar de iterar por las fichas
-			return false;
-		}
-	});
-	if (!movidas) {
+	// Obtener estado del tablero
+	var estado = puestasenlinea();
+	
+	// Comprobar primero si se pasa el turno
+	if (estado[0] == true && estado[1].length == 0) {
 		detenerconfirmacion();
-		return confirm("No has hecho cambios al tablero\n¿Estás seguro que quieres pasar el turno?");
+		return confirm("¿Estás seguro que quieres pasar el turno?");
 	}
 	
 	actualizarporcentaje(25, "Calculando nuevas palabras...");
 	
-	// Ha habido fichas puestas en el tablero, comprobar que estén seguidas
-	// De paso ir guardando las nuevas palabras en un vector
-	var $juegotd = $("#juego td");
-	var seguidas = true;
-	var palabras = [];
-	$juegotd.each(function (i, d) {
-		var $d = $(d);
-		if ($d.hasClass("mover")) {
-			if (!comprobarseguidas($d, $juegotd)) {
-				seguidas = false;
-				// Dejar de iterar por el tablero
-				return false;
-			}
-			palabras = concatenarunicos(palabras, obtenerpalabras($d, $juegotd));
-		}
-	});
-	if (!seguidas || palabras.length == 0) {
+	// A continuación comprobar si la jugada es incorrecta
+	if (estado[0] == false) {
 		detenerconfirmacion();
 		// Decidir qué mensaje mostrar dependiendo de si es el primer movimiento o no
 		var primermovimiento = true;
-		$juegotd.each(function (i, d) {
-			var $d = $(d);
-			if (($d.hasClass("letra") || $d.hasClass("comodin")) && !$d.hasClass("mover")) {
+		$("#juego td").each(function (i, d) {
+			if (esfichafija($(d))) {
 				primermovimiento = false;
 				return false;
 			}
 		});
 		var mensaje = "";
 		if (primermovimiento) {
-			mensaje = "Debes poner una palabra de al menos dos letras que pase por el centro.";
+			mensaje = "Debes poner una palabra que pase por el centro.";
 		} else {
-			mensaje = "Todas las palabras que pongas tienen que estar unidas a otras que ya estuvieran puestas.";
+			mensaje = "Todas las letras que pongas tienen que estar seguidas y unidas a otras que ya estuvieran puestas.";
 		}
 		alert("¡La jugada es incorrecta!\n" + mensaje);
 		return false;
 	}
 	
-	actualizarporcentaje(50, "Comprobando palabra(s): " + palabras.join(", "));
+	// En este punto la jugada es correcta
+	var palabras = estado[1];
 	
+	actualizarporcentaje(50, "Comprobando palabra(s): " + palabras.join(", "));
 	console.log(palabras);
+	
 	// Comprobar palabras válidas
 	// Esto debe hacerse de forma asíncrona porque jquery llamará al callback de esa manera
 	// La url del diccionario se obtiene del html (para poder indicarla de forma relativa con un c:url)
@@ -375,7 +544,7 @@ function confirmarjugada(e) {
 		comprobarDiccionario(palabras, e);
 	});
 	
-	// Devolver falso en espera de que se realize la comprobación del diccionario
+	// Devolver falso en espera de que se realice la comprobación del diccionario
 	return false;
 }
 
@@ -401,7 +570,7 @@ function comprobarseguidas(td, juegotd) {
 				break;
 			} else {
 				var jtd = $(juegotd[y*15+x]);
-				if (!jtd.hasClass("letra") && !jtd.hasClass("comodin")) {
+				if (!esficha(jtd)) {
 					// Celda vacía, dejar de buscar en esta dirección
 					break;
 				} else if (!jtd.hasClass("mover") || jtd.hasClass("inicial")) {
@@ -424,12 +593,14 @@ function comprobarseguidas(td, juegotd) {
  * es decir, palabras de las cuales el td forma parte.
  */
 function obtenerpalabras(td, juegotd) {
+	// Lista de palabras obtenidas
 	var palabras = [];
+	// Coordenadas del td
+	var x = td.data("x");
+	var y = td.data("y");
 	// Direcciones que recorrer
 	var d = [{dx: 1, dy: 0}, {dx: 0, dy: 1}];
 	for (var i = 0; i < d.length; i++) {
-		var x = td.data("x");
-		var y = td.data("y");
 		var dx = d[i].dx;
 		var dy = d[i].dy;
 		// Primero ir hacia atrás hasta que empieze la palabra
@@ -437,13 +608,20 @@ function obtenerpalabras(td, juegotd) {
 		// Buscar el final de la cadena
 		var xyfin = finletras(x, y, dx, dy, juegotd);
 		if (xy.x == xyfin.x && xy.y == xyfin.y) {
-			// No hay palabra en esta dirección
+			// Si las coordenadas de inicio son iguales a las de fin, no hay palabra en esa dirección
 			continue;
 		} else {
 			var palabra = getpalabra(xy.x, xy.y, xyfin.x + 1, xyfin.y + 1, juegotd);
 			palabras.push(palabra);
 		}
 	}
+	
+	// Si es la casilla inicial y no se han detectado palabras, contar la única letra como una palabra
+	// Este es el único caso en que se permite una palabra formada por una sola letra
+	if (palabras.length == 0 && td.hasClass("inicial")) {
+		palabras.push(getpalabra(x, y, x+1, y+1, juegotd));
+	}
+	
 	return palabras;
 }
 
@@ -461,7 +639,7 @@ function finletras(x, y, dx, dy, juegotd) {
 			break;
 		} else {
 			var jtd = $(juegotd[y*15+x]);
-			if (!jtd.hasClass("letra") && !jtd.hasClass("comodin")) {
+			if (!esficha(jtd)) {
 				// Celda vacía, dejar de buscar en esta dirección
 				break;
 			}
@@ -482,6 +660,7 @@ function finletras(x, y, dx, dy, juegotd) {
  * trozo de fila o de columna.
  */
 function getpalabra(xi, yi, xf, yf, juegotd) {
+	// Se usa el textarea en lugar del tablero porque es más sencillo
 	var palabra = [];
 	var filas = $("#tablero").text().split(".");
 	for (var i = yi; i < yf; i++) {
@@ -631,7 +810,7 @@ function eliminarelemento(vector, elemento) {
  */
 function iniciarconfirmacion() {
 	confirmandoJugada = 1;
-	$(".js-submit").hide();
+	$(".js-input").hide();
 	$(".js-confirm").show();
 	actualizarporcentaje(10, "Confirmando jugada...");
 }
@@ -668,7 +847,7 @@ function actualizarporcentaje(p, mensaje) {
 function detenerconfirmacion() {
 	confirmandoJugada = 0;
 	$(".js-confirm").hide();
-	$(".js-submit").show();
+	$(".js-input").show();
 	actualizarporcentaje(0, " ");
 }
 

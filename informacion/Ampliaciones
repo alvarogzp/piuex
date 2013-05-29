@@ -1,0 +1,4 @@
+Ampliaciones realizadas no indicadas en los enunciados (revisar los commits para encontrar más ampliaciones):
+
+1. En el tablero, si sueltas una letra sobre otra que se puede mover, se intercambian ambas letras (la que movías y en la que la has soltado)
+2. En el tablero, se muestra un montón de información detallada de la jugada según vas cambiando las fichas de sitio, también si la jugada será correcta o no incluso antes de pulsar Enviar.

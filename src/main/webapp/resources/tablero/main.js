@@ -59,15 +59,19 @@ _( filas ).each(function( tr, i ) {
 				}
 			}
 			
-			if(td.match("[A-ZÑ]")) {
+			if (td.match("[A-ZÑ]")) {
 				tabla.push("letra letra-" + td);
 			} else if (td == "*") {
 				tabla.push("comodin");
 			}
 			
-			tabla.push("'>");
+			tabla.push("'");
 			
-			tabla.push(    ' '   );
+			tabla.push(" data-letra='" + td + "'");
+			
+			tabla.push(">");
+			
+			tabla.push(    ' '  );
 			tabla.push( "</td>" );
 		});
 	
@@ -94,13 +98,17 @@ if (fichas.length) {
 	_( fichas.split("") ).each(function( td, i ) {
 		tabla.push( "<td data-f='" + i + "' class='tabla-td " );
 		
-		if(td.match("[A-ZÑ]")) {
+		if (td.match("[A-ZÑ]")) {
 			tabla.push(mover + "letra letra-" + td);
 		} else if (td == "*") {
 			tabla.push(mover + "comodin");
 		}
 		
-		tabla.push("'>");
+		tabla.push("'");
+		
+		tabla.push(" data-letra='" + td + "'");
+		
+		tabla.push(">");
 		
 		tabla.push( '<span>&nbsp;</span>' );
 		tabla.push( "</td>" );
