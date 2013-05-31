@@ -33,6 +33,8 @@ http://www.apalabrados.com/reglas
 
 * Estadísticas
 
+* Confirmar partida por el otro usuario antes de empezar a jugar
+
 al redirigir a login desde cualquier página porque no se está registrado que salga el error en la pantalla de login (por ejemplo "Debes iniciar sesión para ver esa página")
 
 Convertir level y opponents a enumeracion, igual con status de partidas

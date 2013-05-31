@@ -1,0 +1,18 @@
+Hola,
+
+Sigo pensando que jugar dos partidas al apalabrados para móvil es bastante clarificador, pero por si acaso, aclaro algunas cosas:
+
+    Las fichas nuevas, las que el jugador ha puesto en su turno deben estar alineadas. Eso significa que, si sacamos una lista con todas las coordenadas x y otras con todas las coordenadas y de las *fichas* que ha puesto el jugador, una de las dos listas debe tener como máximo un elemento.
+    Llamamos palabra a lo que va desde un borde o espacio hasta otro borde o espacio, en horizontal, y en vertical. Esto indica que la función split nos puede ayudar a sacar las palabras de una fila, o de una columna, si la fila o la columna están en un string. Para hacer que una fila o una columna de un array de arrays de letras estén en un string podemos usar collect y reduce, o bien hacer dos bucles anidados (dos para horizontal, dos para vertical).
+    El jugador no pone *una palabra*. De hecho, tampoco pone *palabras*, pone fichas. No hay concepto de *la palabra nueva* porque puede haber varias.
+    La puntuación de una *jugada* es la SUMA de las puntuaciones de todas las palabras que haya en el tablero en las que participe al menos una ficha nueva.
+    La puntuación de una *palabra* en la que participe al menos una ficha nueva es la SUMA de la puntuación que aporte cada ficha, sea vieja o nueva.
+    Los modificadores de letra (DL, TL) se aplican a la letra que tienen encima, *antes* de ser sumados para calcular la puntuación de la palabra.
+    Los modificadores de palabra (DP, TP) se aplican a la puntuación de las fichas ya sumadas de la palabra bajo la que se encuentren.
+    Los modificadores se aplican sólo en la jugada donde una ficha ha sido colocada encima de ellos. Luego no se aplican.
+    Las fichas viejas, repito, también se suman. (Aunque sin modificadores)
+    Antes de pensar el algoritmo, pensad en la estructura de datos que os permite hacer esto. Una matriz de base (original) y otra matriz con la jugada nos permite bastante capacidad.
+    Para "pasar de turno" simplemente debéis incluir el caso en el que la matriz inicial y final son iguales (no hay fichas nuevas) y en este caso la puntuación de la jugada es 0.
+    El comodín debe ser incluido de la siguiente forma: cada vez que se coloca o recoloca debemos preguntar por qué ficha se sustituye. Podéis preguntar con var letra = prompt("Letra?"). Se puede guardar en minúscula para diferenciar que no tiene puntuación (si es que las puntuaciones están en un hash indexado por letras mayúsculas) pero para permitir que el diccionario encuentre la palabra (si es que tenéis un toLowerCase() antes de buscar en el diccionario).
+
+Un saludo,

@@ -1,0 +1,21 @@
+Buenas,
+
+Después de esta primera sesión de tutorías programadas, he podido comprobar que la mayoría de vosotros piensa que la parte del servidor para la gestión de una partida es muy compleja o muy larga de desarrollar. Pues ni uno ni la otro.
+
+A continuación, tenéis los 3 pasos a seguir para hacerlo:
+
+PASO 1.- Añade a la tabla (y al POJO) game los campos (atributos) necesarios: turno, puntos_1, puntos_2, tablero, letras_1, letras_2, letras. El primero puede ser boolean, los dos siguientes pueden ser int y los cuatro últimos serán cadenas con tamaña: 255, 8, 8 y 96 (según enunciado). Consideramos que ambos jugadores cogen fichas de la misma bolsa. Cuando crees una nueva partida, inicializa el tablero a 255 espacios en blanco y las letras con esta secuencia: "EDENISNITRALPUEGAEAETEMDAADDVSÑUOFBRHUUONGITAXSALOOAQHOSNOBROTDEOSJCNAECCZEAEJSARIPCUIROEMILAYEL". El resto de inicializaciones lo dejo a tu criterio.
+
+PASO 2.- Confirmar partida. Cuando se crea una partida, su estado es "esperando". El oponente debe confirmar la partida. Lo más sencillo es que el oponente seleccione la partida de su lista de partidas y que el controlador, si detecta estado "esperando" y jugador actual es oponente, lleve al usuario a una página que simplemente contiene un formulario con un campo oculto (id de la partida) y un botón para confirmar (no consideramos rechazar partida). El controlador que trata la petición de este formulario, cambiará el estado a "jugando", repartirá fichas a los jugadores y pondrá el turno en jugador 1.
+
+PASO 3.- Jugar la partida. Ambos jugadores pueden ver la partida desde su lista. La vista de detalle de la partida contiene un formulario con id partida y textarea del tablero (ambos son mapeados a un objeto game mediante las form tags de spring). Tengáis hecha o no la parte de interacción en cliente, el formulario se puede enviar y se puede procesar en servidor. Desde el controlador controlamos que sólo el jugador en turno pueda realizar una jugada (hay muchas otras alternativas). Recuperamos de base de datos la partida con el id recibido. Comparamos tableros para obtener qué letras ha usado el jugador actual en la jugada. Calculamos los puntos de la jugada (tabla conversión de letra a número). Quitamos esas letras de las letras del jugador actual. Le damos 4 fichas más de la bolsa de letras, quitando esas letras del campo letras. Fin partida simple: cuando no haya más letras que repartir.
+
+Dejando aparte la confirmación de la partida, jugar la partida simplemente consiste en la atención de una petición POST y su GET correspondiente para mostrar el tablero actualizado en cliente.
+
+Como podéis ver, hay muchas posibilidades de extensión: generación aleatoria de la secuencia de letras de la bolsa, comprobar palabra es correcta (diccionario, cliente REST), tablero con casillas especiales, finalización de la partida más correcta, una bolsa de letras por cada jugador, etc.
+
+Tened en cuenta que lo anterior son sólo unas recomendaciones, cada uno puede hacerlo como quiera.
+
+Un saludo
+
+P.D.: La secuencia aleatoria de letras la he generado a partir de esta cadena "AAAAAAAAAAAABBCCCCDDDDDEEEEEEEEEEEEFGGHHIIIIIIJJLLLLMMNNNNNÑOOOOOOOOOPPQRRRRRSSSSSSTTTTUUUUUVXYZ mediante este string randomizer: http://textmechanic.com/String-Randomizer.html

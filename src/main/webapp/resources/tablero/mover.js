@@ -742,11 +742,10 @@ function descargarDiccionario() {
 	// Sólo se obtiene el diccionario si había una url
 	if (url) {
 		diccionario.estado = 1;
-		$(".js-diccionario").text("Descargando diccionario...").show();
-		setTimeout(function() {
+		$(".js-diccionario").text("Descargando diccionario...").slideDown('slow', function() {
 			$.get(url, procesarDiccionario)
 			.fail(errorDiccionario);
-		}, 100);
+		});
 	} else {
 		// No hay diccionario
 		diccionario.estado = 5;
@@ -769,10 +768,6 @@ function procesarDiccionario(dic) {
 		diccionario.palabras = dic.split(/\s/);
 		diccionario.estado = 3;
 		finDiccionario();
-		// Comprobar si hay una comprobación en espera
-		if (diccionario.comprobando == 2) {
-			iniciarComprobarPalabrasDiccionario();
-		}
 	}, 100);
 }
 
@@ -782,9 +777,9 @@ function procesarDiccionario(dic) {
  * Ejecutado si falla la obtención del diccionario de la red.
  * Simplemente actualiza el estado y muestra un pequeño mensaje de error al usuario.
  */
-function errorDiccionario() {
+function errorDiccionario(xhr, status, error) {
 	diccionario.estado = 4;
-	finDiccionario();
+	finDiccionario(error);
 }
 
 
@@ -793,7 +788,7 @@ function errorDiccionario() {
  * Ejecutado al terminar de realizar las labores iniciales sobre el diccionario,
  * muestra un mensaje y lo oculta con una animación.
  */
-function finDiccionario(texto) {
+function finDiccionario(estado) {
 	// Sólo muestra mensajes si está el span
 	if ($(".js-diccionario").length > 0) {
 		$(".js-diccionario").addClass(
@@ -801,19 +796,25 @@ function finDiccionario(texto) {
 			diccionario.estado == 4? "label-important":
 			diccionario.estado == 3? "label-success": ""
 		).text(
-			diccionario.estado == 5? "Diccionario no disponible":
-			diccionario.estado == 4? "Error al obtener el diccionario":
+			diccionario.estado == 5? "Diccionario no definido":
+			diccionario.estado == 4? "Error al obtener el diccionario: " + estado:
 			diccionario.estado == 3? "¡Diccionario almacenado!": ""
-		).show();
-		// Ocultar tras unos segundos
-		setTimeout(function() {
-			$(".js-diccionario").fadeOut(2000, function() {
-				if (diccionario.estado == 4 || diccionario.estado == 5) {
-					// Error en el diccionario, mostrar span de error
-					$(".js-diccionario-error").show();
-				}
-			});
-		}, diccionario.estado == 4? 2000: 1000);
+		).slideDown('slow', function() {
+			// Ocultar tras unos segundos cuando acabe la animación
+			// Si el elemento ya estaba mostrado, se ejecuta inmediatamente
+			setTimeout(function() {
+				$(".js-diccionario").slideUp('slow', function() {
+					if (diccionario.estado == 4 || diccionario.estado == 5) {
+						// Error en el diccionario, mostrar span de error
+						$(".js-diccionario-error").slideDown('slow');
+					}
+				});
+			}, diccionario.estado == 3? 1000: 2000);
+		});
+	}
+	// Ver si hay una comprobación en espera
+	if (diccionario.comprobando == 2) {
+		iniciarComprobarPalabrasDiccionario();
 	}
 }
 
@@ -849,27 +850,22 @@ function comprobarDiccionario(palabras) {
 	// Comprobar estado del diccionario
 	switch (diccionario.estado) {
 	case 0:
-		diccionario.comprobando = 2;
-		actualizarporcentaje(0, "Esperando al diccionario...");
-		// El diccionario todavía no se ha empezado a descargar, descargar ahora
-		descargarDiccionario();
-		return;
 	case 1:
 	case 2:
-		// Esperar a que acabe la obtención del diccionario
+		// Esperar a la obtención del diccionario
 		diccionario.comprobando = 2;
 		actualizarporcentaje(0, "Esperando al diccionario...");
+		if (diccionario.estado == 0) {
+			// El diccionario todavía no se ha empezado a descargar, descargar ahora
+			descargarDiccionario();
+		}
 		return;
 	case 3:
+	case 4:
+	case 5:
 		// Iniciar la comprobación
 		iniciarComprobarPalabrasDiccionario();
 		break;
-	case 4:
-	case 5:
-		// No realizar comprobación, vaciar palabras para simular que son correctas
-		diccionario.comprobar = [];
-		finComprobarPalabrasDiccionario();
-		return;
 	}
 }
 
@@ -879,9 +875,16 @@ function comprobarDiccionario(palabras) {
  * Inicia la comprobación de las palabras del diccionario de forma asíncrona.
  */
 function iniciarComprobarPalabrasDiccionario() {
-	diccionario.comprobando = 3;
-	actualizarporcentaje(0, "Comprobando palabra(s): " + diccionario.comprobar.join(", "));
-	setTimeout(comprobarPalabrasDiccionario, 100);
+	if (diccionario.estado == 4 || diccionario.estado == 5) {
+		// Se juega sin diccionario, no se realizarán comprobaciones de palabras
+		// Vaciar palabras para simular que son correctas
+		diccionario.comprobar = [];
+		finComprobarPalabrasDiccionario();
+	} else if (diccionario.estado == 3) {
+		diccionario.comprobando = 3;
+		actualizarporcentaje(0, "Comprobando palabra(s): " + diccionario.comprobar.join(", "));
+		setTimeout(comprobarPalabrasDiccionario, 100);
+	}
 }
 
 
