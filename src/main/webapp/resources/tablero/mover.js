@@ -49,6 +49,28 @@ var $mensaje = $(".js-mensaje");
 //  2: Botón activado, texto "Jugar"
 var estadopantalla = 0;
 
+// Contiene información sobre el diccionario
+var diccionario = {
+		// Estado en el que se encuentra:
+		// 0 si todavía no se ha obtenido
+		// 1 si se está realizando la petición (obteniendo el diccionario)
+		// 2 si se ha obtenido y se está procesando (separando en palabras)
+		// 3 si se ha obtenido y almacenado correctamente
+		// 4 si hubo un error en la obtención del diccionario
+		// 5 si no hay diccionario que obtener (no es el turno)
+		estado: 0,
+		// Lista de palabras del diccionario, puede ser un array muy largo
+		palabras: [],
+		// Estado de una comprobación de palabras en el diccionario:
+		// 0 es si no se está realizando ninguna comprobación
+		// 1 es si se está preparando una comprobación
+		// 2 es si se está esperando al diccionario para realizar una comprobación
+		// 3 es si se está realizando una comprobación
+		comprobando: 0,
+		// Lista de palabras que comprobar, en el caso de que se esté realizando una comprobación
+		comprobar: []
+};
+
 
 
 
@@ -302,7 +324,7 @@ function detenermovimiento(e) {
 
 
 
-/// COMPROBACIONES ANTES DE ENVIAR ///
+/// COMPROBACIONES DE JUGADA CORRECTA ///
 
 /*
  * Comprueba si las fichas puestas por el jugador en el tablero están en linea,
@@ -395,11 +417,6 @@ function puestasenlinea() {
 			}
 		}
 	});
-	// TODO QUITAR ESTO ANTES DE ENVIARLO PARA PRODUCCION ;)
-	// No es más que un checkeo que se debería cumplir siempre
-	if (enlinea && (malas.length > 0 || noalineadas.length > 0 || letras.length > 1)) {
-		alert("Hay algo mal en puestasenlinea, ¡avisa a Álvaro!");
-	}
 	return enlinea? [true, palabras]: [false, malas, noalineadas, letras];
 }
 
@@ -477,14 +494,15 @@ function actualizarestado() {
  *   - Comprueba que todas las palabras puestas sean correctas, es decir, que estén en el diccionario
  *   usado por la aplicación.
  * 
- * La última comprobación (comprobar que las palabras estén en un diccionario) requiere realizar una
- * petición HTTP para obtener el diccionario, y debe ser realizada de forma asíncrona. Por tanto, si
- * se llega a ese punto, la función devolverá false aunque no se haya acabado de procesar, y tras
- * recibir la petición y terminar la comprobación se decidirá si se envía el formulario o no.
+ * La última comprobación (comprobar que las palabras estén en un diccionario) se realiza de forma asíncrona
+ * para mostrar mensajes por la pantalla mientras tanto, y no bloquear el navegador.
+ * Por tanto, si se llega a ese punto, la función devolverá false aunque no se haya acabado de procesar,
+ * y tras terminar la comprobación se decidirá si se envía el formulario o no.
+ * 
  * Esto se consigue mediante una bandera con 3 estados: 0 si no se está realizando ninguna comprobación,
  * 1 si se está confirmando la jugada y 2 si la jugada ha sido confirmada con éxito.
  * Al realizarse la comprobación asíncrona satisfactoriamente y establecerse la bandera al valor 2,
- * se volverá a pulsar (de forma virtual) de nuevo el botón de Jugar, y se llamará a este método, que
+ * se volverá a pulsar (de forma simulada) de nuevo el botón de enviar, y se llamará a este método, que
  * al ver el valor 2 en la bandera enviará directamente el formulario sin realizar ningún tipo de
  * comprobación adicional.
  */
@@ -507,8 +525,6 @@ function confirmarjugada(e) {
 		detenerconfirmacion();
 		return confirm("¿Estás seguro que quieres pasar el turno?");
 	}
-	
-	actualizarporcentaje(25, "Calculando nuevas palabras...");
 	
 	// A continuación comprobar si la jugada es incorrecta
 	if (estado[0] == false) {
@@ -534,17 +550,12 @@ function confirmarjugada(e) {
 	// En este punto la jugada es correcta
 	var palabras = estado[1];
 	
-	actualizarporcentaje(50, "Comprobando palabra(s): " + palabras.join(", "));
-	console.log(palabras);
+//	console.log(palabras);
 	
 	// Comprobar palabras válidas
-	// Esto debe hacerse de forma asíncrona porque jquery llamará al callback de esa manera
-	// La url del diccionario se obtiene del html (para poder indicarla de forma relativa con un c:url)
-	$.get($("#diccionario").text(), function(e) {
-		comprobarDiccionario(palabras, e);
-	});
+	comprobarDiccionario(palabras);
 	
-	// Devolver falso en espera de que se realice la comprobación del diccionario
+	// Devolver falso ya que la comprobación del diccionario es asíncrona
 	return false;
 }
 
@@ -703,61 +714,206 @@ function concatenarunicos(v1, v2) {
 
 
 
+
+
+/// GESTIÓN DEL DICCIONARIO ///
+
 /*
- * Llamado al obtener el diccionario mediante una petición AJAX.
- * palabras es la lista de palabras a analizar,
- * diccionario es una cadena con el contenido del diccionario.
- * El diccionario puede tener palabras separadas por espacios o saltos de línea, indistintamente.
- * Comprueba que todas las palabras estén en el diccionario, y si es así confirma la jugada
+ * Programa la descarga del diccionario tras un tiempo, para que no se bloquee la página
+ * nada más cargarla con la carga del diccionario.
+ */
+function programarDescargaDiccionario() {
+	setTimeout(descargarDiccionario, 1000);
+}
+
+
+
+/*
+ * Descarga el diccionario asíncronamente llamando a $.get,
+ * y lo procesa una vez descargado.
+ */
+function descargarDiccionario() {
+	if (diccionario.estado != 0) {
+		// Ya se ha obtenido o se está obteniendo el diccionario
+		return;
+	}
+	// La url del diccionario se obtiene del html (para poder indicarla de forma relativa con un c:url)
+	var url = $("#diccionario").text();
+	// Sólo se obtiene el diccionario si había una url
+	if (url) {
+		diccionario.estado = 1;
+		$(".js-diccionario").text("Descargando diccionario...").show();
+		setTimeout(function() {
+			$.get(url, procesarDiccionario)
+			.fail(errorDiccionario);
+		}, 100);
+	} else {
+		// No hay diccionario
+		diccionario.estado = 5;
+		finDiccionario();
+	}
+}
+
+
+
+/*
+ * Procesa el diccionario, recibido como una cadena de caracteres larguísima
+ * con palabras separadas por espacios o saltos de línea indistintamente,
+ * lo convierte a un vector de palabras larguísimo, y lo guarda en una variable global.
+ */
+function procesarDiccionario(dic) {
+	diccionario.estado = 2;
+	$(".js-diccionario").text("Procesando diccionario...");
+	setTimeout(function() {
+		// Dividir las palabras usando \s que separa tanto espacios como saltos de línea
+		diccionario.palabras = dic.split(/\s/);
+		diccionario.estado = 3;
+		finDiccionario();
+		// Comprobar si hay una comprobación en espera
+		if (diccionario.comprobando == 2) {
+			iniciarComprobarPalabrasDiccionario();
+		}
+	}, 100);
+}
+
+
+
+/*
+ * Ejecutado si falla la obtención del diccionario de la red.
+ * Simplemente actualiza el estado y muestra un pequeño mensaje de error al usuario.
+ */
+function errorDiccionario() {
+	diccionario.estado = 4;
+	finDiccionario();
+}
+
+
+
+/*
+ * Ejecutado al terminar de realizar las labores iniciales sobre el diccionario,
+ * muestra un mensaje y lo oculta con una animación.
+ */
+function finDiccionario(texto) {
+	// Sólo muestra mensajes si está el span
+	if ($(".js-diccionario").length > 0) {
+		$(".js-diccionario").addClass(
+			diccionario.estado == 5? "label-warning":
+			diccionario.estado == 4? "label-important":
+			diccionario.estado == 3? "label-success": ""
+		).text(
+			diccionario.estado == 5? "Diccionario no disponible":
+			diccionario.estado == 4? "Error al obtener el diccionario":
+			diccionario.estado == 3? "¡Diccionario almacenado!": ""
+		).show();
+		// Ocultar tras unos segundos
+		setTimeout(function() {
+			$(".js-diccionario").fadeOut(2000, function() {
+				if (diccionario.estado == 4 || diccionario.estado == 5) {
+					// Error en el diccionario, mostrar span de error
+					$(".js-diccionario-error").show();
+				}
+			});
+		}, diccionario.estado == 4? 2000: 1000);
+	}
+}
+
+
+
+/*
+ * Comprueba que todas las palabras en "palabras" estén en el diccionario, y si es así confirma la jugada
  * y simula una pulsación del botón de jugar para enviar el formulario.
  * Si hay palabras que no están, muestra un mensaje con las palabras que no están y detiene la confirmación.
  * 
  * El diccionario actualmente usado es un fichero de 15MB, por lo que su recorrido se puede demorar varios
  * segundos, incluso parecer que el navegador no responde.
- * El algoritmo intenta en la medida de lo posible ser eficiente, evitando recorrer todo el contenido si ya
- * se han comprobado todas las palabras, pero inevitablemente se debe recorrer entero si alguna palabra no
- * es correcta.
+ * Se ha usado el algoritmo más eficiente encontrado según pruebas empíricas.
  * 
  * Las palabras del diccionario están en minúsculas y sólo contienen caracteres de la a la z y la eñe, sin
  * tildes ni diéresis.
+ * 
+ * Todo lo anteriormente mencionado es una descripción general de lo que llamar a esta función causa,
+ * sin embargo, esta función únicamente prepara la comprobación y la inicia o encola dependiendo de si se
+ * ha obtenido ya el diccionario o todavía no.
+ * El resto de acciones son realizadas por las siguientes funciones.
  */
-function comprobarDiccionario(palabras, diccionario) {
-	palabras = tolowercase(palabras);
-	// No se usa _.each porque no se puede parar cuando ya no se quiera seguir recorriendo el array
-	// Con every se devuelve false para detener el recorrido, y entonces el propio every devuelve false
-	// Dividir las palabras usando \s que separa tanto espacios como saltos de línea
-	diccionario.split(/\s/).every(function (palabra, index) {
-		if (index % 25000 == 0) {
-			actualizarporcentaje(50 + (index / 25000));
-		}
-		if (!palabras.every(function (p) {
-			if (palabra == p) {
-				palabras = eliminarelemento(palabras, p);
-				if (palabras.length == 0) {
-					// Detener el recorrido
-					return false;
-				}
-			}
-			// Seguir el recorrido
-			return true;
-		})) {
-			// El every interno nos informa que se ha vaciado el vector de palabras
-			// Detener recorrido
-			return false;
-		}
-		// Seguir recorrido
-		return true;
-	});
+function comprobarDiccionario(palabras) {
+	if (diccionario.comprobando != 0) {
+		// Ya se está realizando una comprobación, no hacer nada
+		return;
+	}
 	
-	if (palabras.length > 0) {
-		// Hay palabras no reconocidas
+	// Preparar comprobación
+	diccionario.comprobando = 1;
+	diccionario.comprobar = palabras;
+	
+	// Comprobar estado del diccionario
+	switch (diccionario.estado) {
+	case 0:
+		diccionario.comprobando = 2;
+		actualizarporcentaje(0, "Esperando al diccionario...");
+		// El diccionario todavía no se ha empezado a descargar, descargar ahora
+		descargarDiccionario();
+		return;
+	case 1:
+	case 2:
+		// Esperar a que acabe la obtención del diccionario
+		diccionario.comprobando = 2;
+		actualizarporcentaje(0, "Esperando al diccionario...");
+		return;
+	case 3:
+		// Iniciar la comprobación
+		iniciarComprobarPalabrasDiccionario();
+		break;
+	case 4:
+	case 5:
+		// No realizar comprobación, vaciar palabras para simular que son correctas
+		diccionario.comprobar = [];
+		finComprobarPalabrasDiccionario();
+		return;
+	}
+}
+
+
+
+/*
+ * Inicia la comprobación de las palabras del diccionario de forma asíncrona.
+ */
+function iniciarComprobarPalabrasDiccionario() {
+	diccionario.comprobando = 3;
+	actualizarporcentaje(0, "Comprobando palabra(s): " + diccionario.comprobar.join(", "));
+	setTimeout(comprobarPalabrasDiccionario, 100);
+}
+
+
+
+/*
+ * Realiza una comprobación de palabras el diccionario.
+ */
+function comprobarPalabrasDiccionario() {
+	diccionario.comprobar = _.difference(tolowercase(diccionario.comprobar), diccionario.palabras);
+	finComprobarPalabrasDiccionario();
+}
+
+
+
+/*
+ * Finaliza la comprobación de las palabras del diccionario.
+ */
+function finComprobarPalabrasDiccionario() {
+	var palabras = diccionario.comprobar;
+	diccionario.comprobando = 0;
+	diccionario.comprobar = [];
+	if (palabras.length == 0) {
+		// Comprobación correcta!
+		completarconfirmacion();
+		setTimeout(function() {
+			// Simular una pulsación del botón de jugar para enviar el formulario
+			$(".js-submit").click();
+		}, 1000);
+	} else {
+		// Hay palabras no válidas
 		detenerconfirmacion();
 		alert("Las siguientes palabras no son válidas:\n" + touppercase(palabras).join("\n"));
-	} else {
-		// Palabras vacías!
-		completarconfirmacion();
-		// Simular una pulsación del botón de jugar
-		$(".js-submit").click();
 	}
 }
 
@@ -789,20 +945,9 @@ function touppercase(vector) {
 
 
 
-/*
- * Elimina elemento del vector, devolviendo el resultado.
- */
-function eliminarelemento(vector, elemento) {
-	var nuevo = [];
-	_(vector).each(function (e) {
-		if (e != elemento) {
-			nuevo.push(e);
-		}
-	});
-	return nuevo;
-}
 
 
+/// MENSAJES EN EL TABLERO ///
 
 /*
  * Inicia una confirmación de la jugada en curso, oculta el botón de jugar,
@@ -812,7 +957,7 @@ function iniciarconfirmacion() {
 	confirmandoJugada = 1;
 	$(".js-input").hide();
 	$(".js-confirm").show();
-	actualizarporcentaje(10, "Confirmando jugada...");
+	actualizarporcentaje(0, "Comprobando jugada...");
 }
 
 
@@ -823,6 +968,7 @@ function iniciarconfirmacion() {
  */
 function completarconfirmacion() {
 	confirmandoJugada = 2;
+	$mensaje.addClass("label-success");
 	actualizarporcentaje(100, "¡Jugada válida!");
 }
 
@@ -868,6 +1014,9 @@ $(".js-submit").click(confirmarjugada);
 
 // Esconder el espacio para mostrar mensajes mientras se confirma la jugada
 $(".js-confirm").hide();
+
+// Empezar a descargar el diccionario cuando la página se cargue
+$(programarDescargaDiccionario);
 
 
 

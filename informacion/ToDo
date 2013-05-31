@@ -9,10 +9,6 @@ http://www.apalabrados.com/reglas
 
 *** Hacer timeline de twitter relativo a porcentaje (mirar toda la página en general).
 
-** Hacer que la barra se mueva tras obtener satisfactoriamente el diccionario.
-
-** El diccionario podía cargarse al obtener la página, para no tener que esperar una vez le das a jugar, mucha gente se cansa de esperar.
-
 ** Si puedes, mejora el estilo del span que hay abajo del tablero cuando no es tu turno :)
 
 ** Hacer que compruebe de alguna forma cada cierto tiempo el tablero si ya es tu turno, y actualize la pantalla en ese caso

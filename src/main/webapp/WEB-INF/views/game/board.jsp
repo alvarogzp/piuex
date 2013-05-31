@@ -35,7 +35,7 @@
 	
 	
 	<span class="fantasma" data-letra=" "></span>
-	<span style="display:none;" id="diccionario"><c:url value="/resources/tablero/diccionarios/diccionario-enminusculas-sintildes.txt"/></span>
+	<span style="display:none;" id="diccionario"><c:if test='${turn}'><c:url value="/resources/tablero/diccionarios/diccionario-enminusculas-sintildes.txt"/></c:if></span>
 	
 	<form method="post" autocomplete="off"> <!-- autocomplete="off" tells firefox to not remember the state of the controls, like the disabled state of the input button -->
 		<div class="container" style="margin: 0 auto; width: 38%">
@@ -75,8 +75,9 @@
 		
 		<div class="container" style="margin: 0 auto; width: 15%">
 			<c:if test='${turn}'>
+				<span class="js-diccionario label" style="display: none;">&nbsp;</span>
 				<div class="js-confirm">
-					<span class="js-mensaje label label-success">&nbsp;</span>
+					<span class="js-mensaje label">&nbsp;</span>
 					<div class="progress">
 						<div class="bar bar-success" style="width: 0%;"></div>
 					</div>
@@ -88,6 +89,7 @@
 					<span class="js-checklabel js-correct label label-success" style="display: none;">&nbsp;</span>
 					<input type="submit" value="Pasar turno" class="btn btn-info btn-block js-submit" style="padding: 5px"/>
 				</div>
+				<span class="js-diccionario-error label label-warning" style="display: none;">Jugando sin diccionario</span>
 			</c:if>
 			<c:if test='${!turn}'>
 				<c:if test="${letters != null}"><span class="label label-inverse" style="margin: 0 auto">¡No es tu turno!</span></c:if><a href="" class="btn btn-primary btn-block">Recargar</a>
