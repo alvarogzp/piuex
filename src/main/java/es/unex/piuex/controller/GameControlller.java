@@ -111,50 +111,54 @@ public class GameControlller {
 			p2 = !game.isP1Turn();
 		}
 		// Comprobar si faltan letras y rellenar
-		boolean update = false;
-		if (p1 && game.getP1letters().contains(" ")) {
-			StringBuffer letters = new StringBuffer(game.getLetters());
-			StringBuffer pletters = new StringBuffer(game.getP1letters());
-			Random random = new Random();
-			int index = pletters.indexOf(" ");
-			while (index != -1) {
-				int rand = random.nextInt(letters.length());
-				pletters.deleteCharAt(index).insert(index, letters.charAt(rand));
-				letters.deleteCharAt(rand);
-				index = pletters.indexOf(" ");
-			}
-			game.setLetters(letters.toString());
-			game.setP1letters(pletters.toString());
-			update = true;
-		} else if (p2 && game.getP2letters().contains(" ")) {
-			StringBuffer letters = new StringBuffer(game.getLetters());
-			StringBuffer pletters = new StringBuffer(game.getP2letters());
-			Random random = new Random();
-			int index = pletters.indexOf(" ");
-			while (index != -1) {
-				int rand = random.nextInt(letters.length());
-				pletters.deleteCharAt(index).insert(index, letters.charAt(rand));
-				letters.deleteCharAt(rand);
-				index = pletters.indexOf(" ");
-			}
-			game.setLetters(letters.toString());
-			game.setP2letters(pletters.toString());
-			update = true;
-		}
-		if (update) {
+		if (updateLetters(game, p1, p2)) {
 			gameDAO.update(game);
 			game = gameDAO.get(game.getId());
 		}
-		String letras = null;
-		if (p1) {
-			letras = game.getP1letters();
-		} else if (p2) {
-			letras = game.getP2letters();
-		}
 		model.addAttribute("game", game);
 		model.addAttribute("turn", turn);
-		model.addAttribute("letters", letras);
+		model.addAttribute("letters", p1? game.getP1letters(): p2? game.getP2letters(): null);
 		return "/game/board";
+	}
+	
+	
+	/**
+	 * Actualiza las fichas del usuario, si es que le falta alguna.
+	 * 
+	 * Sólo realiza cambios si p1 o p2 están activos, pero no si ninguno o ambos lo están.
+	 * 
+	 * @param game El juego sobre el que actualizar las fichas.
+	 * @param p1 True si se deben actualizar las fichas del jugador 1.
+	 * @param p2 True si se deben actualizar las fichas del jugador 2.
+	 * 
+	 * @return True si se ha realizado una actualización, false si no.
+	 */
+	private boolean updateLetters(Game game, boolean p1, boolean p2) {
+		if (p1 == p2) {
+			// Ambos true o ambos false, salir sin cambios
+			return false;
+		}
+		String pLetters = p1? game.getP1letters(): game.getP2letters();
+		if (pLetters.contains(" ")) {
+			StringBuffer letters = new StringBuffer(game.getLetters());
+			StringBuffer pletters = new StringBuffer(pLetters);
+			Random random = new Random();
+			int index = pletters.indexOf(" ");
+			while (index != -1) {
+				int rand = random.nextInt(letters.length());
+				pletters.deleteCharAt(index).insert(index, letters.charAt(rand));
+				letters.deleteCharAt(rand);
+				index = pletters.indexOf(" ");
+			}
+			game.setLetters(letters.toString());
+			if (p1) {
+				game.setP1letters(pletters.toString());
+			} else {
+				game.setP2letters(pletters.toString());
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	
@@ -164,13 +168,16 @@ public class GameControlller {
 		if (session.getAttribute("loggedUser") == null)
 			return "redirect:/user/login";
 		Game game = gameDAO.get(id);
-		game.setBoard(tablero); // Actualizar tablero
+		// Actualizar tablero
+		game.setBoard(tablero);
+		// Actualizar fichas
 		if (game.getP1Turn()) {
 			game.setP1letters(fichas);
 		} else {
 			game.setP2letters(fichas);
 		}
-		game.setP1Turn(!game.getP1Turn()); // Cambiar turno
+		// Cambiar turno
+		game.setP1Turn(!game.getP1Turn());
 		gameDAO.update(game);
 		return "redirect:/game/detail?id=" + id;
 	}
