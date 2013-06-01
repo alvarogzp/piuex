@@ -37,6 +37,7 @@
 	
 	<table class="table table-hover table-striped table-condensed">
 		<tr class="even">
+			<th><c:if test="${loggedUser.rank==0}"><th></th></c:if></th>
 			<th>Id</th>
 			<th>Estado</th>
 			<th>Turno</th>
@@ -47,13 +48,20 @@
 		</tr>
 		<c:forEach items="${games}" var="game">
 			<tr>
-			<td>${game.id}</td>
-			<td>${game.status}</td>
-			<td>Jugador <c:if test="${game.p1Turn==true}">1</c:if><c:if test="${game.p1Turn==false}">2</c:if></td>
-			<td><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if></td>
-			<td><c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if></td>
-			<td>${game.p1Score} - ${game.p2Score}</td>
-			<td><a class="btn btn-primary btn-block" href="<c:url value="/game/detail?id=${game.id}"/>">Acceder a la partida</a></td>
+				<td>
+					<c:if test="${loggedUser.rank==0}">
+						<td>
+							<a href="<c:url value="/game/delete?id=${game.id}&next=${p1}"/>"><i class="icon-remove"></i></a>
+						</td>
+					</c:if>
+				</td>
+				<td>${game.id}</td>
+				<td>${game.status}</td>
+				<td>Jugador <c:if test="${game.p1Turn==true}">1</c:if><c:if test="${game.p1Turn==false}">2</c:if></td>
+				<td><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if></td>
+				<td><c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if></td>
+				<td>${game.p1Score} - ${game.p2Score}</td>
+				<td><a class="btn btn-primary btn-block" href="<c:url value="/game/detail?id=${game.id}"/>">Acceder a la partida</a></td>
 			</tr>
 	   </c:forEach>
 	</table>

@@ -39,14 +39,14 @@
 			<h1>Perfil de usuario</h1>
 			<br>
 			<br>
-			<fieldset>
+			<div>
 				<img src="<c:url value="/resources/avatars/${userBean.avatarFileName}"/>" alt="avatar" />
 				<form:hidden path="username"/>
 				<h3>
 					<span style="color: #000000">${userBean.name} - ${userBean.username}</span> 
 					<span style="color: #888888"> (${userBean.email}) </span>
 				</h3>
-			</fieldset>
+			</div>
 			
 			<div>
 				<img src="http://maps.googleapis.com/maps/api/staticmap?size=380x263&sensor=false&zoom=13&maptype=hybrid&markers=${map.latitude},${map.longitude}" alt="map">

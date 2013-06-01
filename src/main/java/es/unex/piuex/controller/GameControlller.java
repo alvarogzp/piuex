@@ -68,6 +68,7 @@ public class GameControlller {
 		model.addAttribute("username", "todos");
 		model.addAttribute("users", userDAO.getAll());
 		model.addAttribute("newGame", new Game());
+		model.addAttribute("p1", -1);
 
 		return "/game/list";
 	}
@@ -186,4 +187,15 @@ public class GameControlller {
 		return "redirect:/game/detail?id=" + id;
 	}
 
+	@RequestMapping(value="/delete", method=RequestMethod.GET, params="id")
+	public String deleteGame(@RequestParam int id,@RequestParam int next, HttpSession session) {
+		// Comprobar que el usuario esté logueado
+		if (session.getAttribute("loggedUser") == null)
+			return "redirect:/user/login";
+
+		gameDAO.delete(id);
+		
+		return "redirect:/game/list" + (next != -1? ("?id=" + next): "");
+	}
+	
 }

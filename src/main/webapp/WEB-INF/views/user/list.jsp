@@ -42,6 +42,7 @@
 			
 			<table class="table table-hover table-striped table-condensed">
 				<tr>
+					<c:if test="${loggedUser.rank==0}"><th></th></c:if>
 					<th>Id</th>
 					<th>Nombre</th>
 					<th>Usuario</th>
@@ -53,10 +54,14 @@
 				
 				<c:forEach items="${users}" var="user">
 					<tr>
+						<c:if test="${loggedUser.rank==0}">
+							<td>
+								<a href="<c:url value="/user/delete?id=${user.id}"/>"><i class="icon-remove"></i></a>
+							</td>
+						</c:if>
 						<td>${user.id}</td>
 						<td>${user.name}</td>
-						<td><a href="<c:url value="/user/stats?id=${user.id}"/>">${user.username}</a>
-						</td>
+						<td><a href="<c:url value="/user/stats?id=${user.id}"/>">${user.username}</a></td>
 						<td>${user.email}</td>
 						<td>${user.level}</td>
 						<td><img src="<c:url value="/resources/avatars/${user.avatarFileName}"/>" alt="${user.avatarFileName}" class="avatar-list"/></td>

@@ -7,7 +7,7 @@ Listado de usuarios																						 3	✔
 Dashboard de partidas																					 3	✔
 Detalle de partida																						 3	✓ (estamos en ello)
 Despliegue en cloudfoundry																				 2	✓ (re-desplegar en la entrega)
-Capa REST para la gestión de usuarios																	 3	✗ (esto hay que revisarlo en profundidad)
+Capa REST para la gestión de usuarios																	 3	✔
 Cliente REST para mapa en perfil u otra funcionalidad													 3	✔
 Login/logout																							 3	✔
 Gestión de excepciones																					 4	✘ (sólo controlamos páginas de error, que son lanzadas por excepciones)
@@ -17,7 +17,7 @@ Personalización CSS																						 4	✔
 Menú de navegación																						 3	✔
 Control de nombre de la imagen de avatar																 4	✔
 El proyecto muestra un aspecto uniforme																	 4	✔ (aunque es subjetivo)
-Podemos abrir una partida en la que estemos como jugador pero no una en la que no estemos				 2	✓ (excepto el administrador y si un usuario pone el link directamente, aunque sólo puede ver la partida)
+Podemos abrir una partida en la que estemos como jugador pero no una en la que no estemos				 2	✔
 En la partida actual se ve el tablero																	 3	✔
 Se muestran las fichas disponibles del jugador															 2	✔
 El tablero tiene aspecto diferente para las celdas con significado especial								 2	✔
@@ -43,7 +43,7 @@ Existe una página con estadísticas de partidas y jugadas récord											 8	
 Ausencia de registros por consola del navegador en la versión final										 5	✘ (borrarlos antes de entregar)
 
 Ausencia de errores graves																				 5	✓ (por ahora)
-Estilo de código adecuado y calidad general correcta													10	✓ (subjetivo)
+Estilo de código adecuado y calidad general correcta													10	✔
 Conveniencia de las soluciones adoptadas																 5	✓ (supongo...)
 
 La documentación adjunta es relevante, concisa y útil													10	✘
@@ -52,8 +52,8 @@ Descripción correcta de lo realizado, los errores y las limitaciones									10
 Extensiones (puntos extra)																				40	✓ (tenemos muchas extensiones, podemos tener muchos puntos aquí, pero hay que documentarlas bien)
 
 
-Puntuación requisitos cumplidos:																	   107
-Puntuación posible:																					   155
+Puntuación requisitos cumplidos:																	   180
+Puntuación posible:																					   233
 
 
 Leyenda:

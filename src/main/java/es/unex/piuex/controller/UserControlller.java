@@ -234,6 +234,17 @@ public class UserControlller {
 		
 		return "/user/stats";
 	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET, params="id")
+	public String deleteUser(@RequestParam int id, HttpSession session) {
+		// Comprobar que el usuario esté logueado
+		if (session.getAttribute("loggedUser") == null)
+			return "redirect:/user/login";
+
+		userDAO.delete(id);
+		
+		return "redirect:/user/list";
+	}
 
 }
 
