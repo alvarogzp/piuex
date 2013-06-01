@@ -36,11 +36,10 @@
 	
 	<div class="container" style="margin: 0 auto; width: 38%">
 		<form:form method="post" modelAttribute="userBean" enctype="multipart/form-data">
-			<h1>Perfil de usuario</h1>
-			<br>
-			<br>
+			<h1>Perfil de usuario</h1><br>
+			
 			<div>
-				<img src="<c:url value="/resources/avatars/${userBean.avatarFileName}"/>" alt="avatar" />
+				<img width="50%" height="50%" src="<c:url value="/resources/avatars/${userBean.avatarFileName}"/>" alt="avatar" />
 				<form:hidden path="username"/>
 				<h3>
 					<span style="color: #000000">${userBean.name} - ${userBean.username}</span> 
@@ -52,12 +51,12 @@
 				<img src="http://maps.googleapis.com/maps/api/staticmap?size=380x263&sensor=false&zoom=13&maptype=hybrid&markers=${map.latitude},${map.longitude}" alt="map">
 			</div>
 			<br>
-			<fieldset>
+			<div>
 				<p>
 					<label for="file">Nueva imagen:</label>
 					<input id="file" type="file" name="file"/>
 				</p>
-			</fieldset>
+			</div>
 			
 				
 			<div class="container" style="margin: 0 auto; width: 38%">	
