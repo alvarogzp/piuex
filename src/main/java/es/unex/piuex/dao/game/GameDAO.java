@@ -18,4 +18,5 @@ public interface GameDAO {
 	
 	public List<Game> getAllUser(int id);
 	
+	public boolean delete(int id);
 }

@@ -30,6 +30,7 @@ public class SpringJdbcGameDAOImpl implements GameDAO {
 	private final String GAME_INSERT_SQL = "INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2) VALUES (?, ?, ?, ?)";
 	private final String GAME_SELECT_SQL = "SELECT ID, STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD, LETTERS, P1LETTERS, P2LETTERS FROM APALABRADOS.GAME";
 	private final String GAME_UPDATE_SQL = "UPDATE APALABRADOS.GAME SET (STATUS, P1TURN, P1SCORE, P2SCORE, BOARD, LETTERS, P1LETTERS, P2LETTERS) = (?, ?, ?, ?, ?, ?, ?, ?) WHERE ID = ?";
+	private final String GAME_DELETE_SQL = "DELETE FROM APALABRADOS.GAME WHERE ID = ?";
 	
 	private final String GAME_ORDER_SQL = " ORDER BY ID" ;
 	
@@ -91,19 +92,27 @@ public class SpringJdbcGameDAOImpl implements GameDAO {
 		return get(id) == null? false: true;
 	}
 
+	
 	@Override
 	public void add(Game game) {
 		jdbcTemplate.update(GAME_INSERT_SQL, new Object[] {game.getStatus(), game.getP1Turn(), game.getP1().getId(), game.getP2().getId()});
 	}
 
+	
 	@Override
 	public void update(Game game) {
 		jdbcTemplate.update(GAME_UPDATE_SQL, new Object[] {game.getStatus(), game.getP1Turn(), game.getP1Score(), game.getP2Score(), game.getBoard(), game.getLetters(), game.getP1letters(), game.getP2letters(), game.getId()});
 	}
 
+	
 	@Override
 	public List<Game> getAllUser(int id) {
 		return jdbcTemplate.query(GAME_SELECT_SQL + " where p1 = ? or p2 = ?" + GAME_ORDER_SQL, new Object[]{id, id}, new UserMapper(jdbcTemplate));		
 	}
-
+	
+	
+	@Override
+	public boolean delete(int id) {
+		return jdbcTemplate.update(GAME_DELETE_SQL, new Object[] {id}) > 0;
+	}
 }
