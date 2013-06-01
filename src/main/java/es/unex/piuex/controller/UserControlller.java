@@ -223,5 +223,17 @@ public class UserControlller {
 		}
 	}
 	
+
+	@RequestMapping(value="/stats", method=RequestMethod.GET, params="id")
+	public String getStats(@RequestParam int id, Model model, HttpSession session) {
+		// Comprobar que el usuario esté logueado
+		if (session.getAttribute("loggedUser") == null)
+			return "redirect:/user/login";
+		
+		model.addAttribute("user", userDAO.get(id));
+		
+		return "/user/stats";
+	}
+
 }
 
