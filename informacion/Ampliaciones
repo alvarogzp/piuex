@@ -14,3 +14,5 @@ Ampliaciones realizadas no indicadas en los enunciados (revisar los commits para
 	- Las puntuaciones son una ampliación (no viene en los requisitos para la entrega final).
 	- Se muestra la puntuación de cada palabra nueva en todo momento (siempre que la jugada sea correcta), y la puntuación total que tendría esa jugada.
 	- Se envía al servidor y se actualiza la puntuación.
+7. En la página usuarios, incluido timeline de Twitter.
+8. En la página home, incluido Parallax personalizado.

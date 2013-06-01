@@ -55,14 +55,7 @@
 					<tr>
 						<td>${user.id}</td>
 						<td>${user.name}</td>
-						<td>
-							<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
-								<a href="<c:url value="/user/profile?username=${user.username}"/>">
-							</c:if>
-							${user.username}
-							<c:if test="${loggedUser.username} == ${user.username}">
-								</a>
-							</c:if>	
+						<td><a href="<c:url value="/user/stats?id=${user.id}"/>">${user.username}</a>
 						</td>
 						<td>${user.email}</td>
 						<td>${user.level}</td>
@@ -72,7 +65,7 @@
 							<a class="btn btn-primary btn-block" href="<c:url value="/game/list?id=${user.id}"/>">
 						</c:if>
 						Partidas de ${user.username}
-						<c:if test="${loggedUser.username} == ${user.username}">
+						<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
 							</a>
 						</c:if>	
 						</td>
