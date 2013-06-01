@@ -1,7 +1,2 @@
-¿Se puede poner una palabra de una letra en el primer turno? Lo tenemos
-¿Se puede pasar en el primer turno? Lo tenemos
 ¿Se puede continuar una palabra poniendo una sola letra y a la vez hacer otra palabra usando esa letra de forma ortogonal a la palabra extendida? NO lo tenemos
-¿Qué es menú de navegación?
-¿Qué pasa si pones una palabra que ocupa 2 o más modificadores de palabras (DP, TP), se suman, o sólo se cuenta uno (sólo se puede repetir el mismo modificador, con la disposición del tablero es imposible estar a la vez sobre una DP y TP o viceversa)?
-Si una letra en una jugada forma dos palabras, ¿se debe contar su puntuación sólo una única vez, o una por palabra? ¿Y si hay un modificador en esa letra? ¿Y si el modificador es de palabra? Nosotros lo tenemos de forma que se cuenta una vez por cada palabra, y si hay modificador también, incluso si es de palabra; es decir, cada palabra es independiente, aunque compartan letras; para la puntuación final de la jugada, se suman las puntuaciones de cada palabra, aunque haya letras compartidas. Esto quizá haya que ponerlo en la documentación.
 ¿Se puede formar una palabra en vertical completamente compuesta por fichas nuevas, si todas ellas (o algunas) están rozando con fichas antiguas en la columna de al lado? Nosotros tenemos que se pueda siempre que todas rozen, pero no sé si esto está muy bien del todo...

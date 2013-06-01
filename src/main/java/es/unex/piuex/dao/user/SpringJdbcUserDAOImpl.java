@@ -29,6 +29,8 @@ public class SpringJdbcUserDAOImpl implements UserDAO {
 	private final String USER_INSERT_SQL = "INSERT INTO APALABRADOS.USER (NAME, USERNAME, AVATAR, EMAIL, PASSWORD, LEVEL) VALUES (?, ?, ?, ?, ?, ?)";
 	private final String USER_SELECT_SQL = "SELECT ID, NAME, USERNAME, EMAIL, PASSWORD, AVATAR, LEVEL, OPPONENTS, RANK FROM APALABRADOS.USER";
 	private final String USER_SAVE_SQL = "UPDATE APALABRADOS.USER SET (AVATAR, LEVEL, OPPONENTS) = (?, ?, ?) WHERE USERNAME = ?";
+	private final String USER_DELETE_SQL = "DELETE FROM APALABRADOS.USER WHERE ID = ?";
+	private final String GAME_DELETE_SQL = "DELETE FROM APALABRADOS.GAME WHERE P1 = ? OR P2 = ?";
 	
 	@Override
 	public List<User> getAll() {
@@ -70,19 +72,30 @@ public class SpringJdbcUserDAOImpl implements UserDAO {
 		}
 	}
 
+	
 	@Override
 	public void add(User user) {
 		jdbcTemplate.update(USER_INSERT_SQL, new Object[] {user.getName(), user.getUsername(), "pf.png", user.getEmail(), user._getPassword(), "newbie"});
 	}
 	
+	
+	@Override
 	public void save(User user) {
 		//TODO: encode opponents values in String
 		jdbcTemplate.update(USER_SAVE_SQL, new Object[] {user.getAvatarFileName(), user.getLevel(), "newbie", user.getUsername()});
 	}
 
+	
 	@Override
 	public boolean exists(String username) {
 		return get(username) == null? false: true;
+	}
+	
+	
+	@Override
+	public boolean delete(int id) {
+		jdbcTemplate.update(GAME_DELETE_SQL, new Object[] {id, id});
+		return jdbcTemplate.update(USER_DELETE_SQL, new Object[] {id}) > 0;
 	}
 	
 }

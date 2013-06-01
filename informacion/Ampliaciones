@@ -14,3 +14,5 @@ Ampliaciones realizadas no indicadas en los enunciados (revisar los commits para
 	- Las puntuaciones son una ampliación (no viene en los requisitos para la entrega final).
 	- Se muestra la puntuación de cada palabra nueva en todo momento (siempre que la jugada sea correcta), y la puntuación total que tendría esa jugada.
 	- Se envía al servidor y se actualiza la puntuación.
+	- Al poner letras que pasan por más de un multiplicador de palabra en la misma jugada se suman los multiplicadores.
+7. ¡¡La J vale 8 puntos, no 5 como viene en el PDF!!

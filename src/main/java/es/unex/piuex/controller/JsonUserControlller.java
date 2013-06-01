@@ -73,17 +73,19 @@ public class JsonUserControlller {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE, consumes="application/json")
 	public @ResponseBody String deleteUser(@PathVariable int id) {
-		User user = userDAO.get(id);
-		if (user == null) {
-			return "ERROR: No existe ese usuario!";
+		if (userDAO.delete(id)) {
+			return "User " + id + " borrado!";
 		} else {
-			return "User " + id + " borrado! (simulado)";
+			return "ERROR: No existe ese usuario!";
 		}
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, consumes="application/json")
 	public @ResponseBody String deleteUsers() {
-		return "¡Todos los usuarios han sido borrados! (En realidad no)";
+		for (User user: userDAO.getAll()) {
+			userDAO.delete(user.getId());
+		}
+		return "¡Todos los usuarios han sido borrados!";
 	}
 	
 	

@@ -36,8 +36,8 @@ var puntos_fichas = {
 		 2: "DG",
 		 3: "CBMP",
 		 4: "HFVY",
-		 5: "QJ",
-		 8: "ÑX",
+		 5: "Q",
+		 8: "ÑXJ",
 		10: "Z"
 };
 

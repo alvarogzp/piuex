@@ -800,7 +800,7 @@ function finletras(x, y, dx, dy, juegotd) {
 function getpalabra(xi, yi, xf, yf, juegotd) {
 	var palabra = [];
 	var puntos = 0;
-	var multiplicador_palabra = 1;
+	var multiplicador_palabra = 0;
 	for (var i = yi; i < yf; i++) {
 		for (var j = xi; j < xf; j++) {
 			var td = $(juegotd[i*15+j]);
@@ -818,10 +818,10 @@ function getpalabra(xi, yi, xf, yf, juegotd) {
 					punto *= 3;
 					break;
 				case "2": // Doble palabra
-					multiplicador_palabra = 2;
+					multiplicador_palabra += 2;
 					break;
 				case "3": // Triple palabra
-					multiplicador_palabra = 3;
+					multiplicador_palabra += 3;
 					break;
 				}
 			}
@@ -829,8 +829,8 @@ function getpalabra(xi, yi, xf, yf, juegotd) {
 			puntos += punto;
 		}
 	}
-	// Multiplicar los puntos por su multiplicador, que será 1 si no se ha aplicado ninguno
-	return [palabra.join(""), puntos * multiplicador_palabra];
+	// Multiplicar los puntos por su multiplicador o 1 si no se ha aplicado ninguno
+	return [palabra.join(""), puntos * (multiplicador_palabra == 0? 1: multiplicador_palabra)];
 }
 
 

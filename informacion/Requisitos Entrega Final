@@ -14,9 +14,9 @@ Gestión de excepciones																					 4	✘ (sólo controlamos páginas d
 Páginas de error de contenedor servlet																	 3	✔
 Uso de logger																							 3	✓ (hay que cambiar todos los System.out.println por logger)
 Personalización CSS																						 4	✔
-Menú de navegación																						 3	✓ (esto es la barra?)
-Control de nombre de la imagen de avatar																 4	✓ (si es que nosotros decidimos con qué nombre se guarda el avatar, sí)
-El proyecto muestra un aspecto uniforme																	 4	✓ (esto es muy subjetivo)
+Menú de navegación																						 3	✔
+Control de nombre de la imagen de avatar																 4	✔
+El proyecto muestra un aspecto uniforme																	 4	✔ (aunque es subjetivo)
 Podemos abrir una partida en la que estemos como jugador pero no una en la que no estemos				 2	✓ (excepto el administrador y si un usuario pone el link directamente, aunque sólo puede ver la partida)
 En la partida actual se ve el tablero																	 3	✔
 Se muestran las fichas disponibles del jugador															 2	✔

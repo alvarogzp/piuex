@@ -58,7 +58,7 @@
                 <beans:property name="exceptionMappingDefinitions">
                     <beans:map>
 <!--                         404 -->
-<!--                         <beans:entry key="es.unex.piuex.exceptions.UnknownResourceException" value="404, _exmsg"/> -->
+                        <beans:entry key="es.unex.piuex.exceptions.UnknownResourceException" value="404, _exmsg"/>
 
 <!--                         500 (catch all): -->
 <!--                         <beans:entry key="Throwable" value="500"/> -->

@@ -8,8 +8,6 @@ import java.util.List;
 import es.unex.piuex.domain.User;
 
 
-// TODO: Desactualizado, actualizar si se va a usar!!
-
 //Comentado para que no de problemas: @Service
 public class SimpleUserDAO implements UserDAO {
 
@@ -24,7 +22,6 @@ public class SimpleUserDAO implements UserDAO {
 	
 	@Override
 	public List<User> getAll() {
-		// TODO Auto-generated method stub
 		return users;
 	}
 
@@ -67,6 +64,11 @@ public class SimpleUserDAO implements UserDAO {
 		for(User user: users)
 			if (user.getId() == id) return user;
 		return null;
+	}
+
+	@Override
+	public boolean delete(int id) {
+		return users.remove(get(id));
 	}
 
 }

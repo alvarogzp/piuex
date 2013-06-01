@@ -23,4 +23,6 @@ public interface UserDAO {
 	public void add(User user);
 	
 	public void save(User user);
+	
+	public boolean delete(int id);
 }

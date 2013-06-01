@@ -9,8 +9,6 @@ http://www.apalabrados.com/reglas
 
 *** Hacer timeline de twitter relativo a porcentaje (mirar toda la página en general).
 
-*** La J son 5 puntos, no 8 como está puesto en la ficha!
-
 ** Hacer que compruebe de alguna forma cada cierto tiempo el tablero si ya es tu turno, y actualize la pantalla en ese caso
 
 ** Que se muestre la fecha/hora de la última jugada, palabras puestas, y un historial de movimientos
@@ -34,6 +32,8 @@ http://www.apalabrados.com/reglas
 * Confirmar partida por el otro usuario antes de empezar a jugar
 
 * Implementar final de partida
+
+* ¿Quitar opponents?
 
 al redirigir a login desde cualquier página porque no se está registrado que salga el error en la pantalla de login (por ejemplo "Debes iniciar sesión para ver esa página")
 
