@@ -165,18 +165,20 @@ public class GameControlller {
 	
 	
 	@RequestMapping(value="/detail", method=RequestMethod.POST)
-	public String postBoard(int id, Model model, HttpSession session, String tablero, String fichas) {
+	public String postBoard(int id, Model model, HttpSession session, String tablero, String fichas, int puntos) {
 		// Comprobar que el usuario esté logueado
 		if (session.getAttribute("loggedUser") == null)
 			return "redirect:/user/login";
 		Game game = gameDAO.get(id);
 		// Actualizar tablero
 		game.setBoard(tablero);
-		// Actualizar fichas
+		// Actualizar fichas y puntos
 		if (game.getP1Turn()) {
 			game.setP1letters(fichas);
+			game.setP1Score(game.getP1Score() + puntos);
 		} else {
 			game.setP2letters(fichas);
+			game.setP2Score(game.getP2Score() + puntos);
 		}
 		// Cambiar turno
 		game.setP1Turn(!game.getP1Turn());

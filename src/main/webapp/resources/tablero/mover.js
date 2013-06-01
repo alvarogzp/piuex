@@ -254,7 +254,7 @@ function pedirletra(l) {
 			return null;
 		} else {
 			letra = letra.toUpperCase();
-			if (letra.length != 1 || puntos[letra] == undefined || letra == "*") {
+			if (letra.length != 1 || fichas_puntos[letra] == undefined || letra == "*") {
 				alert("¡Letra no válida!\nDebes indicar una única letra de las que forman parte del juego (todas menos la K y la W).");
 				// Volver a pedir
 				continue;
@@ -425,8 +425,11 @@ function detenermovimiento(e) {
  * es decir en la misma fila o la misma columna y seguidas todas ellas o separadas por
  * otras fichas no puestas en esta jugada.
  * 
- * Si se cumple la condición anterior, devuelve una lista con dos elementos: el primero es true,
- * y el segundo es una lista de palabras insertadas o ampliadas con las letras puestas.
+ * Si se cumple la condición anterior, devuelve una lista con tres elementos: el primero es true,
+ * el segundo es una lista de palabras insertadas o ampliadas con las letras puestas,
+ * y el tercero es un número con la puntuación total de la jugada.
+ * Cada elemento de la segunda lista es a su vez otra lista con dos elementos, el primero es la cadena
+ * con las letras que forman la palabra, y el segundo la puntuación de la palabra.
  * 
  * Si no se cumple la condición (hay algo mal puesto), devuelve una lista con 4 elementos:
  * el primero es false, el segundo es una lista de letras incorrectas que el usuario debe quitar,
@@ -511,7 +514,9 @@ function puestasenlinea() {
 			}
 		}
 	});
-	return enlinea? [true, palabras]: [false, malas, noalineadas, letras];
+	return enlinea?
+		[true, palabras, _(palabras).reduce(function(m, e) { return m + e[1]; }, 0)]:
+		[false, malas, noalineadas, letras];
 }
 
 
@@ -536,6 +541,7 @@ function actualizarestado() {
 			$(".js-checklabel").hide();
 			estadopantalla = 1;
 		}
+		
 		$(".js-invalid").hide();
 		if (estado[1].length > 0) {
 			$(".js-invalid1").show().text("Letras incorrectas: " + estado[1].join(", "));
@@ -544,7 +550,11 @@ function actualizarestado() {
 			$(".js-invalid2").show().text("Letras no alineadas: " + estado[2].join(", "));
 		}
 		if (estado[3].length > 1) {
-			$(".js-invalid3").show().text("Letras en grupos incompatibles: " + estado[3].join(" - "));
+			$(".js-invalid3").show().text("Letras en grupos incompatibles: " +
+					_(estado[3]).map(function(e) {
+						return e.join(",");
+					}).join(" - ")
+			);
 		}
 		
 	} else if (estado[0] == true) {
@@ -559,6 +569,7 @@ function actualizarestado() {
 				$(".js-checklabel").hide();
 				estadopantalla = 0;
 			}
+			
 		} else {
 			// Se han puesto fichas
 			
@@ -568,7 +579,13 @@ function actualizarestado() {
 				$(".js-checklabel").hide();
 				estadopantalla = 2;
 			}
-			$(".js-correct").show().text("Palabras: " + estado[1].join(", "));
+			
+			$(".js-correct").show().text("Palabras: " +
+					_(estado[1]).map(function(e) {
+						return e[0] + " (" + e[1] + ")";
+					}).join(", ")
+			);
+			$(".js-correct-points").show().text("Puntuación: " + estado[2]);
 		}
 	}
 }
@@ -617,6 +634,8 @@ function confirmarjugada(e) {
 	// Comprobar primero si se pasa el turno
 	if (estado[0] == true && estado[1].length == 0) {
 		detenerconfirmacion();
+		// Poner puntos a cero
+		$("#puntos").attr("value", 0);
 		return confirm("¿Estás seguro que quieres pasar el turno?");
 	}
 	
@@ -641,8 +660,13 @@ function confirmarjugada(e) {
 		return false;
 	}
 	
-	// En este punto la jugada es correcta
-	var palabras = estado[1];
+	// En este punto la jugada es correcta, extraer palabras eliminando puntuación
+	var palabras = _(estado[1]).map(function(e) {
+		return e[0];
+	});
+	
+	// Asignar puntos a un campo hidden que se envía en el formulario para el servidor
+	$("#puntos").attr("value", estado[2]);
 	
 //	console.log(palabras);
 	
@@ -756,27 +780,57 @@ function finletras(x, y, dx, dy, juegotd) {
 
 
 /*
- * Dadas unas coordenadas de inicio y fin, devuelve la palabra que se encuentra en ellas.
- * Es decir, se empieza recorriendo el tablero en [xi, yi] y se sigue hasta [xf, yf] guardando las letras
+ * Dadas unas coordenadas de inicio y fin, devuelve la palabra que se encuentra en ellas y su puntuación.
+ * 
+ * Se empieza recorriendo el tablero en [xi, yi] y se sigue hasta [xf, yf] contando las letras
  * que están dentro del área.
  * El índice xf e yf debe ser el límite que no se debe alcanzar al obtener la palabra, y como mínimo
  * uno más que xi e yi.
- * Lo normal es que la coordenada x o la y sea de ancho 1 y de este modo se obtendrían las letras de un
+ * Lo normal es que la coordenada X o la Y sea de ancho 1 y de este modo se obtendrían las letras de un
  * trozo de fila o de columna.
+ * 
+ * Para la puntuación, se tienen en cuenta los modificadores siempre que la letra sobre la que se encuentran
+ * se haya puesto en esta jugada (tenga la clase mover).
+ * Si hay más de un multiplicador de palabra sobre el que se ha puesto letra en esta jugada, solamente
+ * se tendrá en cuenta uno.
+ * 
+ * Devuelve una lista con dos elementos, el primero es la palabra obtenida, y el segundo es la puntuación
+ * asociada a esa palabra en la jugada actual.
  */
 function getpalabra(xi, yi, xf, yf, juegotd) {
-	// Se usa el textarea en lugar del tablero porque es más sencillo
 	var palabra = [];
-	var filas = $("#tablero").text().split(".");
+	var puntos = 0;
+	var multiplicador_palabra = 1;
 	for (var i = yi; i < yf; i++) {
-		var columna = filas[i].split("");
 		for (var j = xi; j < xf; j++) {
-			var letra = columna[j];
-			// La letra puede estar en minúsculas si es un comodín
-			palabra.push(letra.toUpperCase());
+			var td = $(juegotd[i*15+j]);
+			// Poner la letra en la palabra
+			palabra.push(td.data("letra"));
+			// Obtener puntos y convertir a int (por si no lo fuera)
+			var punto = +td.data("puntos");
+			if (td.hasClass("mover")) {
+				// La letra se ha puesto en esta jugada, tener en cuenta los modificadores
+				switch (modificadores[i][j]) {
+				case "0": // Doble letra
+					punto *= 2;
+					break;
+				case "1": // Triple letra
+					punto *= 3;
+					break;
+				case "2": // Doble palabra
+					multiplicador_palabra = 2;
+					break;
+				case "3": // Triple palabra
+					multiplicador_palabra = 3;
+					break;
+				}
+			}
+			// Sumar puntos al total de la palabra
+			puntos += punto;
 		}
 	}
-	return palabra.join("");
+	// Multiplicar los puntos por su multiplicador, que será 1 si no se ha aplicado ninguno
+	return [palabra.join(""), puntos * multiplicador_palabra];
 }
 
 
@@ -787,12 +841,13 @@ function getpalabra(xi, yi, xf, yf, juegotd) {
  * Se supone que v1 no tiene duplicados.
  * v2 puede tenerlos, incluso dentro de él mismo.
  * v1 es modificado para añadir los elementos de v2 no repetidos.
+ * Los elementos de los vectores son listas con dos elementos.
  */
 function concatenarunicos(v1, v2) {
 	var v = v1;
 	_( v2 ).each(function (e) {
 		if (v.every(function (f) {
-			if (e == f) {
+			if (e[0] == f[0] && e[1] == f[1]) {
 				// e ya está en v, no añadir y detener el recorrido de v
 				return false;
 			} else {

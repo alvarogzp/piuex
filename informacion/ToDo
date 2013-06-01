@@ -9,6 +9,8 @@ http://www.apalabrados.com/reglas
 
 *** Hacer timeline de twitter relativo a porcentaje (mirar toda la página en general).
 
+*** La J son 5 puntos, no 8 como está puesto en la ficha!
+
 ** Hacer que compruebe de alguna forma cada cierto tiempo el tablero si ya es tu turno, y actualize la pantalla en ese caso
 
 ** Que se muestre la fecha/hora de la última jugada, palabras puestas, y un historial de movimientos
@@ -23,7 +25,7 @@ http://www.apalabrados.com/reglas
 
 ** Mover ficha entera en lugar de sombra?
 
-* Puntuaciones
+** Si hay dos palabras iguales que se pueden formar en una casilla, sólo se cuenta una (DO, DO) | IDEA: Hacer comparación en base a las coordenadas que ocupa cada palabra
 
 * Confirmar jugada
 

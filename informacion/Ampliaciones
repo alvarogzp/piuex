@@ -10,3 +10,7 @@ Ampliaciones realizadas no indicadas en los enunciados (revisar los commits para
 	- Cada vez que lo cambias de posición en el tablero te vuelve a pedir la letra.
 	- Si lo vuelves a poner donde tus fichas, se vuelve a mostrar como comodín.
 	- Recuerda la última letra que pusiste para que no la tengas que volver a escribir, incluso si lo pones donde tus fichas y lo vuelves a poner en el tablero.
+6. Puntuaciones:
+	- Las puntuaciones son una ampliación (no viene en los requisitos para la entrega final).
+	- Se muestra la puntuación de cada palabra nueva en todo momento (siempre que la jugada sea correcta), y la puntuación total que tendría esa jugada.
+	- Se envía al servidor y se actualiza la puntuación.

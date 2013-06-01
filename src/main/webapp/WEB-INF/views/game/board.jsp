@@ -40,6 +40,7 @@
 	<form method="post" autocomplete="off"> <!-- autocomplete="off" tells firefox to not remember the state of the controls, like the disabled state of the input button -->
 		<div class="container" style="margin: 0 auto; width: 38%">
 			<input id="id" name="id" type="hidden" value="${game.id}"/>
+			<input id ="puntos" name="puntos" type="hidden" value="0"/>
 			
 			<span style="font-size: 25px; color: #000000"><b>Partida: </b></span>  <span style="font-size: 20px"><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if> VS <c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if> </span> 
 			<span style="font-size: 25px; color: #000000"><b>&nbsp;&nbsp;&nbsp;Puntuación:  </b></span><span style="font-size: 20px">${game.p1Score} - ${game.p2Score} </span>
@@ -87,6 +88,7 @@
 					<span class="js-checklabel js-invalid js-invalid2 label label-important" style="display: none;">&nbsp;</span>
 					<span class="js-checklabel js-invalid js-invalid3 label label-important" style="display: none;">&nbsp;</span>
 					<span class="js-checklabel js-correct label label-success" style="display: none;">&nbsp;</span>
+					<span class="js-checklabel js-correct-points label label-success" style="display: none;">&nbsp;</span>
 					<input type="submit" value="Pasar turno" class="btn btn-info btn-block js-submit" style="padding: 5px"/>
 				</div>
 				<span class="js-diccionario-error label label-warning" style="display: none;">Jugando sin diccionario</span>

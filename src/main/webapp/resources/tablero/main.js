@@ -42,7 +42,7 @@ var puntos_fichas = {
 };
 
 // Mapping inverso al anterior de puntos que tiene cada ficha (se crea a partir del otro)
-var puntos = (function() {
+var fichas_puntos = (function() {
 	var p = {};
 	for (var punto in puntos_fichas) {
 		var fichas = puntos_fichas[punto];
@@ -71,7 +71,7 @@ var puntos = (function() {
 		var celdas = tr.split("");
 		
 		_( celdas ).each (function( td, j ) {
-			var puntosletra = puntos[td] || "0";
+			var puntosletra = fichas_puntos[td] || "0";
 			td = td.toUpperCase();
 			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' data-letra='" + td + "' data-puntos='" + puntosletra + "' class='tabla-td " );
 			
@@ -133,7 +133,7 @@ var puntos = (function() {
 		var tabla = ["<table class='tabla'><tr>"];
 
 		_(fichas.split("")).each(function( td, i ) {
-			tabla.push("<td data-f='" + i + "' data-letra='" + td + "' data-puntos='" + puntos[td] + "' class='tabla-td ");
+			tabla.push("<td data-f='" + i + "' data-letra='" + td + "' data-puntos='" + fichas_puntos[td] + "' class='tabla-td ");
 			
 			if (td != " ") {
 				tabla.push(mover);
