@@ -5,37 +5,75 @@
  */
 
 
+
+
+
 // Celdas especiales del tablero
 var modificadores = [
-"3  0   3   0  3",
-" 2   1   1   2 ",
-"  2   0 0   2  ",
-"0  2   0   2  0",
-"    2     2    ",
-" 1   1   1   1 ",
-"  0   0 0   0  ",
-"3  0   #   0  3",
-"  0   0 0   0  ",
-" 1   1   1   1 ",
-"    2     2    ",
-"0  2   0   2  0",
-"  2   0 0   2  ",
-" 2   1   1   2 ",
-"3  0   3   0  3" ];
+	"3  0   3   0  3",
+	" 2   1   1   2 ",
+	"  2   0 0   2  ",
+	"0  2   0   2  0",
+	"    2     2    ",
+	" 1   1   1   1 ",
+	"  0   0 0   0  ",
+	"3  0   #   0  3",
+	"  0   0 0   0  ",
+	" 1   1   1   1 ",
+	"    2     2    ",
+	"0  2   0   2  0",
+	"  2   0 0   2  ",
+	" 2   1   1   2 ",
+	"3  0   3   0  3"
+];
 
 
-var tablero_t = $("#tablero").text(),
-	juego_d = $("#juego"),
-	tabla = [ "<table class='tabla'>" ];
 
-var filas = tablero_t.split(".");
+// Mapping de puntos y fichas que tienen esos puntos
+var puntos_fichas = {
+		 0: "*",
+		 1: "AEOISNLRUT",
+		 2: "DG",
+		 3: "CBMP",
+		 4: "HFVY",
+		 5: "QJ",
+		 8: "ÑX",
+		10: "Z"
+};
 
-_( filas ).each(function( tr, i ) {
+// Mapping inverso al anterior de puntos que tiene cada ficha (se crea a partir del otro)
+var puntos = (function() {
+	var p = {};
+	for (var punto in puntos_fichas) {
+		var fichas = puntos_fichas[punto];
+		_(fichas.split("")).each(function(ficha) {
+			p[ficha] = punto;
+		});
+	}
+	return p;
+})();
+
+
+
+
+
+// Construir tablero a partir del textarea con las letras
+(function() {
+	var tabla = [ "<table class='tabla'>" ];
 	
-	tabla.push ( "<tr>" );
-	
-		_( tr.split("") ).each (function( td, j ) {
-			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' class='tabla-td " );
+	var tablero = $("#tablero").text();
+	var filas = tablero.split(".");
+
+	_( filas ).each(function( tr, i ) {
+		
+		tabla.push ( "<tr>" );
+		
+		var celdas = tr.split("");
+		
+		_( celdas ).each (function( td, j ) {
+			var puntosletra = puntos[td] || "0";
+			td = td.toUpperCase();
+			tabla.push( "<td data-y='"+ i +"' data-x='"+ j +"' data-letra='" + td + "' data-puntos='" + puntosletra + "' class='tabla-td " );
 			
 			if (modificadores[i][j] != " ") {
 				if (modificadores[i][j].match("[0-3]")) {
@@ -65,62 +103,58 @@ _( filas ).each(function( tr, i ) {
 				tabla.push("comodin");
 			}
 			
-			tabla.push("'");
-			
-			tabla.push(" data-letra='" + td + "'");
-			
-			tabla.push(">");
-			
-			tabla.push(    ' '  );
-			tabla.push( "</td>" );
+			tabla.push( "'> </td>" );
 		});
-	
-	tabla.push ( "</tr>" );
-});
-
-tabla.push( "</table>" );
-
-juego_d.html( tabla.join("") );
-
-
-
-
-// Fichas del jugador
-
-var fichas = $("#fichas");
-if (fichas.length) {
-	// En la partida juega el usuario
-	fichas = fichas.text();
-	// Es el turno del jugador?
-	var mover = $(".js-submit").length? "mover ": "";
-	var tabla = [ "<table class='tabla'><tr>" ];
-
-	_( fichas.split("") ).each(function( td, i ) {
-		tabla.push( "<td data-f='" + i + "' class='tabla-td " );
 		
-		if (td.match("[A-ZÑ]")) {
-			tabla.push(mover + "letra letra-" + td);
-		} else if (td == "*") {
-			tabla.push(mover + "comodin");
-		}
+		tabla.push ( "</tr>" );
 		
-		tabla.push("'");
-		
-		tabla.push(" data-letra='" + td + "'");
-		
-		tabla.push(">");
-		
-		tabla.push( '<span>&nbsp;</span>' );
-		tabla.push( "</td>" );
 	});
 
-	tabla.push( "</tr></table>" );
+	tabla.push( "</table>" );
 
-	$("#letras").html( tabla.join("") );
-} else {
-	// El usuario no juega
-	$("#letras").html('<span class="label label-important">¡No juegas en esta partida!</span>');
-}
+	$("#juego").html( tabla.join("") );
+})();
 
 
 
+
+
+// Crear tabla con las fichas del jugador a partir de su textarea
+(function() {
+	var fichas = $("#fichas");
+	if (fichas.length) {
+		
+		// En la partida juega el usuario
+		fichas = fichas.text();
+		
+		// Es el turno del jugador?
+		var mover = $(".js-submit").length? "mover ": "";
+		
+		var tabla = ["<table class='tabla'><tr>"];
+
+		_(fichas.split("")).each(function( td, i ) {
+			tabla.push("<td data-f='" + i + "' data-letra='" + td + "' data-puntos='" + puntos[td] + "' class='tabla-td ");
+			
+			if (td != " ") {
+				tabla.push(mover);
+			}
+			
+			if (td.match("[A-ZÑ]")) {
+				tabla.push("letra letra-" + td);
+			} else if (td == "*") {
+				tabla.push("comodin");
+			}
+			
+			tabla.push("'><span>&nbsp;</span></td>");
+			
+		});
+
+		tabla.push("</tr></table>");
+
+		$("#letras").html(tabla.join(""));
+		
+	} else {
+		// El usuario no juega
+		$("#letras").html('<span class="label label-important">¡No juegas en esta partida!</span>');
+	}
+})();

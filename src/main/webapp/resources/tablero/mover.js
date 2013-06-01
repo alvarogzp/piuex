@@ -83,7 +83,8 @@ var diccionario = {
  * Se debe llamar siempre pasando un objeto de jQuery.
  */
 function esficha($td) {
-	return $td.hasClass("letra") || $td.hasClass("comodin");
+//	return $td.hasClass("letra") || $td.hasClass("comodin");
+	return $td.data("letra") != " ";
 }
 
 
@@ -138,8 +139,19 @@ function asignarCelda(e) {
 	
 	var $ep = element.parent();
 	
+	// Gestionar el cambio de posición del comodín
+	if (!comodinporletra($ep, $this)) {
+		return;
+	}
+	
 	if ($this.hasClass("mover")) {
 		// Intercambiar una ficha con otra
+		
+		// Por si la ficha destino es comodín
+		if (!comodinporletra($this, $ep)) {
+			return;
+		}
+		
 		// Crear un span vacío para insertar las clases ahí de forma temporal
 		var $tempspan = $(document.createElement("span"));
 		
@@ -182,9 +194,84 @@ function asignarCelda(e) {
 
 
 /*
+ * Comprueba si la casilla de origen es un comodín y si se está moviendo al tablero,
+ * y en ese caso pide una letra para sustituirlo al usuario, y lo sustituye por la letra,
+ * dejando sólo como rastro del comodín la propiedad data "comodin".
+ * Si el comodín se mueve de regreso a las fichas del usuario, lo desenmascara convirtiéndolo
+ * de nuevo en comodín.
+ * 
+ * $old es el td de origen, $new el de destino.
+ * 
+ * Devuelve false si el usuario no se ha dignado a indicar una letra por la que sustituir el
+ * comodín, y se debe cancelar la asignación de la celda.
+ */
+function comodinporletra($old, $new) {
+	var oldletra = $old.data("comodin");
+	if (oldletra != undefined) {
+		// Se va a mover un comodín
+		if ($new.data("x") != undefined) {
+			// El comodín se mueve a una casilla del tablero
+			var letra = pedirletra(oldletra);
+			if (letra == null) {
+				return false;
+			}
+			$old.data("comodin", letra)
+			.removeClass("comodin")
+			.removeClass("letra-" + oldletra)
+			.addClass("letra")
+			.addClass("letra-" + letra)
+			.data("letra", letra);
+		} else if ($new.data("f") != undefined && $old.data("x") != undefined) {
+			// El comodín se mueve a las fichas del jugador desde el tablero
+			// Deshacer transformación a letra y convertir de nuevo en comodín
+			// El data se queda como "caché" por si se vuelve a mover al tablero,
+			// tener un valor que presentarle al usuario.
+			$old.removeClass("letra")
+			.removeClass("letra-" + oldletra)
+			.addClass("comodin")
+			.data("letra", "*");
+		}
+	}
+	return true;
+}
+
+
+
+/*
+ * Pide una letra al usuario para sustituir un comodín por ella.
+ * 
+ * El parámetro, si se indica, es la letra que estaba sustituyendo al comodín,
+ * y se mostrará como valor por defecto al usuario.
+ * 
+ * Devuelve la letra introducida en mayúsculas, o null si se ha cancelado.
+ */
+function pedirletra(l) {
+	while (true) {
+		// Preguntar por la letra a la que sustituirá
+		var letra = prompt("¿Por qué letra quieres sustituir el comodín?", l?l:"");
+		if (letra == null) {
+			// Se ha cancelado
+			return null;
+		} else {
+			letra = letra.toUpperCase();
+			if (letra.length != 1 || puntos[letra] == undefined || letra == "*") {
+				alert("¡Letra no válida!\nDebes indicar una única letra de las que forman parte del juego (todas menos la K y la W).");
+				// Volver a pedir
+				continue;
+			} else {
+				// Letra correcta
+				return letra;
+			}
+		}
+	}
+}
+
+
+
+/*
  * Añade las clases que tiene el elemento origen al elemento destino.
  * Las clases que se añaden son mover, letra, comodin y letra-[A-ZÑ].
- * También añade el data de la letra.
+ * También añade el data de la letra y la puntuación.
  */
 function addClasses(origen, destino) {
 	_(origen.attr("class").split(" ")).each(
@@ -195,13 +282,18 @@ function addClasses(origen, destino) {
 		}
 	);
 	destino.data("letra", origen.data("letra"));
+	destino.data("puntos", origen.data("puntos"));
+	destino.data("comodin", origen.data("comodin"));
+	if (origen.data("comodin") == undefined) {
+		destino.removeData("comodin");
+	}
 }
 
 
 
 /*
  * Elimina las clases letra, letra-[A-ZÑ], comodin y mover del elemento.
- * También establece el data de la letra a un espacio (vacía).
+ * También establece el data de la letra a un espacio (vacía) y la puntuación a 0.
  */
 function removeClasses(elemento) {
 	elemento.removeClass("letra");
@@ -209,6 +301,8 @@ function removeClasses(elemento) {
 	elemento.removeClass("comodin");
 	elemento.removeClass("mover");
 	elemento.data("letra", " ");
+	elemento.data("puntos", "0");
+	elemento.removeData("comodin");
 }
 
 
@@ -225,7 +319,7 @@ function ponertextarea(td) {
 	var f = td.data("f");
 	var letra = td.data("letra");
 	if (x != undefined) {
-		actualizartablero(x, y, letra);
+		actualizartablero(x, y, td.data("comodin") != undefined? letra.toLowerCase() : letra);
 	} else if (f != undefined) {
 		actualizarfichas(f, letra);
 	}
@@ -678,7 +772,8 @@ function getpalabra(xi, yi, xf, yf, juegotd) {
 		var columna = filas[i].split("");
 		for (var j = xi; j < xf; j++) {
 			var letra = columna[j];
-			palabra.push(letra);
+			// La letra puede estar en minúsculas si es un comodín
+			palabra.push(letra.toUpperCase());
 		}
 	}
 	return palabra.join("");
@@ -1004,7 +1099,10 @@ function detenerconfirmacion() {
 
 
 
-/// ASIGNACIÓN DE EVENTOS ///
+/// ASIGNACIÓN DE EVENTOS Y ACCIONES INICIALES ///
+
+// Crear data "comodin" para todos los comodines
+$(".comodin").data("comodin", "");
 
 // Al presionar con el ratón sobre un elemento de la clase mover
 $(".mover").mousedown(iniciarmovimiento);

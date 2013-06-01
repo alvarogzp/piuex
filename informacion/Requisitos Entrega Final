@@ -38,7 +38,7 @@ Se pregunta al usuario si confirma una jugada sin haber puesto fichas (pasar tur
 Se comprueba al confirmar que las fichas que ha puesto estén en fila									 6	✔
 Se comprueba al confirmar que las fichas que ha puesto estén en contacto con otras fichas existentes	 6	✔
 Se comprueba al confirmar que las palabras nuevas están en una lista de palabras válidas				 8	✔
-El comodín se maneja en todos los casos bien															 8	✘
+El comodín se maneja en todos los casos bien															 8	✔
 Existe una página con estadísticas de partidas y jugadas récord											 8	✘
 Ausencia de registros por consola del navegador en la versión final										 5	✘ (borrarlos antes de entregar)
 

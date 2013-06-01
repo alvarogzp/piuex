@@ -53,6 +53,7 @@ public class GameControlller {
 		return "/game/list";
 	}
 	
+	
 	@RequestMapping(value="/list", method=RequestMethod.GET, params = "!id")
 	public String getAllGameList(Model model, HttpSession session, RedirectAttributes attrs) {
 		// Comprobar que el usuario esté logueado
@@ -93,6 +94,7 @@ public class GameControlller {
 		return "redirect:/game/list?id=" + p1; 
 		
 	}
+	
 	
 	@RequestMapping(value="/detail", method=RequestMethod.GET, params = "id")
 	public String getBoard(@RequestParam int id, Model model, HttpSession session) {
@@ -139,12 +141,12 @@ public class GameControlller {
 			return false;
 		}
 		String pLetters = p1? game.getP1letters(): game.getP2letters();
-		if (pLetters.contains(" ")) {
+		if (pLetters.contains(" ") && game.getLetters().length() > 0) {
 			StringBuffer letters = new StringBuffer(game.getLetters());
 			StringBuffer pletters = new StringBuffer(pLetters);
 			Random random = new Random();
 			int index = pletters.indexOf(" ");
-			while (index != -1) {
+			while (index != -1 && letters.length() > 0) {
 				int rand = random.nextInt(letters.length());
 				pletters.deleteCharAt(index).insert(index, letters.charAt(rand));
 				letters.deleteCharAt(rand);

@@ -3,4 +3,10 @@ Ampliaciones realizadas no indicadas en los enunciados (revisar los commits para
 1. En el tablero, si sueltas una letra sobre otra que se puede mover, se intercambian ambas letras (la que movías y en la que la has soltado)
 2. En el tablero, se muestra un montón de información detallada de la jugada según vas cambiando las fichas de sitio, también si la jugada será correcta o no incluso antes de pulsar Enviar. Sobre esto, se ha decidido dejar el botón de enviar activo cuando la jugada es no válida, para que si el usuario pulsa, se le muestre un mensaje de error con lo que tiene que hacer para que la jugada sea válida.
 3. En el tablero, se informa de cuándo se obtiene el diccionario, y si se hace con éxito o no.
-4. En el tablero, si no se ha obtenido correctamente el diccionario se muestra permanentemente un mensaje abajo que indica que se está jugando sin diccionario
+4. En el tablero, si no se ha obtenido correctamente el diccionario se muestra permanentemente un mensaje abajo que indica que se está jugando sin diccionario.
+5. Comodín:
+	- Hay 2 comodines en cada partida.
+	- Cuando te toca uno, si lo arrastras al tablero te pide una letra, y se convierte en esa letra.
+	- Cada vez que lo cambias de posición en el tablero te vuelve a pedir la letra.
+	- Si lo vuelves a poner donde tus fichas, se vuelve a mostrar como comodín.
+	- Recuerda la última letra que pusiste para que no la tengas que volver a escribir, incluso si lo pones donde tus fichas y lo vuelves a poner en el tablero.
