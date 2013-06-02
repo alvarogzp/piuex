@@ -15,7 +15,7 @@
 </head>
 <body>
 
-	<!-- Barra de navegación -->
+	<!-- Barra de navegaciÃ³n -->
 
 	<div class="navbar">
 	  	<div class="navbar-inner">
@@ -43,7 +43,7 @@
 			<input id ="puntos" name="puntos" type="hidden" value="0"/>
 			
 			<span style="font-size: 25px; color: #000000"><b>Partida: </b></span>  <span style="font-size: 20px"><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if> VS <c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if> </span> 
-			<span style="font-size: 25px; color: #000000"><b>&nbsp;&nbsp;&nbsp;Puntuación:  </b></span><span style="font-size: 20px">${game.p1Score} - ${game.p2Score} </span>
+			<span style="font-size: 25px; color: #000000"><b>&nbsp;&nbsp;&nbsp;PuntuaciÃ³n:  </b></span><span style="font-size: 20px">${game.p1Score} - ${game.p2Score} </span>
 			<br>
 			
 			<div class="container" style="margin: 0 auto; width: 38%">
@@ -94,8 +94,14 @@
 				<span class="js-diccionario-error label label-warning" style="display: none;">Jugando sin diccionario</span>
 			</c:if>
 			<c:if test='${!turn}'>
-				<c:if test="${letters != null}"><span class="label label-inverse" style="margin: 0 auto">¡No es tu turno!</span></c:if><a href="" class="btn btn-primary btn-block">Recargar</a>
+				<c:if test="${letters != null}"><span class="label label-inverse" style="margin: 0 auto">Â¡No es tu turno!</span></c:if><a href="" class="btn btn-primary btn-block">Recargar</a>
 			</c:if>
+			
+			<div>
+				<br><a href="https://twitter.com/intent/tweet?button_hashtag=PIUEx&text=He%20conseguido%20realizar%20una%20âœŽ%20SUPER%20JUGADA%20âœŽ%20en%20gprj-apalabrados-piuex.cloudfoundry.com" class="twitter-hashtag-button" data-lang="en" data-related="jasoncosta">Tweet #TwitterStories</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			</div>
+			
 		</div>
 		
 	</form>
