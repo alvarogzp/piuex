@@ -37,13 +37,12 @@
 
 	<h1 style="text-align:center"> Formulario de login</h1>
 	<div class="container" style="margin: 0 auto; width: 38%">
-	
 		<form:form class="form-horizontal" method="post" modelAttribute="userBean">
-
+		
 			<div class="control-group">
 				<label class="control-label" for="username">Usuario:</label>
 				<div class="controls">
-					<form:input class="azul" path="username" placeholder="Usuario" style="text-align:center" />
+					<form:input class="azul" path="username" placeholder="Usuario" style="text-align:center" autofocus="autofocus"/>
 					<form:errors path="username" cssClass="label label-important" />
 				</div>
 			</div>
@@ -64,8 +63,9 @@
 					</c:if>
 				</div>
 			</div>
-		
-	</form:form>
+			
+		</form:form>
+	</div>
 
 	<p class="text-center" style="font-size: 10pt">Si no tienes usuario, <a class="text-success" href="<c:url value="/user/registrate"/>">¡registrate aquí!</a> </p>
 

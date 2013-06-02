@@ -45,17 +45,17 @@ public class HomeController {
 		return "/version";
 	}
 	
-	@RequestMapping(value="/errors/error404", method = RequestMethod.GET)
+	@RequestMapping(value="/errors/error404")
 	public String error404(){
 		return "/errors/error404";
 	}
 	
-	@RequestMapping(value="/errors/error500", method = RequestMethod.GET)
+	@RequestMapping(value="/errors/error500")
 	public String error500(){
 		return "/errors/error500";
 	}
 	
-	@RequestMapping(value="/errors/error", method = RequestMethod.GET)
+	@RequestMapping(value="/errors/error")
 	public String error(){
 		return "/errors/error";
 	}

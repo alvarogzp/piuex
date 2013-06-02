@@ -43,11 +43,10 @@ public class GameControlller {
 			attrs.addFlashAttribute("errormessage", "¡No puedes acceder a las partidas de ese usuario!");
 			return "redirect:/user/list";
 		}
+		
 		model.addAttribute("games", gameDAO.getAllUser(id));
-		User p1 = userDAO.get(id);
 		model.addAttribute("username", userDAO.get(id).getUsername());
 		model.addAttribute("users", userDAO.getAll());
-		model.addAttribute("newGame", new Game("initializing", true, p1, null));
 		model.addAttribute("p1", id);
 
 		return "/game/list";
@@ -64,10 +63,10 @@ public class GameControlller {
 			attrs.addFlashAttribute("errormessage", "¡No puedes ver toda la lista de partidas!");
 			return "redirect:/user/list";
 		}
+		
 		model.addAttribute("games", gameDAO.getAll());
 		model.addAttribute("username", "todos");
 		model.addAttribute("users", userDAO.getAll());
-		model.addAttribute("newGame", new Game());
 		model.addAttribute("p1", -1);
 
 		return "/game/list";

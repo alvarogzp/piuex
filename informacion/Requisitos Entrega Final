@@ -17,7 +17,7 @@ Personalización CSS																						 4	✔
 Menú de navegación																						 3	✔
 Control de nombre de la imagen de avatar																 4	✔
 El proyecto muestra un aspecto uniforme																	 4	✔ (aunque es subjetivo)
-Podemos abrir una partida en la que estemos como jugador pero no una en la que no estemos				 2	✔
+Podemos abrir una partida en la que estemos como jugador pero no una en la que no estemos				 2	✓ (podemos verla, pero es una ampliación)
 En la partida actual se ve el tablero																	 3	✔
 Se muestran las fichas disponibles del jugador															 2	✔
 El tablero tiene aspecto diferente para las celdas con significado especial								 2	✔
@@ -43,7 +43,7 @@ Existe una página con estadísticas de partidas y jugadas récord											 8	
 Ausencia de registros por consola del navegador en la versión final										 5	✘ (borrarlos antes de entregar)
 
 Ausencia de errores graves																				 5	✓ (por ahora)
-Estilo de código adecuado y calidad general correcta													10	✔
+Estilo de código adecuado y calidad general correcta													10	✓ (discrepo, falta comentar muchas partes, y algunas son claramente mejorables)
 Conveniencia de las soluciones adoptadas																 5	✓ (supongo...)
 
 La documentación adjunta es relevante, concisa y útil													10	✘
@@ -51,9 +51,11 @@ Descripción correcta de lo realizado, los errores y las limitaciones									10
 
 Extensiones (puntos extra)																				40	✓ (tenemos muchas extensiones, podemos tener muchos puntos aquí, pero hay que documentarlas bien)
 
+																									 ———————
 
 Puntuación requisitos cumplidos:																	   180
-Puntuación posible:																					   233
+Puntuación máxima:																					   240
+
 
 
 Leyenda:

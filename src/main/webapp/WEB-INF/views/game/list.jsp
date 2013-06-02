@@ -33,11 +33,11 @@
 	  	</div>
 	</div>
 
-	<h2 style="text-align:center">Partidas de <a href="<c:url value="/user/profile?username=${username}"/>">${username}</a></h2><br>
+	<h2 style="text-align:center">Partidas de <c:if test="${p1 != -1}"><a href="<c:url value="/user/profile?username=${username}"/>"></c:if>${username}<c:if test="${p1 != -1}"></a></c:if></h2><br>
 	
 	<table class="table table-hover table-striped table-condensed">
 		<tr class="even">
-			<th><c:if test="${loggedUser.rank==0}"><th></th></c:if></th>
+			<c:if test="${loggedUser.rank==0}"><th></th></c:if>
 			<th>Id</th>
 			<th>Estado</th>
 			<th>Turno</th>
@@ -48,16 +48,14 @@
 		</tr>
 		<c:forEach items="${games}" var="game">
 			<tr>
-				<td>
-					<c:if test="${loggedUser.rank==0}">
-						<td>
-							<a href="<c:url value="/game/delete?id=${game.id}&next=${p1}"/>"><i class="icon-remove"></i></a>
-						</td>
-					</c:if>
-				</td>
+				<c:if test="${loggedUser.rank==0}">
+					<td>
+						<a href="<c:url value="/game/delete?id=${game.id}&next=${p1}"/>"><i class="icon-remove"></i></a>
+					</td>
+				</c:if>
 				<td>${game.id}</td>
 				<td>${game.status}</td>
-				<td>Jugador <c:if test="${game.p1Turn==true}">1</c:if><c:if test="${game.p1Turn==false}">2</c:if></td>
+				<td>Jugador <c:if test="${game.p1Turn}">1</c:if><c:if test="${!game.p1Turn}">2</c:if></td>
 				<td><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if></td>
 				<td><c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if></td>
 				<td>${game.p1Score} - ${game.p2Score}</td>
@@ -66,18 +64,21 @@
 	   </c:forEach>
 	</table>
 	
-	<div class="container" style="margin: 0 auto; width: 38%">
-		<c:url var="gameNew" value="/game/new"/>
-		<form:form method="post" modelAttribute="newGame" action="${gameNew}">
-				<input id="p1" name="p1" value="${p1}" type="hidden"/> 
-				<label for="p2"> Oponente: </label>
-				<form:select path="p2">
-					<c:forEach items="${users}" var="user"> <option value="${user.id}"> ${user.username} </option></c:forEach>
-				</form:select>
-				<input class="btn btn-success" type="submit" value="Nueva partida">
-		</form:form>
-	</div>
-		
+	<c:if test="${p1 != -1}">
+		<div class="container" style="margin: 0 auto; width: 38%">
+			<form method="post" action="<c:url value="/game/new"/>">
+					<input id="p1" name="p1" value="${p1}" type="hidden"/>
+					<label for="p2"> Oponente:</label>
+					<select id="p2" name="p2">
+						<c:forEach items="${users}" var="user">
+							<option value="${user.id}"<c:if test="${user.id == p1}"> selected</c:if>>${user.username}</option>
+						</c:forEach>
+					</select>
+					<input class="btn btn-success" type="submit" value="Nueva partida">
+			</form>
+		</div>
+	</c:if>
+	
 	<script src='<c:url value="/resources/js/jquery.js"/>'></script>
 	<script src='<c:url value="/resources/bootstrap/js/bootstrap.js"/>'></script>
 	</body>

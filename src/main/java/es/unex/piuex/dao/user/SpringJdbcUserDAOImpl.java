@@ -94,7 +94,9 @@ public class SpringJdbcUserDAOImpl implements UserDAO {
 	
 	@Override
 	public boolean delete(int id) {
+		// Primero borrar todas las partidas de ese usuario (si no da un error de referencia)
 		jdbcTemplate.update(GAME_DELETE_SQL, new Object[] {id, id});
+		// Ahora borrar al usuario, y devolver true si el número de filas afectadas es mayor que cero
 		return jdbcTemplate.update(USER_DELETE_SQL, new Object[] {id}) > 0;
 	}
 	

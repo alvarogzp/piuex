@@ -64,15 +64,15 @@
 					<legend>My Mastery Level: </legend>
 					<p class="agreement">
 						<form:radiobutton path="level" value="newbie"/>
-						<label>Newbie</label>
+						<label for="level1">Newbie</label>
 					</p>
 					<p class="agreement">
 						<form:radiobutton path="level" value="advanced"/>
-						<label>Advanced</label>
+						<label for="level2">Advanced</label>
 					</p>
 					<p class="agreement">
 						<form:radiobutton path="level" value="master"/>
-						<label>Master</label>
+						<label for="level3">Master</label>
 					</p>
 				</fieldset>
 				<br>

@@ -43,7 +43,7 @@
 			<div class="control-group">
 				<label class="control-label" for="name">Nombre completo:</label>
 				<div class="controls">
-					<form:input class="azul" type="text" path="name" placeholder="Nombre completo" style="text-align:center"/>
+					<form:input class="azul" type="text" path="name" placeholder="Nombre completo" style="text-align:center" autofocus="autofocus"/>
 					<form:errors path="name" cssClass="label label-important" />
 				</div>
 			</div>

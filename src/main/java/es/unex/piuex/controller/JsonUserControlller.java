@@ -30,7 +30,7 @@ public class JsonUserControlller {
 	
 	@RequestMapping(method=RequestMethod.GET, params="alt=jsp")
 	public String getAJAXUI() {
-		return "/json/json";
+		return "/json";
 	}
 	
 	

@@ -67,15 +67,27 @@
 						<td><img src="<c:url value="/resources/avatars/${user.avatarFileName}"/>" alt="${user.avatarFileName}" class="avatar-list"/></td>
 						<td>
 						<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
-							<a class="btn btn-primary btn-block" href="<c:url value="/game/list?id=${user.id}"/>">
-						</c:if>
-						Partidas de ${user.username}
-						<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
-							</a>
+							<a class="btn btn-primary btn-block" href="<c:url value="/game/list?id=${user.id}"/>">Partidas de ${user.username}</a>
 						</c:if>	
 						</td>
 					</tr>
 			   </c:forEach>
+			   
+			   <c:if test="${loggedUser.rank==0}">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a class="btn btn-info btn-block" href="<c:url value="/game/list"/>">Todas las partidas</a>
+						</td>
+					</tr>
+			   </c:if>
+			   
 			</table>
 			<c:if test="${errormessage!=null}"> <span class="error"> ${errormessage} </span> </c:if>
 		</div>
