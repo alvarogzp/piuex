@@ -97,10 +97,17 @@
 				<c:if test="${letters != null}"><span class="label label-inverse" style="margin: 0 auto">¡No es tu turno!</span></c:if><a href="" class="btn btn-primary btn-block">Recargar</a>
 			</c:if>
 			
+			<!-- 
 			<div>
 				<br><a href="https://twitter.com/intent/tweet?button_hashtag=PIUEx&text=He%20conseguido%20realizar%20una%20✎%20SUPER%20JUGADA%20✎%20en%20gprj-apalabrados-piuex.cloudfoundry.com" class="twitter-hashtag-button" data-lang="en" data-related="jasoncosta">Tweet #TwitterStories</a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				
+					 Problemas en al codificación con el simbolo del lápiz, estaria muy bien quedarlo pero es omitible. 
+					 Falta añadirle la condición de cuando se muestra,
+					 la puntuación al tweet y un indicativo de que porque ese boton ha aparecido(se ha conseguido mas de 'X' puntos)
+					 
 			</div>
+			-->
 			
 		</div>
 		
