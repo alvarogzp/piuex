@@ -96,6 +96,13 @@
 			<c:if test='${!turn}'>
 				<c:if test="${letters != null}"><span class="label label-inverse" style="margin: 0 auto">¡No es tu turno!</span></c:if><a href="" class="btn btn-primary btn-block">Recargar</a>
 			</c:if>
+			<c:if test="${puntosJugadaAnterior != null && puntosJugadaAnterior > 5}">
+				<br><span class="label label-success" style="margin: 0 auto">¡Has conseguido una SUPER JUGADA, compártela!</span>
+				<div>
+					<a href="https://twitter.com/intent/tweet?button_hashtag=PIUEx&text=He%20conseguido%20realizar%20una%20%E2%9C%8E%20SUPER%20JUGADA%20%E2%9C%8E%20de%20${puntosJugadaAnterior}%20puntos%20en%20gprj-apalabrados-piuex.cloudfoundry.com" class="twitter-hashtag-button" data-lang="en" data-related="jasoncosta">Tweet #PIUEx</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+			</c:if>
 		</div>
 		
 	</form>

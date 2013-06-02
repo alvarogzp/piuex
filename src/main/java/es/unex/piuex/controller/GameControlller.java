@@ -165,7 +165,7 @@ public class GameControlller {
 	
 	
 	@RequestMapping(value="/detail", method=RequestMethod.POST)
-	public String postBoard(int id, Model model, HttpSession session, String tablero, String fichas, int puntos) {
+	public String postBoard(int id, Model model, HttpSession session, String tablero, String fichas, int puntos, RedirectAttributes attrs) {
 		// Comprobar que el usuario esté logueado
 		if (session.getAttribute("loggedUser") == null)
 			return "redirect:/user/login";
@@ -183,9 +183,14 @@ public class GameControlller {
 		// Cambiar turno
 		game.setP1Turn(!game.getP1Turn());
 		gameDAO.update(game);
+		
+		// Añadir un atributo flash para pasar los puntos de la jugada
+		attrs.addFlashAttribute("puntosJugadaAnterior", puntos);
+		
 		return "redirect:/game/detail?id=" + id;
 	}
 
+	
 	@RequestMapping(value="/delete", method=RequestMethod.GET, params="id")
 	public String deleteGame(@RequestParam int id,@RequestParam int next, HttpSession session) {
 		// Comprobar que el usuario esté logueado
