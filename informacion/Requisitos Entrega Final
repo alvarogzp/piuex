@@ -10,7 +10,7 @@ Despliegue en cloudfoundry																				 2	✓ (re-desplegar en la entrega
 Capa REST para la gestión de usuarios																	 3	✔
 Cliente REST para mapa en perfil u otra funcionalidad													 3	✔
 Login/logout																							 3	✔
-Gestión de excepciones																					 4	✘ (controlar excepción en JsonControlller para UnknownResource)
+Gestión de excepciones																					 4	✔
 Páginas de error de contenedor servlet																	 3	✔
 Uso de logger																							 3	✔
 Personalización CSS																						 4	✔

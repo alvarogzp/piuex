@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.unex.piuex.dao.user.UserDAO;
 import es.unex.piuex.domain.User;
+import es.unex.piuex.exceptions.SimulatedException;
 import es.unex.piuex.exceptions.UnknownResourceException;
 
 
@@ -33,6 +35,15 @@ public class JsonUserControlller {
 		return "/json";
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, params="alt=error")
+	public @ResponseBody String getError() {
+		throw new SimulatedException();
+	}
+	
+	@ExceptionHandler(SimulatedException.class)
+	public @ResponseBody String handleException(SimulatedException ex) {
+		return "Capturada una excepcion simulada";
+	}
 	
 	@RequestMapping(method=RequestMethod.GET, params="alt=json")
 	public @ResponseBody List<User> getUsersParam() {
@@ -57,7 +68,12 @@ public class JsonUserControlller {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces="application/json")
 	public @ResponseBody User getUserAccept(@PathVariable int id) {
-		return userDAO.get(id);
+		User user = userDAO.get(id);
+		if (user == null) {
+			logger.info("Se ha lanzado la excepcion UnknownResourceException!");
+			throw new UnknownResourceException("El usuario no existe!");
+		}
+		return user;
 	}
 	
 	
