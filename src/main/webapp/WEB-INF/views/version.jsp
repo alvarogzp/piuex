@@ -31,8 +31,15 @@
 	  	</div>
 	</div>
 
-<h1 class="text-center" style="text-shadow: 0 4px 0 #BBBBBB"> Cambios de Apalabrados PIUEx </h1>
+<h1 class="text-center" style="text-shadow: 0 4px 0 #BBBBBB"> Cambios de Apalabrados PIUEx </h1><br>
 
+	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 3.0 (fecha 03-06-2013)</h3>
+	<ul>
+		<li>Implementado concepto administrador.</li>
+		<li>Finalizada funcionalidad de jugabilidad con puntuación.</li>
+		<li>Versión preparada para la perfecta interactividad entre usuarios mediante partidas.</li>
+	</ul>
+	
 	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 2.0 (fecha 20-05-2013)</h3>
 	<ul>
 		<li>Implementado tablero y jugabilidad.</li>
