@@ -122,7 +122,7 @@
 					</c:when>
 				</c:choose>
 			</c:if>
-			<c:if test="${puntosJugadaAnterior != null && puntosJugadaAnterior > 5}">
+			<c:if test="${puntosJugadaAnterior != null && puntosJugadaAnterior > 15}">
 				<br><span class="label label-success" style="margin: 0 auto">¡Has conseguido una SUPER JUGADA, compártela!</span>
 				<div>
 					<a href="https://twitter.com/intent/tweet?button_hashtag=PIUEx&text=He%20conseguido%20realizar%20una%20%E2%9C%8E%20SUPER%20JUGADA%20%E2%9C%8E%20de%20${puntosJugadaAnterior}%20puntos%20en%20gprj-apalabrados-piuex.cloudfoundry.com" class="twitter-hashtag-button" data-lang="en" data-related="jasoncosta">Tweet #PIUEx</a>
