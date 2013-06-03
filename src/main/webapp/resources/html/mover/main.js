@@ -13,12 +13,12 @@ var x = 0, y = 0, element = null;
 function mover(elemento) {
 	elemento.onmousedown = iniciarmovimiento;
 	elemento.onmouseup = detenermovimiento;
-	console.log("Cargado movimiento para " + elemento.id);
+//	console.log("Cargado movimiento para " + elemento.id);
 }
 
 
 function iniciarmovimiento(e) {
-	console.log("Moviendo " + e.target.id);
+//	console.log("Moviendo " + e.target.id);
 	e.preventDefault();
 	x = e.pageX;
 	y = e.pageY;
@@ -44,7 +44,7 @@ function moverelemento(element, position, diff) {
 function detenermovimiento(e) {
 	document.onmousemove = null;
 	element = null;
-	console.log("Fin del movimiento de " + e.target.id);
+//	console.log("Fin del movimiento de " + e.target.id);
 }
 
 
@@ -55,4 +55,4 @@ for (var i = 0; i < elements.length; i++) {
 }
 
 
-console.log("Script cargado!");
+//console.log("Script cargado!");

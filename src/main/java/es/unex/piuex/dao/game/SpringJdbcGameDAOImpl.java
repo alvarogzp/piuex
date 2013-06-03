@@ -34,7 +34,7 @@ public class SpringJdbcGameDAOImpl implements GameDAO {
 	
 	private final String GAME_ORDER_SQL = " ORDER BY ID" ;
 	
-	private static final String USER_SELECT_SQL = "SELECT ID, NAME, USERNAME, EMAIL, PASSWORD, AVATAR, LEVEL, OPPONENTS, RANK FROM APALABRADOS.USER";
+	private static final String USER_SELECT_SQL = "SELECT ID, NAME, USERNAME, EMAIL, PASSWORD, AVATAR, LEVEL, RANK, MAXPUNTOSJUGADA FROM APALABRADOS.USER";
 
 	
 	@Override

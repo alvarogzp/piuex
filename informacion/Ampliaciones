@@ -18,4 +18,18 @@ Ampliaciones realizadas no indicadas en los enunciados (revisar los commits para
 7. ¡¡La J vale 8 puntos, no 5 como viene en el PDF!!
 8. En la página usuarios, incluido timeline de Twitter.
 9. En la página home, incluido Parallax personalizado.
-10. Si un usuario te pasa el link de una partida suya, puedes verla pero no jugar; el administrador puede ver cualquier partida
+10. Si un usuario te pasa el link de una partida suya, puedes verla pero no jugar; el administrador puede ver cualquier partida.
+11. Creada enumeración (sí, finalmente se ha creado!!) para representar los diferentes estados de una partida, se han creado métodos para convertir esa enumeración a cadena y obtener un elemento de la enumeración a partir de una cadena. En la base de datos se representa como cadena y al usuario también, pero internamente se usa como enumeración.
+12. Múltiples parámetros en un RequestMapping al aceptar o rechazar una partida (params={"id", "action=accept"}).
+13. Botón para enviar un tweet si has hecho una super jugada!
+14. Empieza el jugador 2 jugando, porque como él tiene que aceptar la partida es lo más rápido (y no tener que esperar de nuevo a que vuelva el jugador 1 y realize su primer turno).
+15. Estadísticas de partidas de cada usuario y de todos los usuarios juntos.
+16. Las estadísticas muestran una gráfica con las partidas en porcentaje.
+17. Si se entra como un administrador se pueden borrar partidas y usuarios (aparece una X delante de cada partida o usuario en las respectivas tablas).
+18. Si hay 2 palabras iguales que se pueden formar en una jugada (una en vertical y otra en horizontal), se cuentan las dos y no sólo una.
+19. No es válida una jugada en la que haya una palabra formada íntegramente por letras nuevas, excepto si es la primera (y pasa por el centro).
+20. La ficha que estás arrastrando no se suelta si pinchas en una celda con una ficha fija.
+21. Puedes arrastrar una ficha pulsando y soltando el ratón, y luego dejarla volviendo a pulsar; de hecho, esta es la forma recomendada de mover las fichas.
+22. Si estás moviendo una ficha y pulsas fuera del tablero, la ficha se deja de mover y se queda donde estaba.
+23. Administrador. Tenemos que dejarles la contraseña del administrador en la documentación.
+24. Aunque parezca que no, los comodines tienen puntuación cero, incluso después de sustituirlos por una letra.

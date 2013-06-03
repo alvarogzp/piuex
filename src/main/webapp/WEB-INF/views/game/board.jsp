@@ -42,7 +42,7 @@
 			<input id="id" name="id" type="hidden" value="${game.id}"/>
 			<input id ="puntos" name="puntos" type="hidden" value="0"/>
 			
-			<span style="font-size: 25px; color: #000000"><b>Partida: </b></span>  <span style="font-size: 20px"><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if> VS <c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if> </span> 
+			<span style="font-size: 25px; color: #000000"><b>Partida: </b></span>  <span style="font-size: 20px"><c:if test="${game.p1Turn}"><b></c:if><a href="<c:url value="/user/stats?id=${game.p1.id}"/>">${game.p1.username}</a><c:if test="${game.p1Turn}"></b></c:if> VS <c:if test="${!game.p1Turn}"><b></c:if><a href="<c:url value="/user/stats?id=${game.p2.id}"/>">${game.p2.username}</a><c:if test="${!game.p1Turn}"></b></c:if> </span> 
 			<span style="font-size: 25px; color: #000000"><b>&nbsp;&nbsp;&nbsp;Puntuación:  </b></span><span style="font-size: 20px">${game.p1Score} - ${game.p2Score} </span>
 			<br>
 			
@@ -94,7 +94,31 @@
 				<span class="js-diccionario-error label label-warning" style="display: none;">Jugando sin diccionario</span>
 			</c:if>
 			<c:if test='${!turn}'>
-				<c:if test="${letters != null}"><span class="label label-inverse" style="margin: 0 auto">¡No es tu turno!</span></c:if><a href="" class="btn btn-primary btn-block">Recargar</a>
+				<c:choose>
+					<c:when test='${game.status.equals("Jugando")}'>
+						<c:if test="${letters != null}">
+							<span class="label label-inverse" style="margin: 0 auto">¡No es tu turno!</span>
+						</c:if>
+						<a href="" class="btn btn-primary btn-block">Recargar</a>
+					</c:when>
+					<c:when test='${game.status.equals("Finalizada")}'>
+						<span class="label label-success">Partida finalizada:</span>
+						<c:choose>
+							<c:when test="${(winner == 1 && loggedUser.id == game.p1.id) || (winner == 2 && loggedUser.id == game.p2.id)}">
+								<span class="label label-success">¡Has ganado!</span>
+							</c:when>
+							<c:when test="${winner == 0}">
+								<span class="label label-info">Ha quedado en empate</span>
+							</c:when>
+							<c:when test="${loggedUser.id == game.p1.id || loggedUser.id == game.p2.id}">
+								<span class="label label-important">Has perdido :(</span>
+							</c:when>
+							<c:otherwise>
+								<span class="label label-info">Ha ganado <c:choose><c:when test="${winner == 1}">${game.p1.username}</c:when><c:otherwise>${game.p2.username}</c:otherwise></c:choose></span>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+				</c:choose>
 			</c:if>
 			<c:if test="${puntosJugadaAnterior != null && puntosJugadaAnterior > 5}">
 				<br><span class="label label-success" style="margin: 0 auto">¡Has conseguido una SUPER JUGADA, compártela!</span>

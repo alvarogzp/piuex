@@ -61,24 +61,28 @@ INSERT INTO APALABRADOS.USER (NAME, USERNAME, AVATAR, EMAIL, PASSWORD, LEVEL, RA
 
 -- Partidas:
 
-INSERT INTO APALABRADOS.GAME (ID, STATUS, P1, P2) VALUES (
+INSERT INTO APALABRADOS.GAME (ID, STATUS, P1, P2, P1LETTERS, P2LETTERS) VALUES (
 	0,
 	'Jugando',
 	0,
-	0
+	0,
+	'AEOI*SNL',
+	'CDTURLEO'
 );
 
 
-INSERT INTO APALABRADOS.GAME (STATUS, P1, P2, LETTERS) VALUES (
+INSERT INTO APALABRADOS.GAME (STATUS, P1, P2, LETTERS, P1LETTERS, P2LETTERS) VALUES (
 	'Jugando',
 	0,
 	0,
-	'*AAAEEEOOISNLRUTDC'
+	'AE',
+	'*AEOISNL',
+	'AEORUTDC'
 );
 
 
 INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
-	'Inicializando',
+	'Esperando',
 	1,
 	1,
 	2,
@@ -89,7 +93,7 @@ INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) V
 
 
 INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
-	'Inicializando',
+	'Rechazada',
 	1,
 	2,
 	3,
@@ -100,22 +104,24 @@ INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) V
 
 
 INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
-	'Inicializando',
+	'Finalizada',
 	1,
 	4,
 	1,
-	0,
-	0,
+	10,
+	25,
 	'               .               .               .               .               .               .               .               .               .               .               .               .               .               .               '
 );
 
 
-INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD) VALUES (
+INSERT INTO APALABRADOS.GAME (STATUS, P1TURN, P1, P2, P1SCORE, P2SCORE, BOARD, P1LETTERS, P2LETTERS) VALUES (
 	'Jugando',
 	0,
 	3,
 	4,
 	10,
 	12,
-	'               .               .               .               .               .               .         C     .    ALVARO     .         Q     .         U     .         I     .               .               .               .               '
+	'               .               .               .               .               .               .         C     .    ALVARO     .         Q     .         U     .         I     .               .               .               .               ',
+	'AEOIRSNL',
+	'CDTURLEO'
 );

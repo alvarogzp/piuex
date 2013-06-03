@@ -49,7 +49,7 @@
 					<th>E-mail</th>
 					<th>Level</th>
 					<th>Avatar</th>
-					<th>Partidas</th>
+					<th></th>
 				</tr>
 				
 				<c:forEach items="${users}" var="user">
@@ -73,20 +73,20 @@
 					</tr>
 			   </c:forEach>
 			   
-			   <c:if test="${loggedUser.rank==0}">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
+				<tr>
+					<c:if test="${loggedUser.rank==0}"><td></td></c:if>
+					<td></td>
+					<td></td>
+					<td><a href="<c:url value="/user/stats"/>" title="Estadísticas de todos los usuarios">Todos</a></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<c:if test="${loggedUser.rank==0}">
 							<a class="btn btn-info btn-block" href="<c:url value="/game/list"/>">Todas las partidas</a>
-						</td>
-					</tr>
-			   </c:if>
+						</c:if>
+					</td>
+				</tr>
 			   
 			</table>
 			<c:if test="${errormessage!=null}"> <span class="error"> ${errormessage} </span> </c:if>

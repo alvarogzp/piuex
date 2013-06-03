@@ -39,6 +39,8 @@ public class User {
 	 */
 	private int rank = 10;
 	
+	private int maxPuntosJugada;
+	
 
 	public User(){
 		this.name = "";
@@ -138,5 +140,13 @@ public class User {
 
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+
+	public int getMaxPuntosJugada() {
+		return maxPuntosJugada;
+	}
+
+	public void setMaxPuntosJugada(int maxPuntosJugada) {
+		this.maxPuntosJugada = maxPuntosJugada;
 	}
 }

@@ -5,14 +5,14 @@ Registro de usuario con validación																		 2	✔
 Perfil usuario con foto																					 3	✔
 Listado de usuarios																						 3	✔
 Dashboard de partidas																					 3	✔
-Detalle de partida																						 3	✓ (estamos en ello)
+Detalle de partida																						 3	✔
 Despliegue en cloudfoundry																				 2	✓ (re-desplegar en la entrega)
 Capa REST para la gestión de usuarios																	 3	✔
 Cliente REST para mapa en perfil u otra funcionalidad													 3	✔
 Login/logout																							 3	✔
-Gestión de excepciones																					 4	✘ (sólo controlamos páginas de error, que son lanzadas por excepciones)
+Gestión de excepciones																					 4	✘ (controlar excepción en JsonControlller para UnknownResource)
 Páginas de error de contenedor servlet																	 3	✔
-Uso de logger																							 3	✓ (cambiar System.out.println por logger de GameControlller, UserControlller y SimpleUserDAO)
+Uso de logger																							 3	✔
 Personalización CSS																						 4	✔
 Menú de navegación																						 3	✔
 Control de nombre de la imagen de avatar																 4	✔
@@ -34,16 +34,16 @@ Se controla no poder arrastrar fichas si no es el turno del jugador										 3	
 Se puede confirmar la jugada																			 2	✔
 La partida con la jugada confirmada cambia de turno														 3	✔
 La partida guarda la jugada en la BBDD																	 7	✔
-Se pregunta al usuario si confirma una jugada sin haber puesto fichas (pasar turno)						 4	✔ (aquí hay una extensión, se informa si se va a pasar turno o jugar antes de pulsar en el botón)
+Se pregunta al usuario si confirma una jugada sin haber puesto fichas (pasar turno)						 4	✔
 Se comprueba al confirmar que las fichas que ha puesto estén en fila									 6	✔
 Se comprueba al confirmar que las fichas que ha puesto estén en contacto con otras fichas existentes	 6	✔
 Se comprueba al confirmar que las palabras nuevas están en una lista de palabras válidas				 8	✔
 El comodín se maneja en todos los casos bien															 8	✔
-Existe una página con estadísticas de partidas y jugadas récord											 8	✘
-Ausencia de registros por consola del navegador en la versión final										 5	✘ (borrarlos antes de entregar)
+Existe una página con estadísticas de partidas y jugadas récord											 8	✓ (no sabemos si lo que hemos hecho nosotros es lo que ellos querían)
+Ausencia de registros por consola del navegador en la versión final										 5	✔
 
 Ausencia de errores graves																				 5	✓ (por ahora)
-Estilo de código adecuado y calidad general correcta													10	✓ (discrepo, falta comentar muchas partes, y algunas son claramente mejorables)
+Estilo de código adecuado y calidad general correcta													10	✓ (falta comentar código, y algunas partes son mejorables)
 Conveniencia de las soluciones adoptadas																 5	✓ (supongo...)
 
 La documentación adjunta es relevante, concisa y útil													10	✘

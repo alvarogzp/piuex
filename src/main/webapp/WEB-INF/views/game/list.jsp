@@ -33,7 +33,7 @@
 	  	</div>
 	</div>
 
-	<h2 style="text-align:center">Partidas de <c:if test="${p1 != -1}"><a href="<c:url value="/user/profile?username=${username}"/>"></c:if>${username}<c:if test="${p1 != -1}"></a></c:if></h2><br>
+	<h2 style="text-align:center">Partidas de <c:if test="${p1 != -1}"><a href="<c:url value="/user/stats?id=${p1}"/>"></c:if>${username}<c:if test="${p1 != -1}"></a></c:if></h2><br>
 	
 	<table class="table table-hover table-striped table-condensed">
 		<tr class="even">
@@ -44,7 +44,7 @@
 			<th>Jugador 1</th>
 			<th>Jugador 2</th>
 			<th>Puntuación</th>
-			<th>Tablero</th>
+			<th></th>
 		</tr>
 		<c:forEach items="${games}" var="game">
 			<tr>
@@ -59,7 +59,30 @@
 				<td><c:if test="${game.p1Turn}"><b></c:if>${game.p1.username}<c:if test="${game.p1Turn}"></b></c:if></td>
 				<td><c:if test="${!game.p1Turn}"><b></c:if>${game.p2.username}<c:if test="${!game.p1Turn}"></b></c:if></td>
 				<td>${game.p1Score} - ${game.p2Score}</td>
-				<td><a class="btn btn-primary btn-block" href="<c:url value="/game/detail?id=${game.id}"/>">Acceder a la partida</a></td>
+				<td>
+					<c:choose>
+						<c:when test='${game.status.equals("Esperando")}'>
+							<c:choose>
+								<c:when test="${p1 == game.p2.id}">
+									<a class="btn btn-success" href="<c:url value="/game/detail?id=${game.id}&action=accept"/>">Aceptar</a>
+									<a class="btn btn-danger" href="<c:url value="/game/detail?id=${game.id}&action=reject"/>">Rechazar</a>
+								</c:when>
+								<c:otherwise>
+									<button class="btn btn-block" disabled>Esperando a ${game.p2.username}...</button>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:when test='${game.status.equals("Rechazada")}'>
+							<button class="btn btn-link btn-block" disabled>&nbsp;</button>
+						</c:when>
+						<c:when test='${game.status.equals("Finalizada")}'>
+							<a class="btn btn-block" href="<c:url value="/game/detail?id=${game.id}"/>">Ver el tablero final</a>
+						</c:when>
+						<c:otherwise>
+							<a class="btn btn-<c:choose><c:when test='${(p1 == game.p1.id && game.p1Turn) || (p1 == game.p2.id && !game.p1Turn)}'>primary</c:when><c:otherwise>info</c:otherwise></c:choose> btn-block" href="<c:url value="/game/detail?id=${game.id}"/>">Acceder a la partida</a>
+						</c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 	   </c:forEach>
 	</table>

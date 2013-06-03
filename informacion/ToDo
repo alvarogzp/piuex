@@ -1,7 +1,3 @@
-Cosas importantes que hacer ordenadas por importancia según Rober (¡NO ESCRIBIR NADA POR ENCIMA DE ESTA LÍNEA!):
-1. Puntuaciones
-2. Comodín
-3. Estadísticas
 
 http://www.apalabrados.com/reglas
 
@@ -15,33 +11,17 @@ http://www.apalabrados.com/reglas
 
 ** Las letras puestas en la última jugada del otro jugador podían salir de alguna forma más destacada.
 
-** Una ficha no se debería soltar a menos que se pulse en la misma ficha o, atención, fuera del tablero (en concreto ahora se suelta si pulsas sobre cualquier otra ficha).
-
 ** poner en la barra con qué usuario has entrado
 
 ** Con admin no se debe poder jugar
 
 ** Mover ficha entera en lugar de sombra?
 
-** Si hay dos palabras iguales que se pueden formar en una casilla, sólo se cuenta una (DO, DO) | IDEA: Hacer comparación en base a las coordenadas que ocupa cada palabra
-
-* Confirmar jugada
-
-* Estadísticas
-
-* Confirmar partida por el otro usuario antes de empezar a jugar
-
-* Implementar final de partida
-
-* ¿Quitar opponents?
-
 al redirigir a login desde cualquier página porque no se está registrado que salga el error en la pantalla de login (por ejemplo "Debes iniciar sesión para ver esa página")
 
-Convertir level y opponents a enumeracion, igual con status de partidas
-implementar oppponents ¿como una lista?
+Convertir level a enumeracion?
 
 excepciones
-cambiar system.out por logger
 
 cabecera en todos los ficheros .java
 arreglar codificación

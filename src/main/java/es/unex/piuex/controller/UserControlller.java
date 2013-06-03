@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
@@ -30,9 +32,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import es.unex.piuex.dao.game.GameDAO;
 import es.unex.piuex.dao.user.UserDAO;
+import es.unex.piuex.domain.Game;
 import es.unex.piuex.domain.User;
 import es.unex.piuex.utils.IpInfo;
+import es.unex.piuex.utils.Stats;
 
 
 /**
@@ -47,8 +52,13 @@ import es.unex.piuex.utils.IpInfo;
 @SessionAttributes("userBean")
 public class UserControlller {
 	
+	private static final Logger logger = LoggerFactory.getLogger(UserControlller.class);
+	
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private GameDAO gameDAO;
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -88,7 +98,7 @@ public class UserControlller {
 			return "/user/registrate";
 		}
 		userDAO.add(userBean);
-		System.out.println("Creado usuario '" + userBean.getUsername() + "' por '" + sr.getRemoteAddr() + ":" + sr.getRemotePort() + "' at '" + new Date().toString() + "'");
+		logger.info("Creado usuario '{}' por '{}:{}' at '{}'", new Object[] {userBean.getUsername(), sr.getRemoteAddr(), sr.getRemotePort(), new Date().toString()});
 		session.setAttribute("loggedUser", userDAO.get(userBean.getUsername()));
 		// Añadir un atributo flash para asociar el siguiente GET al usuario que hizo el POST
 		attrs.addFlashAttribute("userBean", userBean);
@@ -139,7 +149,7 @@ public class UserControlller {
 			String fileName = userBean.getUsername() + "." + (extIndex > 0? orgName.substring(extIndex+1).toLowerCase(): "");
 			userBean.setAvatarFileName(fileName);
 			File dest = new File(filePathToAvatarsDir, fileName);
-			System.out.println("Nueva imagen: " + dest.getPath());
+			logger.info("Nueva imagen: {}", dest.getPath());
 			try {
 				file.transferTo(dest);
 			} catch (IllegalStateException e) {
@@ -175,7 +185,7 @@ public class UserControlller {
 		}
 		
 		session.setAttribute("loggedUser", loggedUser);
-		System.out.println("Ha entrado '" + loggedUser.getUsername() + "' desde '" + sr.getRemoteAddr() + ":" + sr.getRemotePort() + "' at '" + new Date().toString() + "'");
+		logger.info("Ha entrado '{}' desde '{}:{}' at '{}'", new Object[] {loggedUser.getUsername(), sr.getRemoteAddr(), sr.getRemotePort(), new Date().toString()});
 		return "redirect:/user/list";
 	}
 	
@@ -183,7 +193,7 @@ public class UserControlller {
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session, ServletRequest sr) {
 		session.invalidate();
-		System.out.println("Cerrada sesión por '" + sr.getRemoteAddr() + ":" + sr.getRemotePort() + "' at '" + new Date().toString() + "'");
+		logger.info("Cerrada sesión por '{}:{}' at '{}'", new Object[] {sr.getRemoteAddr(), sr.getRemotePort(), new Date().toString()});
 		
 		return "redirect:/user";
 	}
@@ -230,10 +240,99 @@ public class UserControlller {
 		if (session.getAttribute("loggedUser") == null)
 			return "redirect:/user/login";
 		
-		model.addAttribute("user", userDAO.get(id));
+		int partidas = 0, jugando = 0, finalizadas = 0, esperando = 0, rechazadas = 0;
+		for (Game g: gameDAO.getAllUser(id)) {
+			partidas++;
+			switch (g.getState()) {
+			case JUGANDO:
+				jugando++;
+				break;
+			case FINALIZADA:
+				finalizadas++;
+				break;
+			case ESPERANDO:
+				esperando++;
+				break;
+			case RECHAZADA:
+				rechazadas++;
+				break;
+			default: // Para que no de un warning
+				break;
+			}
+		}
+		
+		User user = userDAO.get(id);
+		model.addAttribute("user", user);
+		model.addAttribute("stats", new Stats(user, partidas, esperando, jugando, finalizadas, rechazadas, user.getMaxPuntosJugada()));
 		
 		return "/user/stats";
 	}
+	
+	
+	@RequestMapping(value="/stats", method=RequestMethod.GET)
+	public String getAllStats(Model model, HttpSession session) {
+		// Comprobar que el usuario esté logueado
+		if (session.getAttribute("loggedUser") == null)
+			return "redirect:/user/login";
+		
+		List<Stats> stats = new ArrayList<Stats>();
+		int maxjugada = 0;
+		for (User u: userDAO.getAll()) {
+			int partidas = 0, jugando = 0, finalizadas = 0, esperando = 0, rechazadas = 0;
+			for (Game g: gameDAO.getAllUser(u.getId())) {
+				partidas++;
+				switch (g.getState()) {
+				case JUGANDO:
+					jugando++;
+					break;
+				case FINALIZADA:
+					finalizadas++;
+					break;
+				case ESPERANDO:
+					esperando++;
+					break;
+				case RECHAZADA:
+					rechazadas++;
+					break;
+				default: // Para que no de un warning
+					break;
+				}
+			}
+			stats.add(new Stats(u, partidas, esperando, jugando, finalizadas, rechazadas, u.getMaxPuntosJugada()));
+			if (u.getMaxPuntosJugada() > maxjugada) {
+				maxjugada = u.getMaxPuntosJugada();
+			}
+		}
+		
+		int partidas = 0, jugando = 0, finalizadas = 0, esperando = 0, rechazadas = 0;
+		for (Game g: gameDAO.getAll()) {
+			partidas++;
+			switch (g.getState()) {
+			case JUGANDO:
+				jugando++;
+				break;
+			case FINALIZADA:
+				finalizadas++;
+				break;
+			case ESPERANDO:
+				esperando++;
+				break;
+			case RECHAZADA:
+				rechazadas++;
+				break;
+			default: // Para que no de un warning
+				break;
+			}
+		}
+		
+		Stats global = new Stats(null, partidas, esperando, jugando, finalizadas, rechazadas, maxjugada);
+		
+		model.addAttribute("stats", stats);
+		model.addAttribute("global", global);
+		
+		return "/user/stats";
+	}
+	
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET, params="id")
 	public String deleteUser(@RequestParam int id, HttpSession session) {

@@ -27,7 +27,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, ServletRequest sr) {
 		//logger.info("Welcome home! The client locale is {}.", locale);
-		logger.info("GET '/' by '" + sr.getRemoteAddr() + ":" + sr.getRemotePort() + "' at '" + new Date().toString() + "'");
+		logger.info("GET '/' by '{}:{}' at '{}'", new Object[] {sr.getRemoteAddr(), sr.getRemotePort(), new Date().toString()});
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, locale);

@@ -27,8 +27,8 @@ public class SpringJdbcUserDAOImpl implements UserDAO {
 	}
 	
 	private final String USER_INSERT_SQL = "INSERT INTO APALABRADOS.USER (NAME, USERNAME, AVATAR, EMAIL, PASSWORD, LEVEL) VALUES (?, ?, ?, ?, ?, ?)";
-	private final String USER_SELECT_SQL = "SELECT ID, NAME, USERNAME, EMAIL, PASSWORD, AVATAR, LEVEL, OPPONENTS, RANK FROM APALABRADOS.USER";
-	private final String USER_SAVE_SQL = "UPDATE APALABRADOS.USER SET (AVATAR, LEVEL, OPPONENTS) = (?, ?, ?) WHERE USERNAME = ?";
+	private final String USER_SELECT_SQL = "SELECT ID, NAME, USERNAME, EMAIL, PASSWORD, AVATAR, LEVEL, RANK, MAXPUNTOSJUGADA FROM APALABRADOS.USER";
+	private final String USER_SAVE_SQL = "UPDATE APALABRADOS.USER SET (AVATAR, LEVEL, MAXPUNTOSJUGADA) = (?, ?, ?) WHERE USERNAME = ?";
 	private final String USER_DELETE_SQL = "DELETE FROM APALABRADOS.USER WHERE ID = ?";
 	private final String GAME_DELETE_SQL = "DELETE FROM APALABRADOS.GAME WHERE P1 = ? OR P2 = ?";
 	
@@ -48,7 +48,7 @@ public class SpringJdbcUserDAOImpl implements UserDAO {
 			user.setAvatarFileName(rs.getString("avatar"));
 			user.setLevel(rs.getString("level"));
 			user.setRank(rs.getInt("rank"));
-			//user.setOpponentsLevel(rs.getString("opponents"));
+			user.setMaxPuntosJugada(rs.getInt("maxpuntosjugada"));
 			return user;
 		}
 	}
@@ -81,8 +81,7 @@ public class SpringJdbcUserDAOImpl implements UserDAO {
 	
 	@Override
 	public void save(User user) {
-		//TODO: encode opponents values in String
-		jdbcTemplate.update(USER_SAVE_SQL, new Object[] {user.getAvatarFileName(), user.getLevel(), "newbie", user.getUsername()});
+		jdbcTemplate.update(USER_SAVE_SQL, new Object[] {user.getAvatarFileName(), user.getLevel(), user.getMaxPuntosJugada(), user.getUsername()});
 	}
 
 	

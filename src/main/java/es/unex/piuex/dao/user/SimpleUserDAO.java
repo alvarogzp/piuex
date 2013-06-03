@@ -3,6 +3,9 @@ package es.unex.piuex.dao.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 //import org.springframework.stereotype.Service;
 
 import es.unex.piuex.domain.User;
@@ -10,6 +13,8 @@ import es.unex.piuex.domain.User;
 
 //Comentado para que no de problemas: @Service
 public class SimpleUserDAO implements UserDAO {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SimpleUserDAO.class);
 
 	List<User> users;
 	
@@ -48,7 +53,7 @@ public class SimpleUserDAO implements UserDAO {
 			}
 		}
 		if (i == users.size()) {
-			System.err.println("ERROR: No existe el usuario que se intentaba actualizar " + user.getUsername());
+			logger.error("ERROR: No existe el usuario que se intentaba actualizar: {}", user.getUsername());
 		} else {
 			users.set(i, user);
 		}

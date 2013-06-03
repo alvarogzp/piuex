@@ -126,15 +126,11 @@ function asignarCelda(e) {
 	if (element == null) {
 		detenermovimiento(e);
 		return;
-	} else if (element.parent()[0] == $this[0]) {
-		// Se ha soltado el ratón en la misma celda en la que se presionó
+	} else if (element.parent()[0] == $this[0] || esfichafija($this)) {
+		// Se ha soltado el ratón en la misma celda en la que se presionó o en una con una letra fija
 		// No hacer nada para poder arrastrar la celda teniendo el ratón sin pulsar
-		return;
-	} else if (esfichafija($this)) {
-		// Se ha soltado el ratón sobre una celda ya ocupada y que no se puede mover
-		// Detener sin hacer nada
-		detenermovimiento(e);
-		return;
+		// Devolver false para evitar que se llame al evento del document que cancela el movimiento
+		return false;
 	}
 	
 	var $ep = element.parent();
@@ -428,8 +424,9 @@ function detenermovimiento(e) {
  * Si se cumple la condición anterior, devuelve una lista con tres elementos: el primero es true,
  * el segundo es una lista de palabras insertadas o ampliadas con las letras puestas,
  * y el tercero es un número con la puntuación total de la jugada.
- * Cada elemento de la segunda lista es a su vez otra lista con dos elementos, el primero es la cadena
- * con las letras que forman la palabra, y el segundo la puntuación de la palabra.
+ * Cada elemento de la segunda lista es a su vez otra lista con tres elementos, el primero es la cadena
+ * con las letras que forman la palabra, el segundo la puntuación de la palabra y el tercero las coordenadas
+ * de inicio y fin de la palabra.
  * 
  * Si no se cumple la condición (hay algo mal puesto), devuelve una lista con 4 elementos:
  * el primero es false, el segundo es una lista de letras incorrectas que el usuario debe quitar,
@@ -506,11 +503,18 @@ function puestasenlinea() {
 						return;
 					}
 				}
+				// Obtener palabras de las que forma parte esta casilla
+				var p = obtenerpalabras($d, $juegotd);
+				if (p == false) {
+					// Hay letras formando palabras compuestas únicamente por letras nuevas
+					enlinea = false;
+					malas.push($d.data("letra"));
+					return;
+				}
 				// Si se ha llegado hasta aquí es que la letra es buena
 				letras[letras.length-1].push($d.data("letra"));
-				// Obtener palabras de las que forma parte esta casilla y unirlas eliminando duplicados
-				// a las palabras
-				palabras = concatenarunicos(palabras, obtenerpalabras($d, $juegotd));
+				// Unir las palabras obtenidas antes eliminando duplicados
+				palabras = concatenarunicos(palabras, p);
 			}
 		}
 	});
@@ -660,10 +664,10 @@ function confirmarjugada(e) {
 		return false;
 	}
 	
-	// En este punto la jugada es correcta, extraer palabras eliminando puntuación
-	var palabras = _(estado[1]).map(function(e) {
+	// En este punto la jugada es correcta, extraer palabras eliminando puntuación y duplicados
+	var palabras = _(_(estado[1]).map(function(e) {
 		return e[0];
-	});
+	})).uniq();
 	
 	// Asignar puntos a un campo hidden que se envía en el formulario para el servidor
 	$("#puntos").attr("value", estado[2]);
@@ -720,6 +724,10 @@ function comprobarseguidas(td, juegotd) {
 /*
  * Devuelve las palabras que hay unidas al td pasado como parámetro,
  * es decir, palabras de las cuales el td forma parte.
+ * 
+ * Debe ser llamado únicamente sobre tds del tablero con letras en él, no sobre tds vacíos.
+ * 
+ * Si hay una palabra incorrecta de la que el td forma parte, devuelve false.
  */
 function obtenerpalabras(td, juegotd) {
 	// Lista de palabras obtenidas
@@ -741,7 +749,13 @@ function obtenerpalabras(td, juegotd) {
 			continue;
 		} else {
 			var palabra = getpalabra(xy.x, xy.y, xyfin.x + 1, xyfin.y + 1, juegotd);
-			palabras.push(palabra);
+			if (palabra.length == 0) {
+				// Error en la letra
+				return false;
+			} else {
+				// Si es válida, añadir a la lista de palabras
+				palabras.push(palabra);
+			}
 		}
 	}
 	
@@ -794,13 +808,19 @@ function finletras(x, y, dx, dy, juegotd) {
  * Si hay más de un multiplicador de palabra sobre el que se ha puesto letra en esta jugada, solamente
  * se tendrá en cuenta uno.
  * 
- * Devuelve una lista con dos elementos, el primero es la palabra obtenida, y el segundo es la puntuación
- * asociada a esa palabra en la jugada actual.
+ * Devuelve una lista con tres elementos, el primero es la palabra obtenida, el segundo es la puntuación
+ * asociada a esa palabra en la jugada actual y el tercero una lista con cuatro elementos correspondientes
+ * a las coordenadas de inicio y de fin de la palabra.
+ * 
+ * Si la palabra que se ha obtenido no tiene ninguna letra fija ni pasa por el centro, devuelve una lista
+ * vacía, ya que la palabra es incorrecta.
  */
 function getpalabra(xi, yi, xf, yf, juegotd) {
 	var palabra = [];
 	var puntos = 0;
 	var multiplicador_palabra = 0;
+	// Bandera que cambia a true cuando se encuentra una ficha fija
+	var fija = false;
 	for (var i = yi; i < yf; i++) {
 		for (var j = xi; j < xf; j++) {
 			var td = $(juegotd[i*15+j]);
@@ -824,13 +844,21 @@ function getpalabra(xi, yi, xf, yf, juegotd) {
 					multiplicador_palabra += 3;
 					break;
 				}
+				if (!fija && td.hasClass("inicial")) {
+					// Se ha pasado por el centro
+					fija = true;
+				}
+			} else {
+				fija = true;
 			}
 			// Sumar puntos al total de la palabra
 			puntos += punto;
 		}
 	}
 	// Multiplicar los puntos por su multiplicador o 1 si no se ha aplicado ninguno
-	return [palabra.join(""), puntos * (multiplicador_palabra == 0? 1: multiplicador_palabra)];
+	return fija? [palabra.join(""),
+	              puntos * (multiplicador_palabra == 0? 1: multiplicador_palabra),
+	              [xi, yi, xf, yf]]: [];
 }
 
 
@@ -841,13 +869,13 @@ function getpalabra(xi, yi, xf, yf, juegotd) {
  * Se supone que v1 no tiene duplicados.
  * v2 puede tenerlos, incluso dentro de él mismo.
  * v1 es modificado para añadir los elementos de v2 no repetidos.
- * Los elementos de los vectores son listas con dos elementos.
+ * Los elementos de los vectores son listas con varios elementos, y se comparan uno a uno.
  */
 function concatenarunicos(v1, v2) {
 	var v = v1;
 	_( v2 ).each(function (e) {
 		if (v.every(function (f) {
-			if (e[0] == f[0] && e[1] == f[1]) {
+			if (iguales(e, f)) {
 				// e ya está en v, no añadir y detener el recorrido de v
 				return false;
 			} else {
@@ -860,6 +888,24 @@ function concatenarunicos(v1, v2) {
 		}
 	});
 	return v;
+}
+
+
+
+/*
+ * Compara recursivamente dos arrays y devuelve true si ambos son iguales, false si no.
+ * Los compara elemento por elemento con el operador ==.
+ * Si se encuentra otro array dentro, llama a esta función recursivamente para compararlo.
+ * 
+ * Nota: Esto no funciona bien en la consola de Firefox (la comprobación de
+ * "e[0] instanceof Array" no se cumple), no sé por qué,
+ * el caso es que cuando se ejecuta porque lo llama este script si se cumple, y en la consola
+ * de Chrome también va.
+ */
+function iguales(e1, e2) {
+	return _.zip(e1, e2).every(function(e) {
+		return e[0] instanceof Array? iguales(e[0], e[1]): e[0] == e[1];
+	});
 }
 
 
@@ -1165,6 +1211,9 @@ $(".mover").mousedown(iniciarmovimiento);
 // Al levantar el ratón sobre un td
 $("td").mouseup(asignarCelda);
 
+// Al pulsar sobre cualquier zona de la pantalla con una letra, soltarla
+$(document).mouseup(detenermovimiento);
+
 // Al hacer click en el botón de enviar
 $(".js-submit").click(confirmarjugada);
 
@@ -1176,4 +1225,4 @@ $(programarDescargaDiccionario);
 
 
 
-console.log("¡Script cargado!");
+//console.log("¡Script cargado!");
