@@ -62,7 +62,7 @@
 				<td>${game.p1Score} - ${game.p2Score}</td>
 				<td>
 					<c:choose>
-						<c:when test='${game.status.equals("Esperando")}'>
+						<c:when test='${game.status == "Esperando"}'>
 							<c:choose>
 								<c:when test="${p1 == game.p2.id}">
 									<a class="btn btn-success" href="<c:url value="/game/detail?id=${game.id}&action=accept"/>">Aceptar</a>
@@ -73,10 +73,10 @@
 								</c:otherwise>
 							</c:choose>
 						</c:when>
-						<c:when test='${game.status.equals("Rechazada")}'>
+						<c:when test='${game.status == "Rechazada"}'>
 							<button class="btn btn-link btn-block" disabled>&nbsp;</button>
 						</c:when>
-						<c:when test='${game.status.equals("Finalizada")}'>
+						<c:when test='${game.status == "Finalizada"}'>
 							<a class="btn btn-block" href="<c:url value="/game/detail?id=${game.id}"/>">Ver el tablero final</a>
 						</c:when>
 						<c:otherwise>

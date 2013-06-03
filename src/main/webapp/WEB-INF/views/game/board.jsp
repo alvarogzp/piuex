@@ -98,13 +98,13 @@
 			</c:if>
 			<c:if test='${!turn}'>
 				<c:choose>
-					<c:when test='${game.status.equals("Jugando")}'>
+					<c:when test='${game.status== "Jugando" }'>
 						<c:if test="${letters != null}">
 							<span class="label label-inverse" style="margin: 0 auto">¡No es tu turno!</span>
 						</c:if>
 						<a href="" class="btn btn-primary btn-block">Recargar</a>
 					</c:when>
-					<c:when test='${game.status.equals("Finalizada")}'>
+					<c:when test='${game.status=="Finalizada"}'>
 						<span class="label label-success">Partida finalizada:</span>
 						<c:choose>
 							<c:when test="${(winner == 1 && loggedUser.id == game.p1.id) || (winner == 2 && loggedUser.id == game.p2.id)}">
