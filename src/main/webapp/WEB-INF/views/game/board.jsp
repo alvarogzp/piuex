@@ -39,15 +39,17 @@
 	
 	<form method="post" autocomplete="off"> <!-- autocomplete="off" tells firefox to not remember the state of the controls, like the disabled state of the input button -->
 		<div class="container" style="margin: 0 auto; width: 38%">
+		
 			<input id="id" name="id" type="hidden" value="${game.id}"/>
 			<input id ="puntos" name="puntos" type="hidden" value="0"/>
 			
-			<span style="font-size: 25px; color: #000000"><b>Partida: </b></span>  <span style="font-size: 20px"><c:if test="${game.p1Turn}"><b></c:if><a href="<c:url value="/user/stats?id=${game.p1.id}"/>">${game.p1.username}</a><c:if test="${game.p1Turn}"></b></c:if> VS <c:if test="${!game.p1Turn}"><b></c:if><a href="<c:url value="/user/stats?id=${game.p2.id}"/>">${game.p2.username}</a><c:if test="${!game.p1Turn}"></b></c:if> </span> 
-			<span style="font-size: 25px; color: #000000"><b>&nbsp;&nbsp;&nbsp;Puntuación:  </b></span><span style="font-size: 20px">${game.p1Score} - ${game.p2Score} </span>
+			<div>
+				<span style="font-size: 25px; color: #000000"><b>Partida: </b></span>  <span style="font-size: 20px"><c:if test="${game.p1Turn}"><b></c:if><a href="<c:url value="/user/stats?id=${game.p1.id}"/>">${game.p1.username}</a><c:if test="${game.p1Turn}"></b></c:if> VS <c:if test="${!game.p1Turn}"><b></c:if><a href="<c:url value="/user/stats?id=${game.p2.id}"/>">${game.p2.username}</a><c:if test="${!game.p1Turn}"></b></c:if> </span> 
+				<span style="font-size: 25px; color: #000000"><b>&nbsp;&nbsp;&nbsp;Puntuación:  </b></span><span style="font-size: 20px">${game.p1Score} - ${game.p2Score} </span>
+			</div>
 			<br>
-			
 			<div class="container" style="margin: 0 auto; width: 38%">
-				<span style="font-size: 20px; text-decoration: underline;"><b >Estado del tablero</b></span>
+				<span style="font-size: 20px; text-decoration: underline;"><b>Estado del tablero</b></span>
 			</div>
 			<br>
 		</div>

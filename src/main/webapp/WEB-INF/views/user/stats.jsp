@@ -33,71 +33,74 @@
 	  	</div>
 	</div>
 
-	<h2 style="text-align:center">
-		Estadísticas
-		<c:if test="${user != null}">
-			 de 
-			<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
-				<a href="<c:url value="/user/profile?username=${user.username}"/>">
+	<div class="container" style="margin: 0 auto; width: 70%">
+		<h2 style="text-align:center">
+			Estadísticas
+			<c:if test="${user != null}">
+				 de 
+				<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
+					<a href="<c:url value="/user/profile?username=${user.username}"/>">
+				</c:if>
+				${user.username}
+				<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
+					</a>
+				</c:if>
 			</c:if>
-			${user.username}
-			<c:if test="${loggedUser.rank==0 || loggedUser.username==user.username}">
-				</a>
-			</c:if>
-		</c:if>
-	</h2><br>
-	
-	<table class="table table-hover table-striped table-condensed">
-		<tr class="even">
-			<c:if test="${user == null}"><th>Usuario</th></c:if>
-			<th>Número de partidas</th>
-			<th>Sin confirmar</th>
-			<th>Jugando</th>
-			<th>Finalizadas</th>
-			<th>Rechazadas</th>
-			<th>Máxima puntuación de una jugada</th>
-		</tr>
-		<c:choose>
-			<c:when test="${user != null}">
-				<tr>
-					<td>${stats.partidas}</td>
-					<td id="sinconfirmar">${stats.partidasSinConfirmar}</td>
-					<td id="jugando">${stats.partidasJugando}</td>
-					<td id="finalizadas">${stats.partidasFinalizadas}</td>
-					<td id="rechazadas">${stats.partidasRechazadas}</td>
-					<td>${stats.maximaPuntuacionJugada}</td>
+		</h2><br>
+	</div>
+		
+		<div class="container" style="margin: 0 auto; width: 70%">
+			<table class="table table-hover table-striped table-condensed">
+				<tr class="even">
+					<c:if test="${user == null}"><th>Usuario</th></c:if>
+					<th>Número de partidas</th>
+					<th>Sin confirmar</th>
+					<th>Jugando</th>
+					<th>Finalizadas</th>
+					<th>Rechazadas</th>
+					<th>Máxima puntuación de una jugada</th>
 				</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${stats}" var="stat">
-					<tr>
-						<th>${stat.user.username}</th>
-						<td>${stat.partidas}</td>
-						<td>${stat.partidasSinConfirmar}</td>
-						<td>${stat.partidasJugando}</td>
-						<td>${stat.partidasFinalizadas}</td>
-						<td>${stat.partidasRechazadas}</td>
-						<td>${stat.maximaPuntuacionJugada}</td>
-					</tr>
-				</c:forEach>
-					<tr class="info">
-						<td><b><u>Total</u></b></td>
-						<td>${global.partidas}</td>
-						<td id="sinconfirmar">${global.partidasSinConfirmar}</td>
-						<td id="jugando">${global.partidasJugando}</td>
-						<td id="finalizadas">${global.partidasFinalizadas}</td>
-						<td id="rechazadas">${global.partidasRechazadas}</td>
-						<td>${global.maximaPuntuacionJugada}</td>
-					</tr>
-			</c:otherwise>
-		</c:choose>
-	</table>
-	
-	
-	
-	<!--Div that will hold the pie chart-->
-    <div class="container"  style="margin: 0 auto; width: 38%" id="chart_div"></div>
-    
+				<c:choose>
+					<c:when test="${user != null}">
+						<tr>
+							<td>${stats.partidas}</td>
+							<td id="sinconfirmar">${stats.partidasSinConfirmar}</td>
+							<td id="jugando">${stats.partidasJugando}</td>
+							<td id="finalizadas">${stats.partidasFinalizadas}</td>
+							<td id="rechazadas">${stats.partidasRechazadas}</td>
+							<td>${stats.maximaPuntuacionJugada}</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${stats}" var="stat">
+							<tr>
+								<th>${stat.user.username}</th>
+								<td>${stat.partidas}</td>
+								<td>${stat.partidasSinConfirmar}</td>
+								<td>${stat.partidasJugando}</td>
+								<td>${stat.partidasFinalizadas}</td>
+								<td>${stat.partidasRechazadas}</td>
+								<td>${stat.maximaPuntuacionJugada}</td>
+							</tr>
+						</c:forEach>
+							<tr class="info">
+								<td><b><u>Total</u></b></td>
+								<td>${global.partidas}</td>
+								<td id="sinconfirmar">${global.partidasSinConfirmar}</td>
+								<td id="jugando">${global.partidasJugando}</td>
+								<td id="finalizadas">${global.partidasFinalizadas}</td>
+								<td id="rechazadas">${global.partidasRechazadas}</td>
+								<td>${global.maximaPuntuacionJugada}</td>
+							</tr>
+					</c:otherwise>
+				</c:choose>
+			</table>
+		</div>
+		
+	<div class="container" style="margin: 0 auto; width: 100%">
+		<!--Div that will hold the pie chart-->
+	    <div class="container"  style="margin: 0 auto; width: 38%" id="chart_div"></div>
+    </div>
     
     
      <!--Load the AJAX API-->
