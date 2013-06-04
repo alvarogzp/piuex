@@ -6,7 +6,7 @@ Perfil usuario con foto																					 3	✔
 Listado de usuarios																						 3	✔
 Dashboard de partidas																					 3	✔
 Detalle de partida																						 3	✔
-Despliegue en cloudfoundry																				 2	✓ (re-desplegar en la entrega)
+Despliegue en cloudfoundry																				 2	✔
 Capa REST para la gestión de usuarios																	 3	✔
 Cliente REST para mapa en perfil u otra funcionalidad													 3	✔
 Login/logout																							 3	✔
@@ -46,14 +46,14 @@ Ausencia de errores graves																				 5	✓ (por ahora)
 Estilo de código adecuado y calidad general correcta													10	✓ (falta comentar código, y algunas partes son mejorables)
 Conveniencia de las soluciones adoptadas																 5	✓ (supongo...)
 
-La documentación adjunta es relevante, concisa y útil													10	✘
-Descripción correcta de lo realizado, los errores y las limitaciones									10	✘
+La documentación adjunta es relevante, concisa y útil													10	✓
+Descripción correcta de lo realizado, los errores y las limitaciones									10	✓
 
 Extensiones (puntos extra)																				40	✓ (tenemos muchas extensiones, podemos tener muchos puntos aquí, pero hay que documentarlas bien)
 
 																									 ———————
 
-Puntuación requisitos cumplidos:																	   180
+Puntuación requisitos cumplidos:																	   146
 Puntuación máxima:																					   240
 
 

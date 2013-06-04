@@ -11,11 +11,11 @@ http://www.apalabrados.com/reglas
 
 ** Las letras puestas en la última jugada del otro jugador podían salir de alguna forma más destacada.
 
-** poner en la barra con qué usuario has entrado
-
 ** Con admin no se debe poder jugar
 
 ** Mover ficha entera en lugar de sombra?
+
+** Barra que muestre unas cosas u otras si el usuario está registrado o no. O por lo menos, desactivar enlaces que no funcionen.
 
 al redirigir a login desde cualquier página porque no se está registrado que salga el error en la pantalla de login (por ejemplo "Debes iniciar sesión para ver esa página")
 
@@ -24,4 +24,3 @@ Convertir level a enumeracion?
 excepciones
 
 cabecera en todos los ficheros .java
-arreglar codificación

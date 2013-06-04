@@ -29,9 +29,9 @@
 		      	<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/game/list?id=${loggedUser.id}"/></c:if>'>Partidas</a></li>
 	      	</ul>
 	      	<ul class="nav pull-right">
-	      		<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/user/profile"/></c:if>'>${loggedUser.username}</a></li>
+	      		<c:if test="${loggedUser!=null}"><li><a href='<c:url value="/user/profile"/>' title="Ir al perfil">${loggedUser.username}</a></li></c:if>
 	      		<li><a target="_blank" href="https://twitter.com/#piuex"><img src="<c:url value="/resources/img/twitter.png"/>" class="barra-icon"></a></li>
-	      		<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/user/logout"/></c:if>'><i class="icon-off"></i></a></li>
+	      		<c:if test="${loggedUser!=null}"><li><a href='<c:url value="/user/logout"/>' title="Cerrar sesión"><i class="icon-off"></i></a></li></c:if>
 	    	</ul>
 	  	</div>
 	</div>

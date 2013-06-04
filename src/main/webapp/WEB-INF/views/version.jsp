@@ -24,9 +24,9 @@
 		      	<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/game/list?id=${loggedUser.id}"/></c:if>'>Partidas</a></li>
 	      	</ul>
 	      	<ul class="nav pull-right">
-	      		<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/user/profile"/></c:if>'>${loggedUser.username}</a></li>	
+	      		<c:if test="${loggedUser!=null}"><li><a href='<c:url value="/user/profile"/>' title="Ir al perfil">${loggedUser.username}</a></li></c:if>
 	      		<li><a target="_blank" href="https://twitter.com/#piuex"><img src="<c:url value="/resources/img/twitter.png"/>" class="barra-icon"></a></li>
-	      		<li><a href='<c:if test="${loggedUser!=null}"><c:url value="/user/logout"/></c:if>'><i class="icon-off"></i></a></li>
+	      		<c:if test="${loggedUser!=null}"><li><a href='<c:url value="/user/logout"/>' title="Cerrar sesión"><i class="icon-off"></i></a></li></c:if>
 	    	</ul>
 	  	</div>
 	</div>
@@ -35,27 +35,32 @@
 
 	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 3.0 (fecha 03-06-2013)</h3>
 	<ul>
-		<li>Implementado concepto administrador.</li>
+		<li>Entrega final.</li>
 		<li>Finalizada funcionalidad de jugabilidad con puntuación.</li>
+		<li>Usuarios pueden aceptar o rechazar partidas.</li>
+		<li>Las partidas finalizan al gastar un jugador todas sus letras y las de la bolsa.</li>
 		<li>Versión preparada para la perfecta interactividad entre usuarios mediante partidas.</li>
+		<li>Página de estadísticas de cada usuario accesible desde la lista de usuarios.</li>
 	</ul>
 	
 	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 2.0 (fecha 20-05-2013)</h3>
 	<ul>
+		<li>Entrega parcial 2.</li>
 		<li>Implementado tablero y jugabilidad.</li>
-		<li>Aplicado estilo uniforme a toda la aplicación usando bootstrap.</li>
+		<li>Aplicado estilo uniforme a toda la aplicación usando <a href="http://twitter.github.io/bootstrap/">Bootstrap</a>.</li>
 	</ul>
 
 	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 1.1 (fecha 19-04-2013)</h3>
 	<ul>
 		<li>Creado usuario "Administrador". Dispone de total acceso a la aplicación.</li>
 		<li>Añadidas las imágenes de los usuarios. En la lista de partidas se puede observar el avatar de cada usuario.</li>
-		<li>Arreglado enlace a la lista de partidas. Este enlace se encuentra en el tablero.</li>
+		<li>Arreglado enlace a la lista de partidas. Ya se puede volver a la lista de partidas desde el tablero.</li>
 	</ul>
 	
 	<h3 style="text-shadow: 0 2px 0 #BBBBBB">Versión 1.0 (fecha 07-03-2013)</h3>
 	<ul>
-		<li>Entrega parcial 1. Es la versión inicial de la aplicación.</li>
+		<li>Entrega parcial 1.</li>
+		<li>Versión inicial de la aplicación.</li>
 	</ul>
 	
 
